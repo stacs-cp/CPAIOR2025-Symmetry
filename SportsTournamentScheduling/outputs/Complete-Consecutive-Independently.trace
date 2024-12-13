@@ -1,8 +1,0 @@
-Adding the following unnamed symmetry breaking constraints:
-    such that
-        and([sched .<= transform([permutation((q1, succ(q1)))], sched)
-                 | q1 : Team, q1 < n_teams]),
-        and([sched .<= transform([permutation((q2, succ(q2)))], sched)
-                 | q2 : Week, q2 < let1]),
-        and([sched .<= transform([permutation((q3, succ(q3)))], sched)
-                 | q3 : Period, q3 < let2])
