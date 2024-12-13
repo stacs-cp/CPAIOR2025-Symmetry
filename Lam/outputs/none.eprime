@@ -1,0 +1,71 @@
+language ESSENCE' 1.0
+
+given indexSize: int
+find m: matrix indexed by [int(1..indexSize), int(1..indexSize)] of bool
+branching on [m]
+such that
+    and([sum([toInt(!m[r, c]) | c : int(1..indexSize)]) = 11 | r : int(1..indexSize)]),
+    and([sum([toInt(!m[r, c]) | r : int(1..indexSize)]) = 11 | c : int(1..indexSize)]),
+    and([sum([toInt(!(m[r1, c] \/ m[r2, c])) | c : int(1..indexSize)]) = 1
+             | r1 : int(1..indexSize), r2 : int(1..indexSize), r1 != r2])
+
+$ Conjure's
+$ {"finds": [{"Name": "m"}], "givens": [{"Name": "indexSize"}], "enumGivens": [], "enumLettings": [],
+$  "lettings":
+$      [[{"Name": "Index"},
+$        {"Domain":
+$             {"DomainInt":
+$                  [{"TagUnnamed": "Index"},
+$                   [{"RangeBounded":
+$                         [{"Constant": {"ConstantInt": [{"TagInt": []}, 1]}},
+$                          {"Reference":
+$                               [{"Name": "indexSize"},
+$                                {"DeclNoRepr":
+$                                     ["Given", {"Name": "indexSize"}, {"DomainInt": [{"TagInt": []}, []]},
+$                                      {"NoRegion": []}]}]}]}]]}}]],
+$  "unnameds": [[{"Name": "Index"}, {"Reference": [{"Name": "indexSize"}, null]}]], "strategyQ": {"PickFirst": []},
+$  "strategyA": {"Compact": []},
+$  "trailCompact":
+$      [[1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1]],
+$  "nameGenState": [["q", 3]], "nbExtraGivens": 0,
+$  "representations":
+$      [[{"Name": "indexSize"}, {"DomainInt": [{"TagUnnamed": "Index"}, []]}],
+$       [{"Name": "m"},
+$        {"DomainMatrix":
+$             [{"DomainInt":
+$                   [{"TagUnnamed": "Index"},
+$                    [{"RangeBounded":
+$                          [{"Constant": {"ConstantInt": [{"TagUnnamed": "Index"}, 1]}},
+$                           {"Reference":
+$                                [{"Name": "indexSize"},
+$                                 {"DeclHasRepr":
+$                                      ["Given", {"Name": "indexSize"},
+$                                       {"DomainInt": [{"TagUnnamed": "Index"}, []]}]}]}]}]]},
+$              {"DomainMatrix":
+$                   [{"DomainInt":
+$                         [{"TagUnnamed": "Index"},
+$                          [{"RangeBounded":
+$                                [{"Constant": {"ConstantInt": [{"TagUnnamed": "Index"}, 1]}},
+$                                 {"Reference":
+$                                      [{"Name": "indexSize"},
+$                                       {"DeclHasRepr":
+$                                            ["Given", {"Name": "indexSize"},
+$                                             {"DomainInt": [{"TagUnnamed": "Index"}, []]}]}]}]}]]},
+$                    {"DomainBool": []}]}]}]],
+$  "representationsTree":
+$      [[{"Name": "indexSize"}, [{"rootLabel": null, "subForest": []}]],
+$       [{"Name": "m"},
+$        [{"rootLabel": null, "subForest": [{"rootLabel": null, "subForest": [{"rootLabel": null, "subForest": []}]}]}]]],
+$  "originalDomains":
+$      [[{"Name": "indexSize"}, {"DomainInt": [{"TagInt": []}, []]}],
+$       [{"Name": "m"},
+$        {"DomainMatrix":
+$             [{"DomainReference": [{"Name": "Index"}, null]},
+$              {"DomainMatrix": [{"DomainReference": [{"Name": "Index"}, null]}, {"DomainBool": []}]}]}]],
+$  "trailGeneralised":
+$      [[1388063543763473814, 490417772059093543], [-1066604778074669180, 146878991054010392],
+$       [-2702031350546262396, 1096769933078380934], [-5606858489721918718, 7264143565029559318],
+$       [-2948699189518320605, 1392428075918446400], [-2595110045991173464, -1743727867999188620],
+$       [1885923764554841086, 1876569467612333734], [5520302238778215895, 5044242660563672506],
+$       [-5785446617022219128, -1550522441942650028], [-1992214899950240194, 1148440125020068956]],
+$  "trailVerbose": [], "trailRewrites": []}

@@ -1,0 +1,165 @@
+language ESSENCE' 1.0
+
+given t: int(1..)
+given k: int(1..)
+given g: int(2..)
+given b: int(1..)
+where k >= t
+where b >= g ** t
+find CA: matrix indexed by [int(1..k), int(1..b)] of int(1..g)
+branching on [CA]
+such that
+    and([and([and([rows_ExplicitBounded_Values[i - 1] != rows_ExplicitBounded_Values[i], i - 1 <= t, i <= t; int(1..3)])
+                  | i : int(2..t)])
+         ->
+         and([or([and([and([CA[rows_ExplicitBounded_Values[i], column] = values_ExplicitBounded_Values[i], i <= t,
+                            i <= t;
+                                int(1..3)])
+                           | i : int(1..t)])
+                      | column : int(1..b)])
+                  | values_ExplicitBounded_Values : matrix indexed by [int(1..t)] of int(1..g)])
+             | rows_ExplicitBounded_Values : matrix indexed by [int(1..t)] of int(1..k),
+               allDiff(rows_ExplicitBounded_Values)])
+
+$ Conjure's
+$ {"finds": [{"Name": "CA"}], "givens": [{"Name": "t"}, {"Name": "k"}, {"Name": "g"}, {"Name": "b"}], "enumGivens": [],
+$  "enumLettings": [],
+$  "lettings":
+$      [[{"Name": "K"},
+$        {"Domain":
+$             {"DomainInt":
+$                  [{"TagUnnamed": "K"},
+$                   [{"RangeBounded":
+$                         [{"Constant": {"ConstantInt": [{"TagInt": []}, 1]}},
+$                          {"Reference":
+$                               [{"Name": "k"},
+$                                {"DeclNoRepr":
+$                                     ["Given", {"Name": "k"},
+$                                      {"DomainInt":
+$                                           [{"TagInt": []},
+$                                            [{"RangeLowerBounded":
+$                                                  {"Constant": {"ConstantInt": [{"TagInt": []}, 1]}}}]]},
+$                                      {"NoRegion": []}]}]}]}]]}}],
+$       [{"Name": "B"},
+$        {"Domain":
+$             {"DomainInt":
+$                  [{"TagUnnamed": "B"},
+$                   [{"RangeBounded":
+$                         [{"Constant": {"ConstantInt": [{"TagInt": []}, 1]}},
+$                          {"Reference":
+$                               [{"Name": "b"},
+$                                {"DeclNoRepr":
+$                                     ["Given", {"Name": "b"},
+$                                      {"DomainInt":
+$                                           [{"TagInt": []},
+$                                            [{"RangeLowerBounded":
+$                                                  {"Constant": {"ConstantInt": [{"TagInt": []}, 1]}}}]]},
+$                                      {"NoRegion": []}]}]}]}]]}}],
+$       [{"Name": "G"},
+$        {"Domain":
+$             {"DomainInt":
+$                  [{"TagUnnamed": "G"},
+$                   [{"RangeBounded":
+$                         [{"Constant": {"ConstantInt": [{"TagInt": []}, 1]}},
+$                          {"Reference":
+$                               [{"Name": "g"},
+$                                {"DeclNoRepr":
+$                                     ["Given", {"Name": "g"},
+$                                      {"DomainInt":
+$                                           [{"TagInt": []},
+$                                            [{"RangeLowerBounded":
+$                                                  {"Constant": {"ConstantInt": [{"TagInt": []}, 2]}}}]]},
+$                                      {"NoRegion": []}]}]}]}]]}}]],
+$  "unnameds":
+$      [[{"Name": "K"}, {"Reference": [{"Name": "k"}, null]}], [{"Name": "B"}, {"Reference": [{"Name": "b"}, null]}],
+$       [{"Name": "G"}, {"Reference": [{"Name": "g"}, null]}]],
+$  "strategyQ": {"PickFirst": []}, "strategyA": {"Compact": []},
+$  "trailCompact":
+$      [[1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
+$       [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
+$       [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1]],
+$  "nameGenState": [["q", 5]], "nbExtraGivens": 0,
+$  "representations":
+$      [[{"Name": "k"},
+$        {"DomainInt": [{"TagInt": []}, [{"RangeLowerBounded": {"Constant": {"ConstantInt": [{"TagInt": []}, 1]}}}]]}],
+$       [{"Name": "t"},
+$        {"DomainInt": [{"TagInt": []}, [{"RangeLowerBounded": {"Constant": {"ConstantInt": [{"TagInt": []}, 1]}}}]]}],
+$       [{"Name": "b"},
+$        {"DomainInt": [{"TagInt": []}, [{"RangeLowerBounded": {"Constant": {"ConstantInt": [{"TagInt": []}, 1]}}}]]}],
+$       [{"Name": "g"},
+$        {"DomainInt": [{"TagInt": []}, [{"RangeLowerBounded": {"Constant": {"ConstantInt": [{"TagInt": []}, 2]}}}]]}],
+$       [{"Name": "CA"},
+$        {"DomainMatrix":
+$             [{"DomainInt":
+$                   [{"TagUnnamed": "K"},
+$                    [{"RangeBounded":
+$                          [{"Constant": {"ConstantInt": [{"TagUnnamed": "K"}, 1]}},
+$                           {"Reference":
+$                                [{"Name": "k"},
+$                                 {"DeclHasRepr":
+$                                      ["Given", {"Name": "k"},
+$                                       {"DomainInt":
+$                                            [{"TagInt": []},
+$                                             [{"RangeLowerBounded":
+$                                                   {"Constant": {"ConstantInt": [{"TagInt": []}, 1]}}}]]}]}]}]}]]},
+$              {"DomainMatrix":
+$                   [{"DomainInt":
+$                         [{"TagUnnamed": "B"},
+$                          [{"RangeBounded":
+$                                [{"Constant": {"ConstantInt": [{"TagUnnamed": "B"}, 1]}},
+$                                 {"Reference":
+$                                      [{"Name": "b"},
+$                                       {"DeclHasRepr":
+$                                            ["Given", {"Name": "b"},
+$                                             {"DomainInt":
+$                                                  [{"TagInt": []},
+$                                                   [{"RangeLowerBounded":
+$                                                         {"Constant": {"ConstantInt": [{"TagInt": []}, 1]}}}]]}]}]}]}]]},
+$                    {"DomainInt":
+$                         [{"TagUnnamed": "G"},
+$                          [{"RangeBounded":
+$                                [{"Constant": {"ConstantInt": [{"TagUnnamed": "G"}, 1]}},
+$                                 {"Reference":
+$                                      [{"Name": "g"},
+$                                       {"DeclHasRepr":
+$                                            ["Given", {"Name": "g"},
+$                                             {"DomainInt":
+$                                                  [{"TagInt": []},
+$                                                   [{"RangeLowerBounded":
+$                                                         {"Constant":
+$                                                              {"ConstantInt": [{"TagInt": []}, 2]}}}]]}]}]}]}]]}]}]}]],
+$  "representationsTree":
+$      [[{"Name": "CA"},
+$        [{"rootLabel": null, "subForest": [{"rootLabel": null, "subForest": [{"rootLabel": null, "subForest": []}]}]}]],
+$       [{"Name": "b"}, [{"rootLabel": null, "subForest": []}]], [{"Name": "g"}, [{"rootLabel": null, "subForest": []}]],
+$       [{"Name": "k"}, [{"rootLabel": null, "subForest": []}]], [{"Name": "t"}, [{"rootLabel": null, "subForest": []}]]],
+$  "originalDomains":
+$      [[{"Name": "t"},
+$        {"DomainInt": [{"TagInt": []}, [{"RangeLowerBounded": {"Constant": {"ConstantInt": [{"TagInt": []}, 1]}}}]]}],
+$       [{"Name": "k"},
+$        {"DomainInt": [{"TagInt": []}, [{"RangeLowerBounded": {"Constant": {"ConstantInt": [{"TagInt": []}, 1]}}}]]}],
+$       [{"Name": "g"},
+$        {"DomainInt": [{"TagInt": []}, [{"RangeLowerBounded": {"Constant": {"ConstantInt": [{"TagInt": []}, 2]}}}]]}],
+$       [{"Name": "b"},
+$        {"DomainInt": [{"TagInt": []}, [{"RangeLowerBounded": {"Constant": {"ConstantInt": [{"TagInt": []}, 1]}}}]]}],
+$       [{"Name": "CA"},
+$        {"DomainMatrix":
+$             [{"DomainReference": [{"Name": "K"}, null]},
+$              {"DomainMatrix":
+$                   [{"DomainReference": [{"Name": "B"}, null]}, {"DomainReference": [{"Name": "G"}, null]}]}]}]],
+$  "trailGeneralised":
+$      [[2765510893014667047, 171740495729321694], [-5814381252334204862, -8277621894098514212],
+$       [340628106415835204, 1980157633582798837], [1347264833923706304, -1013162109337543124],
+$       [1596140579075991708, 185070938253906578], [7641913778168556865, 3097398397101351225],
+$       [-7350228874235459985, -8295817858645933625], [-928729562225174073, -4002823911857616683],
+$       [3053143789577929424, -6078621809016257607], [3874208875309788594, -6431975877306649177],
+$       [5427430284747603101, -8483810571120577202], [-8680800576818542214, 8910114893942875363],
+$       [-2323351487473455435, -836316235239793425], [-1050627656032326475, -8991027222426754106],
+$       [-4241925448675488037, 6454693556774083324], [8614042050687291481, -8259611611989273160],
+$       [2274971304959983041, 2731243423327013790], [-7788096460390135900, -6431975877306649177],
+$       [4771860321003011969, -4785076103747272111], [1496635478989058911, -6431975877306649177],
+$       [-6267875512497258626, 6243454748267888256], [8243634984181694148, -2554148963896204337],
+$       [-2677181664547924246, -2905815403238104353], [766173252362015354, 7063855724520756896],
+$       [7010658775926173207, -2076479868089064252], [6556031222611904569, 369089557595697528],
+$       [4228785635860755463, 4333340139893289032]],
+$  "trailVerbose": [], "trailRewrites": []}

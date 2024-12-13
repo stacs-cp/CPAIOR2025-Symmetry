@@ -1,0 +1,281 @@
+language ESSENCE' 1.0
+
+given w: int(1..)
+given g: int(1..)
+given s: int(1..)
+letting let1 be g * s
+find sched: matrix indexed by [int(1..let1), int(1..w)] of int(1..g)
+branching on [sched]
+such that
+    and([and([sum([toInt(sched[shadow4, shadow3] = gr) | shadow4 : int(1..let1)]) = s | shadow3 : int(1..w)])
+             | gr : int(1..g)]),
+    and([and([toInt(sched[g1, w1] = sched[g2, w1]) + toInt(sched[g1, w2] = sched[g2, w2]) <= 1
+                  | w1 : int(1..w), w2 : int(1..w), w1 != w2])
+             | g1 : int(1..let1), g2 : int(1..let1), g1 != g2]),
+    and([and([and([[sched[q4, q5] | q4 : int(1..let1), q5 : int(1..w)] <=lex
+                   [catchUndef([sched
+                                    [catchUndef([q4, q1 + 1, q1; int(0..2)][toInt(q1 = q4) + toInt(q1 + 1 = q4) * 2],
+                                                1),
+                                     catchUndef([q5, q2 + 1, q2; int(0..2)][toInt(q2 = q5) + toInt(q2 + 1 = q5) * 2],
+                                                1)],
+                                q3 + 1, q3;
+                                    int(0..2)]
+                                   [toInt(q3 =
+                                          sched
+                                              [catchUndef([q4, q1 + 1, q1; int(0..2)]
+                                                              [toInt(q1 = q4) + toInt(q1 + 1 = q4) * 2],
+                                                          1),
+                                               catchUndef([q5, q2 + 1, q2; int(0..2)]
+                                                              [toInt(q2 = q5) + toInt(q2 + 1 = q5) * 2],
+                                                          1)])
+                                    +
+                                    toInt(q3 + 1 =
+                                          sched
+                                              [catchUndef([q4, q1 + 1, q1; int(0..2)]
+                                                              [toInt(q1 = q4) + toInt(q1 + 1 = q4) * 2],
+                                                          1),
+                                               catchUndef([q5, q2 + 1, q2; int(0..2)]
+                                                              [toInt(q2 = q5) + toInt(q2 + 1 = q5) * 2],
+                                                          1)])
+                                    * 2],
+                               1)
+                        | q4 : int(1..let1), q5 : int(1..w)]
+                       | q3 : int(1..g), q3 < g])
+                  | q2 : int(1..w), q2 < w])
+             | q1 : int(1..let1), q1 < let1])
+
+$ Conjure's
+$ {"finds": [{"Name": "sched"}], "givens": [{"Name": "w"}, {"Name": "g"}, {"Name": "s"}], "enumGivens": [],
+$  "enumLettings": [],
+$  "lettings":
+$      [[{"MachineName": ["let", 1, []]},
+$        {"Op":
+$             {"MkOpProduct":
+$                  {"AbstractLiteral":
+$                       {"AbsLitMatrix":
+$                            [{"DomainInt":
+$                                  [{"TagInt": []},
+$                                   [{"RangeBounded":
+$                                         [{"Constant": {"ConstantInt": [{"TagInt": []}, 1]}},
+$                                          {"Constant": {"ConstantInt": [{"TagInt": []}, 2]}}]}]]},
+$                             [{"Reference":
+$                                   [{"Name": "g"},
+$                                    {"DeclNoRepr":
+$                                         ["Given", {"Name": "g"},
+$                                          {"DomainInt":
+$                                               [{"TagInt": []},
+$                                                [{"RangeLowerBounded":
+$                                                      {"Constant": {"ConstantInt": [{"TagInt": []}, 1]}}}]]},
+$                                          {"NoRegion": []}]}]},
+$                              {"Reference":
+$                                   [{"Name": "s"},
+$                                    {"DeclNoRepr":
+$                                         ["Given", {"Name": "s"},
+$                                          {"DomainInt":
+$                                               [{"TagInt": []},
+$                                                [{"RangeLowerBounded":
+$                                                      {"Constant": {"ConstantInt": [{"TagInt": []}, 1]}}}]]},
+$                                          {"NoRegion": []}]}]}]]}}}}],
+$       [{"Name": "Golfers"},
+$        {"Domain":
+$             {"DomainInt":
+$                  [{"TagUnnamed": "Golfers"},
+$                   [{"RangeBounded":
+$                         [{"Constant": {"ConstantInt": [{"TagInt": []}, 1]}},
+$                          {"Reference":
+$                               [{"MachineName": ["let", 1, []]},
+$                                {"Alias":
+$                                     {"Op":
+$                                          {"MkOpProduct":
+$                                               {"AbstractLiteral":
+$                                                    {"AbsLitMatrix":
+$                                                         [{"DomainInt":
+$                                                               [{"TagInt": []},
+$                                                                [{"RangeBounded":
+$                                                                      [{"Constant":
+$                                                                            {"ConstantInt": [{"TagInt": []}, 1]}},
+$                                                                       {"Constant":
+$                                                                            {"ConstantInt": [{"TagInt": []}, 2]}}]}]]},
+$                                                          [{"Reference":
+$                                                                [{"Name": "g"},
+$                                                                 {"DeclNoRepr":
+$                                                                      ["Given", {"Name": "g"},
+$                                                                       {"DomainInt":
+$                                                                            [{"TagInt": []},
+$                                                                             [{"RangeLowerBounded":
+$                                                                                   {"Constant":
+$                                                                                        {"ConstantInt":
+$                                                                                             [{"TagInt": []}, 1]}}}]]},
+$                                                                       {"NoRegion": []}]}]},
+$                                                           {"Reference":
+$                                                                [{"Name": "s"},
+$                                                                 {"DeclNoRepr":
+$                                                                      ["Given", {"Name": "s"},
+$                                                                       {"DomainInt":
+$                                                                            [{"TagInt": []},
+$                                                                             [{"RangeLowerBounded":
+$                                                                                   {"Constant":
+$                                                                                        {"ConstantInt":
+$                                                                                             [{"TagInt": []}, 1]}}}]]},
+$                                                                       {"NoRegion": []}]}]}]]}}}}}]}]}]]}}],
+$       [{"Name": "Weeks"},
+$        {"Domain":
+$             {"DomainInt":
+$                  [{"TagUnnamed": "Weeks"},
+$                   [{"RangeBounded":
+$                         [{"Constant": {"ConstantInt": [{"TagInt": []}, 1]}},
+$                          {"Reference":
+$                               [{"Name": "w"},
+$                                {"DeclNoRepr":
+$                                     ["Given", {"Name": "w"},
+$                                      {"DomainInt":
+$                                           [{"TagInt": []},
+$                                            [{"RangeLowerBounded":
+$                                                  {"Constant": {"ConstantInt": [{"TagInt": []}, 1]}}}]]},
+$                                      {"NoRegion": []}]}]}]}]]}}],
+$       [{"Name": "Groups"},
+$        {"Domain":
+$             {"DomainInt":
+$                  [{"TagUnnamed": "Groups"},
+$                   [{"RangeBounded":
+$                         [{"Constant": {"ConstantInt": [{"TagInt": []}, 1]}},
+$                          {"Reference":
+$                               [{"Name": "g"},
+$                                {"DeclNoRepr":
+$                                     ["Given", {"Name": "g"},
+$                                      {"DomainInt":
+$                                           [{"TagInt": []},
+$                                            [{"RangeLowerBounded":
+$                                                  {"Constant": {"ConstantInt": [{"TagInt": []}, 1]}}}]]},
+$                                      {"NoRegion": []}]}]}]}]]}}]],
+$  "unnameds":
+$      [[{"Name": "Golfers"}, {"Reference": [{"MachineName": ["let", 1, []]}, null]}],
+$       [{"Name": "Weeks"}, {"Reference": [{"Name": "w"}, null]}],
+$       [{"Name": "Groups"}, {"Reference": [{"Name": "g"}, null]}]],
+$  "strategyQ": {"PickFirst": []}, "strategyA": {"Compact": []},
+$  "trailCompact":
+$      [[1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
+$       [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
+$       [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
+$       [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1]],
+$  "nameGenState": [["let", 2], ["q", 24], ["shadow", 5]], "nbExtraGivens": 0,
+$  "representations":
+$      [[{"Name": "sched"},
+$        {"DomainMatrix":
+$             [{"DomainInt":
+$                   [{"TagUnnamed": "Golfers"},
+$                    [{"RangeBounded":
+$                          [{"Constant": {"ConstantInt": [{"TagUnnamed": "Golfers"}, 1]}},
+$                           {"Reference":
+$                                [{"MachineName": ["let", 1, []]},
+$                                 {"Alias":
+$                                      {"Op":
+$                                           {"MkOpProduct":
+$                                                {"AbstractLiteral":
+$                                                     {"AbsLitMatrix":
+$                                                          [{"DomainInt":
+$                                                                [{"TagUnnamed": "Golfers"},
+$                                                                 [{"RangeBounded":
+$                                                                       [{"Constant":
+$                                                                             {"ConstantInt":
+$                                                                                  [{"TagUnnamed": "Golfers"}, 1]}},
+$                                                                        {"Constant":
+$                                                                             {"ConstantInt":
+$                                                                                  [{"TagUnnamed": "Golfers"}, 2]}}]}]]},
+$                                                           [{"Reference":
+$                                                                 [{"Name": "g"},
+$                                                                  {"DeclNoRepr":
+$                                                                       ["Given", {"Name": "g"},
+$                                                                        {"DomainInt":
+$                                                                             [{"TagUnnamed": "Golfers"},
+$                                                                              [{"RangeLowerBounded":
+$                                                                                    {"Constant":
+$                                                                                         {"ConstantInt":
+$                                                                                              [{"TagUnnamed": "Golfers"},
+$                                                                                               1]}}}]]},
+$                                                                        {"NoRegion": []}]}]},
+$                                                            {"Reference":
+$                                                                 [{"Name": "s"},
+$                                                                  {"DeclNoRepr":
+$                                                                       ["Given", {"Name": "s"},
+$                                                                        {"DomainInt":
+$                                                                             [{"TagUnnamed": "Golfers"},
+$                                                                              [{"RangeLowerBounded":
+$                                                                                    {"Constant":
+$                                                                                         {"ConstantInt":
+$                                                                                              [{"TagUnnamed": "Golfers"},
+$                                                                                               1]}}}]]},
+$                                                                        {"NoRegion": []}]}]}]]}}}}}]}]}]]},
+$              {"DomainMatrix":
+$                   [{"DomainInt":
+$                         [{"TagUnnamed": "Weeks"},
+$                          [{"RangeBounded":
+$                                [{"Constant": {"ConstantInt": [{"TagUnnamed": "Weeks"}, 1]}},
+$                                 {"Reference":
+$                                      [{"Name": "w"},
+$                                       {"DeclNoRepr":
+$                                            ["Given", {"Name": "w"},
+$                                             {"DomainInt":
+$                                                  [{"TagUnnamed": "Weeks"},
+$                                                   [{"RangeLowerBounded":
+$                                                         {"Constant": {"ConstantInt": [{"TagUnnamed": "Weeks"}, 1]}}}]]},
+$                                             {"NoRegion": []}]}]}]}]]},
+$                    {"DomainInt":
+$                         [{"TagUnnamed": "Groups"},
+$                          [{"RangeBounded":
+$                                [{"Constant": {"ConstantInt": [{"TagUnnamed": "Groups"}, 1]}},
+$                                 {"Reference":
+$                                      [{"Name": "g"},
+$                                       {"DeclNoRepr":
+$                                            ["Given", {"Name": "g"},
+$                                             {"DomainInt":
+$                                                  [{"TagUnnamed": "Groups"},
+$                                                   [{"RangeLowerBounded":
+$                                                         {"Constant":
+$                                                              {"ConstantInt": [{"TagUnnamed": "Groups"}, 1]}}}]]},
+$                                             {"NoRegion": []}]}]}]}]]}]}]}],
+$       [{"Name": "g"},
+$        {"DomainInt": [{"TagInt": []}, [{"RangeLowerBounded": {"Constant": {"ConstantInt": [{"TagInt": []}, 1]}}}]]}],
+$       [{"Name": "s"},
+$        {"DomainInt": [{"TagInt": []}, [{"RangeLowerBounded": {"Constant": {"ConstantInt": [{"TagInt": []}, 1]}}}]]}],
+$       [{"Name": "w"},
+$        {"DomainInt": [{"TagInt": []}, [{"RangeLowerBounded": {"Constant": {"ConstantInt": [{"TagInt": []}, 1]}}}]]}]],
+$  "representationsTree":
+$      [[{"Name": "g"}, [{"rootLabel": null, "subForest": []}]], [{"Name": "s"}, [{"rootLabel": null, "subForest": []}]],
+$       [{"Name": "sched"},
+$        [{"rootLabel": null, "subForest": [{"rootLabel": null, "subForest": [{"rootLabel": null, "subForest": []}]}]}]],
+$       [{"Name": "w"}, [{"rootLabel": null, "subForest": []}]]],
+$  "originalDomains":
+$      [[{"Name": "w"},
+$        {"DomainInt": [{"TagInt": []}, [{"RangeLowerBounded": {"Constant": {"ConstantInt": [{"TagInt": []}, 1]}}}]]}],
+$       [{"Name": "g"},
+$        {"DomainInt": [{"TagInt": []}, [{"RangeLowerBounded": {"Constant": {"ConstantInt": [{"TagInt": []}, 1]}}}]]}],
+$       [{"Name": "s"},
+$        {"DomainInt": [{"TagInt": []}, [{"RangeLowerBounded": {"Constant": {"ConstantInt": [{"TagInt": []}, 1]}}}]]}],
+$       [{"Name": "sched"},
+$        {"DomainMatrix":
+$             [{"DomainReference": [{"Name": "Golfers"}, null]},
+$              {"DomainMatrix":
+$                   [{"DomainReference": [{"Name": "Weeks"}, null]},
+$                    {"DomainReference": [{"Name": "Groups"}, null]}]}]}]],
+$  "trailGeneralised":
+$      [[-7645125788370600872, 29454063259482265], [7550657756085873962, 8306887735702454519],
+$       [3442609774769009497, -6045609596019868466], [-3762802931629133702, -7361930188838378157],
+$       [6074672019103205506, 4453215910706269646], [8163997354644670765, 8727510363205028856],
+$       [5999899142859337009, 3194658263420276526], [-7207804345520884860, -3300443820692303614],
+$       [-2498305733121268688, -7461813273559461778], [4890746846897318464, 1238859811286416110],
+$       [-6206411887255838170, 1006143961833320320], [-7881485968186299240, 6703245727990283406],
+$       [3643835188545527418, -9022287806705800816], [3614369630956290594, -6807603006048631308],
+$       [6624474121815728172, 5212152502356239058], [-7188385235206215884, 1295451435563510514],
+$       [-1074412336033261805, -226257919330400614], [-3286708250341405066, 9172708514397084434],
+$       [6266366054263986876, -885540850376099534], [-2425062266085734037, 6274441929037873352],
+$       [-839642367297719134, 5051425270252777448], [-5534930495354637094, 3631643118292761512],
+$       [-3859025340896866045, -564086660532302165], [-2304887327665342844, -3158925421606618846],
+$       [1105112244488373228, -7361930188838378157], [-1608398223078850975, -3518265122721094654],
+$       [-190640859918758727, 9206352487807204127], [3122270867750523220, 3805952566188478722],
+$       [3509103408049500254, 3864435760642637053], [-6652343521306428408, 2018863616988387466],
+$       [-2553529352518260150, -7361930188838378157], [-5960851338344968633, 2931435562714020407],
+$       [-867207224842638313, -6590614335347126173], [-5415506304736628745, 8345833077535284918],
+$       [7902350378295466995, 1276281025682886597], [-6019788610315204416, 6755316191449262332],
+$       [1429067603078903278, 5900833567647454509], [-2725006418402259550, -6700778425611895595]],
+$  "trailVerbose": [], "trailRewrites": []}

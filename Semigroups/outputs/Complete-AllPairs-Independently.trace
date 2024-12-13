@@ -1,0 +1,4 @@
+Adding the following unnamed symmetry breaking constraints:
+    such that
+        and([f .<= transform([permutation((q1, q2))], f)
+                 | q1 : T, q2 : T, q1 < q2])

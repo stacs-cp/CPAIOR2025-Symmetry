@@ -1,0 +1,175 @@
+language ESSENCE' 1.0
+
+given n: int(1..)
+find m: matrix indexed by [int(1..n), int(1..n)] of int(1..n)
+branching on [m]
+such that
+    and([allDiff(m[i, ..]) | i : int(1..n)]),
+    and([m[m[i, j], m[i, k]] = m[m[j, i], m[j, k]] | i : int(1..n), j : int(1..n), k : int(1..n)]),
+    allDiff([m[i, i] | i : int(1..n)]),
+    and([[m[q2, q3] | q2 : int(1..n), q3 : int(1..n)] <=lex
+         [[m   [[q2, catchUndef(q1_PermutationAsFunction_PermutationFunction_backwards_Function1D[q2], 0); int(1..2)]
+                    [toInt(or([q14 = q2 | q14 : int(1..n)])) + 1],
+                [q3, catchUndef(q1_PermutationAsFunction_PermutationFunction_backwards_Function1D[q3], 0); int(1..2)]
+                    [toInt(or([q16 = q3 | q16 : int(1..n)])) + 1]],
+           catchUndef(q1_PermutationAsFunction_PermutationFunction_forwards_Function1D
+                          [m   [[q2,
+                                 catchUndef(q1_PermutationAsFunction_PermutationFunction_backwards_Function1D[q2], 0);
+                                     int(1..2)]
+                                    [toInt(or([q18 = q2 | q18 : int(1..n)])) + 1],
+                                [q3,
+                                 catchUndef(q1_PermutationAsFunction_PermutationFunction_backwards_Function1D[q3], 0);
+                                     int(1..2)]
+                                    [toInt(or([q20 = q3 | q20 : int(1..n)])) + 1]]],
+                      0);
+               int(1..2)]
+              [toInt(or([q26 =
+                         m   [[q2, catchUndef(q1_PermutationAsFunction_PermutationFunction_backwards_Function1D[q2], 0);
+                                   int(1..2)]
+                                  [toInt(or([q22 = q2 | q22 : int(1..n)])) + 1],
+                              [q3, catchUndef(q1_PermutationAsFunction_PermutationFunction_backwards_Function1D[q3], 0);
+                                   int(1..2)]
+                                  [toInt(or([q24 = q3 | q24 : int(1..n)])) + 1]]
+                             | q26 : int(1..n)]))
+               + 1]
+              | q2 : int(1..n), q3 : int(1..n)]
+             | q1_PermutationAsFunction_PermutationFunction_forwards_Function1D : matrix indexed by [int(1..n)] of
+                                                                                      int(1..n),
+               q1_PermutationAsFunction_PermutationFunction_backwards_Function1D : matrix indexed by [int(1..n)] of
+                                                                                       int(1..n),
+               allDiff(q1_PermutationAsFunction_PermutationFunction_forwards_Function1D),
+               and([or([q1_PermutationAsFunction_PermutationFunction_forwards_Function1D[q8] = q7 | q8 : int(1..n)])
+                        | q7 : int(1..n)]),
+               allDiff(q1_PermutationAsFunction_PermutationFunction_backwards_Function1D),
+               and([or([q1_PermutationAsFunction_PermutationFunction_backwards_Function1D[q11] = q10 | q11 : int(1..n)])
+                        | q10 : int(1..n)]),
+               and([q1_PermutationAsFunction_PermutationFunction_backwards_Function1D
+                        [q1_PermutationAsFunction_PermutationFunction_forwards_Function1D[q6]]
+                    = q6
+                        | q6 : int(1..n)]),
+               and([q1_PermutationAsFunction_PermutationFunction_forwards_Function1D
+                        [q1_PermutationAsFunction_PermutationFunction_backwards_Function1D[q6]]
+                    = q6
+                        | q6 : int(1..n)])])
+
+$ Conjure's
+$ {"finds": [{"Name": "m"}], "givens": [{"Name": "n"}], "enumGivens": [], "enumLettings": [],
+$  "lettings":
+$      [[{"Name": "X"},
+$        {"Domain":
+$             {"DomainInt":
+$                  [{"TagUnnamed": "X"},
+$                   [{"RangeBounded":
+$                         [{"Constant": {"ConstantInt": [{"TagInt": []}, 1]}},
+$                          {"Reference":
+$                               [{"Name": "n"},
+$                                {"DeclNoRepr":
+$                                     ["Given", {"Name": "n"},
+$                                      {"DomainInt":
+$                                           [{"TagInt": []},
+$                                            [{"RangeLowerBounded":
+$                                                  {"Constant": {"ConstantInt": [{"TagInt": []}, 1]}}}]]},
+$                                      {"NoRegion": []}]}]}]}]]}}]],
+$  "unnameds": [[{"Name": "X"}, {"Reference": [{"Name": "n"}, null]}]], "strategyQ": {"PickFirst": []},
+$  "strategyA": {"Compact": []},
+$  "trailCompact":
+$      [[1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
+$       [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
+$       [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
+$       [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
+$       [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
+$       [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
+$       [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1]],
+$  "nameGenState": [["q", 27]], "nbExtraGivens": 0,
+$  "representations":
+$      [[{"Name": "m"},
+$        {"DomainMatrix":
+$             [{"DomainInt":
+$                   [{"TagUnnamed": "X"},
+$                    [{"RangeBounded":
+$                          [{"Constant": {"ConstantInt": [{"TagUnnamed": "X"}, 1]}},
+$                           {"Reference":
+$                                [{"Name": "n"},
+$                                 {"DeclNoRepr":
+$                                      ["Given", {"Name": "n"},
+$                                       {"DomainInt":
+$                                            [{"TagUnnamed": "X"},
+$                                             [{"RangeLowerBounded":
+$                                                   {"Constant": {"ConstantInt": [{"TagUnnamed": "X"}, 1]}}}]]},
+$                                       {"NoRegion": []}]}]}]}]]},
+$              {"DomainMatrix":
+$                   [{"DomainInt":
+$                         [{"TagUnnamed": "X"},
+$                          [{"RangeBounded":
+$                                [{"Constant": {"ConstantInt": [{"TagUnnamed": "X"}, 1]}},
+$                                 {"Reference":
+$                                      [{"Name": "n"},
+$                                       {"DeclNoRepr":
+$                                            ["Given", {"Name": "n"},
+$                                             {"DomainInt":
+$                                                  [{"TagUnnamed": "X"},
+$                                                   [{"RangeLowerBounded":
+$                                                         {"Constant": {"ConstantInt": [{"TagUnnamed": "X"}, 1]}}}]]},
+$                                             {"NoRegion": []}]}]}]}]]},
+$                    {"DomainInt":
+$                         [{"TagUnnamed": "X"},
+$                          [{"RangeBounded":
+$                                [{"Constant": {"ConstantInt": [{"TagUnnamed": "X"}, 1]}},
+$                                 {"Reference":
+$                                      [{"Name": "n"},
+$                                       {"DeclNoRepr":
+$                                            ["Given", {"Name": "n"},
+$                                             {"DomainInt":
+$                                                  [{"TagUnnamed": "X"},
+$                                                   [{"RangeLowerBounded":
+$                                                         {"Constant": {"ConstantInt": [{"TagUnnamed": "X"}, 1]}}}]]},
+$                                             {"NoRegion": []}]}]}]}]]}]}]}],
+$       [{"Name": "n"},
+$        {"DomainInt": [{"TagInt": []}, [{"RangeLowerBounded": {"Constant": {"ConstantInt": [{"TagInt": []}, 1]}}}]]}]],
+$  "representationsTree":
+$      [[{"Name": "m"},
+$        [{"rootLabel": null, "subForest": [{"rootLabel": null, "subForest": [{"rootLabel": null, "subForest": []}]}]}]],
+$       [{"Name": "n"}, [{"rootLabel": null, "subForest": []}]]],
+$  "originalDomains":
+$      [[{"Name": "n"},
+$        {"DomainInt": [{"TagInt": []}, [{"RangeLowerBounded": {"Constant": {"ConstantInt": [{"TagInt": []}, 1]}}}]]}],
+$       [{"Name": "m"},
+$        {"DomainMatrix":
+$             [{"DomainReference": [{"Name": "X"}, null]},
+$              {"DomainMatrix":
+$                   [{"DomainReference": [{"Name": "X"}, null]}, {"DomainReference": [{"Name": "X"}, null]}]}]}]],
+$  "trailGeneralised":
+$      [[-8524721213421164130, 7480387356861191435], [464969778350412198, 5463036542977171437],
+$       [-6041017058133263974, -1383417851089967109], [3439346515189014540, 7373058212888558452],
+$       [-5504827932110284650, -1927658009224146772], [8927593831133924998, 7997484227666026174],
+$       [1688570866244592082, -1570050411194828004], [-385484612353053320, -8571767515292442326],
+$       [-2045791068533158878, -4928718247617529479], [-2871916367909430690, -3159240971497988019],
+$       [1848523892700396821, 3075839806164990454], [-5367512601430130625, 5612139215552329557],
+$       [888323908940916985, -5705181825750991795], [-8099111930389861355, 1626000252555544888],
+$       [-6778410661730822652, -1614939753311431412], [5287564044337888404, -7745585324062092590],
+$       [-5243606341863471900, 8855717647816499945], [-7818287691838220214, 3234867300480481799],
+$       [1195744789242320882, -1654899618012356240], [9155132792922301326, 3248665398471402576],
+$       [-8195617293209282797, 5973357561698753846], [8385960889506497187, -5409127551471346443],
+$       [-3476479715379248643, -6085687566545325439], [3124131601229340775, 1626000252555544888],
+$       [3921965593716309467, -1614939753311431412], [-7159617808365660207, -3173177364875442310],
+$       [478723326713796683, 3581643848550334769], [7895690102631305263, -7282622507022654677],
+$       [-8742334674408719225, -1654899618012356240], [4866208429828714468, 3248665398471402576],
+$       [6197113950610373152, -836466676712205402], [3240095331649944279, 8637756899020864278],
+$       [7595336419747065007, 1722016782542645829], [340410162259068905, 3943460648489921733],
+$       [1654580875833887855, 1626000252555544888], [-2956250035738342319, -1614939753311431412],
+$       [241579500816188263, 2563374296190407442], [-5337260602223527215, 8527634507347999913],
+$       [-1520761089001719989, 572201173318152943], [-5354294523364826073, -1654899618012356240],
+$       [2648012679071348580, 3248665398471402576], [-2407528085022175255, -4961979741100233965],
+$       [7465881770881218055, -4598797068098184526], [3963605602004637759, -1174887139836678652],
+$       [-9088244282154974083, 7660460611429999714], [-1713509591649139891, -2402409127252257808],
+$       [-3453172903899145519, -4307319969131989720], [-4233299207753876959, 4716616428960317462],
+$       [3354883817615849192, 6113376781194957529], [-4001158016945077055, 4800904829875395158],
+$       [5273995536273723627, -331417962079631428], [-1871759279065668046, -4486959057885121495],
+$       [3244713560542279047, -4168917837659224535], [-4550735952612776683, -4168917837659224535],
+$       [1929039352286044612, -2263318249793986882], [-4662295197481956990, -3054627989525994954],
+$       [-8515499184411251304, 3726159076129733014], [-4455396247111328848, 2541567198799404072],
+$       [-4105094148058875848, 5335014125961610704], [-2792598272712523766, -2275669417657847880],
+$       [1266500862258960272, 1068700198003755196], [-3623284724136985218, -3300941989364575499],
+$       [-1198925091111469488, -7530917510215523222], [7977149988605112660, -5414299469060312294],
+$       [-843784756567937905, 7634726383553101722], [-8284936206375011553, 6881061136330376289]],
+$  "trailVerbose": [], "trailRewrites": []}

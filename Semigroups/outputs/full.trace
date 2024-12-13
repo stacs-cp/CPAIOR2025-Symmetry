@@ -1,0 +1,2 @@
+Adding the following unnamed symmetry breaking constraints:
+    such that and([f .<= transform([q1], f) | q1 : permutation of T])

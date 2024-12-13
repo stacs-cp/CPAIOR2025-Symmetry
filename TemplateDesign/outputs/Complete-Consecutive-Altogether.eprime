@@ -1,0 +1,318 @@
+language ESSENCE' 1.0
+
+given n_templates: int(1..)
+given n_slots: int(1..)
+given n_variations: int(1..)
+given fin1: int
+given demand: matrix indexed by [int(1..n_variations)] of int(1..fin1)
+find design: matrix indexed by [int(1..n_templates), int(1..n_variations)] of int(0..n_slots)
+letting let1 be max([demand[q25] | q25 : int(1..n_variations)])
+find printings: matrix indexed by [int(1..n_templates)] of int(0..let1)
+branching on [design, printings]
+minimising sum([printings[t] | t : int(1..n_templates)])
+such that
+    and([sum([printings[t] * design[t, v] | t : int(1..n_templates)]) >= demand[v] | v : int(1..n_variations)]),
+    and([[design[q5, q6] | q5 : int(1..n_templates), q6 : int(1..n_variations)] <lex
+         [design[catchUndef([q5, q1 + 1, q1; int(0..2)][toInt(q1 = q5) + toInt(q1 + 1 = q5) * 2], 1), q6]
+              | q5 : int(1..n_templates), q6 : int(1..n_variations)]
+         \/
+         and([and([design[q8, q10] =
+                   design[catchUndef([q8, q1 + 1, q1; int(0..2)][toInt(q1 = q8) + toInt(q1 + 1 = q8) * 2], 1), q10]
+                       | q10 : int(1..n_variations)])
+                  | q8 : int(1..n_templates)])
+         /\
+         printings <=lex
+         [printings[catchUndef([q13, q1 + 1, q1; int(0..2)][toInt(q1 = q13) + toInt(q1 + 1 = q13) * 2], 1)]
+              | q13 : int(1..n_templates)]
+             | q1 : int(1..n_templates), q1 < n_templates])
+
+$ Conjure's
+$ {"finds": [{"Name": "design"}, {"Name": "printings"}],
+$  "givens": [{"Name": "n_templates"}, {"Name": "n_slots"}, {"Name": "n_variations"}, {"Name": "demand"}],
+$  "enumGivens": [], "enumLettings": [],
+$  "lettings":
+$      [[{"Name": "templates"},
+$        {"Domain":
+$             {"DomainInt":
+$                  [{"TagUnnamed": "templates"},
+$                   [{"RangeBounded":
+$                         [{"Constant": {"ConstantInt": [{"TagInt": []}, 1]}},
+$                          {"Reference":
+$                               [{"Name": "n_templates"},
+$                                {"DeclNoRepr":
+$                                     ["Given", {"Name": "n_templates"},
+$                                      {"DomainInt":
+$                                           [{"TagInt": []},
+$                                            [{"RangeLowerBounded":
+$                                                  {"Constant": {"ConstantInt": [{"TagInt": []}, 1]}}}]]},
+$                                      {"NoRegion": []}]}]}]}]]}}],
+$       [{"Name": "variations"},
+$        {"Domain":
+$             {"DomainInt":
+$                  [{"TagInt": []},
+$                   [{"RangeBounded":
+$                         [{"Constant": {"ConstantInt": [{"TagInt": []}, 1]}},
+$                          {"Reference":
+$                               [{"Name": "n_variations"},
+$                                {"DeclNoRepr":
+$                                     ["Given", {"Name": "n_variations"},
+$                                      {"DomainInt":
+$                                           [{"TagInt": []},
+$                                            [{"RangeLowerBounded":
+$                                                  {"Constant": {"ConstantInt": [{"TagInt": []}, 1]}}}]]},
+$                                      {"NoRegion": []}]}]}]}]]}}],
+$       [{"MachineName": ["let", 1, []]},
+$        {"Op":
+$             {"MkOpMax":
+$                  {"Reference":
+$                       [{"Name": "demand"},
+$                        {"DeclNoRepr":
+$                             ["Given", {"Name": "demand"},
+$                              {"DomainMatrix":
+$                                   [{"DomainInt":
+$                                         [{"TagInt": []},
+$                                          [{"RangeBounded":
+$                                                [{"Constant": {"ConstantInt": [{"TagInt": []}, 1]}},
+$                                                 {"Reference":
+$                                                      [{"Name": "n_variations"},
+$                                                       {"DeclNoRepr":
+$                                                            ["Given", {"Name": "n_variations"},
+$                                                             {"DomainInt":
+$                                                                  [{"TagInt": []},
+$                                                                   [{"RangeLowerBounded":
+$                                                                         {"Constant":
+$                                                                              {"ConstantInt": [{"TagInt": []}, 1]}}}]]},
+$                                                             {"NoRegion": []}]}]}]}]]},
+$                                    {"DomainInt":
+$                                         [{"TagInt": []},
+$                                          [{"RangeBounded":
+$                                                [{"Constant": {"ConstantInt": [{"TagInt": []}, 1]}},
+$                                                 {"Reference":
+$                                                      [{"MachineName": ["fin", 1, []]},
+$                                                       {"DeclNoRepr":
+$                                                            ["Given", {"MachineName": ["fin", 1, []]},
+$                                                             {"DomainInt": [{"TagInt": []}, []]},
+$                                                             {"NoRegion": []}]}]}]}]]}]},
+$                              {"NoRegion": []}]}]}}}]],
+$  "unnameds": [[{"Name": "templates"}, {"Reference": [{"Name": "n_templates"}, null]}]], "strategyQ": {"PickFirst": []},
+$  "strategyA": {"Compact": []},
+$  "trailCompact":
+$      [[1, 1, 2], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
+$       [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 2, 2], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
+$       [1, 1, 1], [1, 2, 2], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
+$       [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
+$       [1, 2, 2], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
+$       [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1]],
+$  "nameGenState": [["fin", 2], ["let", 2], ["q", 26]], "nbExtraGivens": 1,
+$  "representations":
+$      [[{"Name": "design"},
+$        {"DomainMatrix":
+$             [{"DomainInt":
+$                   [{"TagUnnamed": "templates"},
+$                    [{"RangeBounded":
+$                          [{"Constant": {"ConstantInt": [{"TagUnnamed": "templates"}, 1]}},
+$                           {"Reference":
+$                                [{"Name": "n_templates"},
+$                                 {"DeclNoRepr":
+$                                      ["Given", {"Name": "n_templates"},
+$                                       {"DomainInt":
+$                                            [{"TagUnnamed": "templates"},
+$                                             [{"RangeLowerBounded":
+$                                                   {"Constant": {"ConstantInt": [{"TagUnnamed": "templates"}, 1]}}}]]},
+$                                       {"NoRegion": []}]}]}]}]]},
+$              {"DomainMatrix":
+$                   [{"DomainInt":
+$                         [{"TagInt": []},
+$                          [{"RangeBounded":
+$                                [{"Constant": {"ConstantInt": [{"TagInt": []}, 1]}},
+$                                 {"Reference":
+$                                      [{"Name": "n_variations"},
+$                                       {"DeclNoRepr":
+$                                            ["Given", {"Name": "n_variations"},
+$                                             {"DomainInt":
+$                                                  [{"TagInt": []},
+$                                                   [{"RangeLowerBounded":
+$                                                         {"Constant": {"ConstantInt": [{"TagInt": []}, 1]}}}]]},
+$                                             {"NoRegion": []}]}]}]}]]},
+$                    {"DomainInt":
+$                         [{"TagInt": []},
+$                          [{"RangeBounded":
+$                                [{"Constant": {"ConstantInt": [{"TagInt": []}, 0]}},
+$                                 {"Reference":
+$                                      [{"Name": "n_slots"},
+$                                       {"DeclNoRepr":
+$                                            ["Given", {"Name": "n_slots"},
+$                                             {"DomainInt":
+$                                                  [{"TagInt": []},
+$                                                   [{"RangeLowerBounded":
+$                                                         {"Constant": {"ConstantInt": [{"TagInt": []}, 1]}}}]]},
+$                                             {"NoRegion": []}]}]}]}]]}]}]}],
+$       [{"Name": "n_variations"},
+$        {"DomainInt": [{"TagInt": []}, [{"RangeLowerBounded": {"Constant": {"ConstantInt": [{"TagInt": []}, 1]}}}]]}],
+$       [{"MachineName": ["fin", 1, []]}, {"DomainInt": [{"TagInt": []}, []]}],
+$       [{"Name": "n_templates"},
+$        {"DomainInt": [{"TagInt": []}, [{"RangeLowerBounded": {"Constant": {"ConstantInt": [{"TagInt": []}, 1]}}}]]}],
+$       [{"Name": "n_slots"},
+$        {"DomainInt": [{"TagInt": []}, [{"RangeLowerBounded": {"Constant": {"ConstantInt": [{"TagInt": []}, 1]}}}]]}],
+$       [{"Name": "demand"},
+$        {"DomainMatrix":
+$             [{"DomainInt":
+$                   [{"TagInt": []},
+$                    [{"RangeBounded":
+$                          [{"Constant": {"ConstantInt": [{"TagInt": []}, 1]}},
+$                           {"Reference":
+$                                [{"Name": "n_variations"},
+$                                 {"DeclHasRepr":
+$                                      ["Given", {"Name": "n_variations"},
+$                                       {"DomainInt":
+$                                            [{"TagInt": []},
+$                                             [{"RangeLowerBounded":
+$                                                   {"Constant": {"ConstantInt": [{"TagInt": []}, 1]}}}]]}]}]}]}]]},
+$              {"DomainInt":
+$                   [{"TagInt": []},
+$                    [{"RangeBounded":
+$                          [{"Constant": {"ConstantInt": [{"TagInt": []}, 1]}},
+$                           {"Reference":
+$                                [{"MachineName": ["fin", 1, []]},
+$                                 {"DeclHasRepr":
+$                                      ["Given", {"MachineName": ["fin", 1, []]},
+$                                       {"DomainInt": [{"TagInt": []}, []]}]}]}]}]]}]}],
+$       [{"Name": "printings"},
+$        {"DomainMatrix":
+$             [{"DomainInt":
+$                   [{"TagUnnamed": "templates"},
+$                    [{"RangeBounded":
+$                          [{"Constant": {"ConstantInt": [{"TagUnnamed": "templates"}, 1]}},
+$                           {"Reference":
+$                                [{"Name": "n_templates"},
+$                                 {"DeclHasRepr":
+$                                      ["Given", {"Name": "n_templates"},
+$                                       {"DomainInt":
+$                                            [{"TagInt": []},
+$                                             [{"RangeLowerBounded":
+$                                                   {"Constant": {"ConstantInt": [{"TagInt": []}, 1]}}}]]}]}]}]}]]},
+$              {"DomainInt":
+$                   [{"TagInt": []},
+$                    [{"RangeBounded":
+$                          [{"Constant": {"ConstantInt": [{"TagInt": []}, 0]}},
+$                           {"Reference":
+$                                [{"MachineName": ["let", 1, []]},
+$                                 {"Alias":
+$                                      {"Op":
+$                                           {"MkOpMax":
+$                                                {"Reference":
+$                                                     [{"Name": "demand"},
+$                                                      {"DeclHasRepr":
+$                                                           ["Given", {"Name": "demand"},
+$                                                            {"DomainMatrix":
+$                                                                 [{"DomainInt":
+$                                                                       [{"TagInt": []},
+$                                                                        [{"RangeBounded":
+$                                                                              [{"Constant":
+$                                                                                    {"ConstantInt":
+$                                                                                         [{"TagInt": []}, 1]}},
+$                                                                               {"Reference":
+$                                                                                    [{"Name": "n_variations"},
+$                                                                                     {"DeclHasRepr":
+$                                                                                          ["Given",
+$                                                                                           {"Name": "n_variations"},
+$                                                                                           {"DomainInt":
+$                                                                                                [{"TagInt": []},
+$                                                                                                 [{"RangeLowerBounded":
+$                                                                                                       {"Constant":
+$                                                                                                            {"ConstantInt":
+$                                                                                                                 [{"TagInt":
+$                                                                                                                       []},
+$                                                                                                                  1]}}}]]}]}]}]}]]},
+$                                                                  {"DomainInt":
+$                                                                       [{"TagInt": []},
+$                                                                        [{"RangeBounded":
+$                                                                              [{"Constant":
+$                                                                                    {"ConstantInt":
+$                                                                                         [{"TagInt": []}, 1]}},
+$                                                                               {"Reference":
+$                                                                                    [{"MachineName": ["fin", 1, []]},
+$                                                                                     {"DeclHasRepr":
+$                                                                                          ["Given",
+$                                                                                           {"MachineName":
+$                                                                                                ["fin", 1, []]},
+$                                                                                           {"DomainInt":
+$                                                                                                [{"TagInt": []},
+$                                                                                                 []]}]}]}]}]]}]}]}]}}}}]}]}]]}]}]],
+$  "representationsTree":
+$      [[{"Name": "demand"}, [{"rootLabel": null, "subForest": [{"rootLabel": null, "subForest": []}]}]],
+$       [{"Name": "design"},
+$        [{"rootLabel": null, "subForest": [{"rootLabel": null, "subForest": [{"rootLabel": null, "subForest": []}]}]}]],
+$       [{"MachineName": ["fin", 1, []]}, [{"rootLabel": null, "subForest": []}]],
+$       [{"Name": "n_slots"}, [{"rootLabel": null, "subForest": []}]],
+$       [{"Name": "n_templates"}, [{"rootLabel": null, "subForest": []}]],
+$       [{"Name": "n_variations"}, [{"rootLabel": null, "subForest": []}]],
+$       [{"Name": "printings"}, [{"rootLabel": null, "subForest": [{"rootLabel": null, "subForest": []}]}]]],
+$  "originalDomains":
+$      [[{"Name": "n_templates"},
+$        {"DomainInt": [{"TagInt": []}, [{"RangeLowerBounded": {"Constant": {"ConstantInt": [{"TagInt": []}, 1]}}}]]}],
+$       [{"Name": "n_slots"},
+$        {"DomainInt": [{"TagInt": []}, [{"RangeLowerBounded": {"Constant": {"ConstantInt": [{"TagInt": []}, 1]}}}]]}],
+$       [{"Name": "n_variations"},
+$        {"DomainInt": [{"TagInt": []}, [{"RangeLowerBounded": {"Constant": {"ConstantInt": [{"TagInt": []}, 1]}}}]]}],
+$       [{"Name": "demand"},
+$        {"DomainMatrix":
+$             [{"DomainInt":
+$                   [{"TagInt": []},
+$                    [{"RangeBounded":
+$                          [{"Constant": {"ConstantInt": [{"TagInt": []}, 1]}},
+$                           {"Reference": [{"Name": "n_variations"}, null]}]}]]},
+$              {"DomainInt":
+$                   [{"TagInt": []}, [{"RangeLowerBounded": {"Constant": {"ConstantInt": [{"TagInt": []}, 1]}}}]]}]}],
+$       [{"Name": "design"},
+$        {"DomainMatrix":
+$             [{"DomainReference": [{"Name": "templates"}, null]},
+$              {"DomainMatrix":
+$                   [{"DomainInt":
+$                         [{"TagInt": []},
+$                          [{"RangeBounded":
+$                                [{"Constant": {"ConstantInt": [{"TagInt": []}, 1]}},
+$                                 {"Reference": [{"Name": "n_variations"}, null]}]}]]},
+$                    {"DomainInt":
+$                         [{"TagInt": []},
+$                          [{"RangeBounded":
+$                                [{"Constant": {"ConstantInt": [{"TagInt": []}, 0]}},
+$                                 {"Reference": [{"Name": "n_slots"}, null]}]}]]}]}]}],
+$       [{"Name": "printings"},
+$        {"DomainMatrix":
+$             [{"DomainReference": [{"Name": "templates"}, null]},
+$              {"DomainInt":
+$                   [{"TagInt": []},
+$                    [{"RangeBounded":
+$                          [{"Constant": {"ConstantInt": [{"TagInt": []}, 0]}},
+$                           {"Reference": [{"MachineName": ["let", 1, []]}, null]}]}]]}]}]],
+$  "trailGeneralised":
+$      [[6945713251303812539, 2543934715651586137], [246850017981831959, 5352163259486522885],
+$       [2078064505237730297, 3779873569046705319], [-1598458931007595081, 7801742555656291644],
+$       [-3661448214697809321, 2340141081972698530], [-3818157144253631819, 7047118805396873140],
+$       [-4461396483400555438, 5761427695597630107], [-1574668852549635761, 3070359375889542751],
+$       [2210189631025424406, 4679400667245191190], [-892461211139828022, -4796056953234033822],
+$       [2227228451797526499, -7361930188838378157], [-6478901884384761691, 185647477287603838],
+$       [-192262538535995819, 8902745532998842729], [-5223315789824429129, -8276891727396837184],
+$       [2736526657012793380, 4082434299662001086], [6753214400707927834, -4448010118990537166],
+$       [-8519934704801167224, -6300847591900731214], [-2216905575930335822, -6672626974013591149],
+$       [9217713477053918186, 3993719365426701329], [-5702924025886115031, 3738165852121018480],
+$       [5509235784826213983, -2855677567583140746], [3643858373950538960, -7361930188838378157],
+$       [6227888176958008784, -8749875830503912270], [-7372022863030226600, -2712650454556485751],
+$       [-4314321894041013527, 7826436681959754612], [-5691352721132043963, -2459988751408255010],
+$       [-8342855529466106413, 7143179979497991717], [6432299442878766116, 8830494996364147588],
+$       [7665205618074010423, 4626730106444002473], [1702069804010683769, -2930992008850679064],
+$       [6959118893159696877, 6734811958956576190], [8254809213950808787, -5810266233609034218],
+$       [-5928665259934261917, -2882332169011675090], [4045810174839432233, -7584177788283385562],
+$       [6492305566796501659, -1379674954429273294], [3029535338168803098, -7361930188838378157],
+$       [-785908992960909782, -4192772486137736498], [3480856182114885282, 6308307096322008361],
+$       [3949860349102114967, 4847688955520997936], [-1031937814824014005, -3355660920073405418],
+$       [-3295416787564081211, 6507430714023255571], [1127663472922192784, 4626730106444002473],
+$       [2592670895134750830, -9081246942341904043], [3824939680394300628, -3119532205088329328],
+$       [-3083865528566380728, 7584431013384640818], [1806959892565665754, -5088103619154682158],
+$       [-7067975421654406002, 5922637400074642791], [3049314768228939834, 3734294221301097337],
+$       [-3238759789894240206, 8103948754645746674], [8286511359557594332, -7660862652912169876],
+$       [-5627780629463045182, -1129802260476382224], [1391725996931715816, -2717752761680935708],
+$       [-5138615161923010376, 8713200634380716170], [-6376822324767098824, -8302514479907506624],
+$       [-3700029888003444184, -3017668660832824984]],
+$  "trailVerbose": [], "trailRewrites": []}

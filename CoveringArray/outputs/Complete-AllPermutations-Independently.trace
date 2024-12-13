@@ -1,0 +1,5 @@
+Adding the following unnamed symmetry breaking constraints:
+    such that
+        and([CA .<= transform([q1], CA) | q1 : permutation of K]),
+        and([CA .<= transform([q2], CA) | q2 : permutation of B]),
+        and([CA .<= transform([q3], CA) | q3 : permutation of G])

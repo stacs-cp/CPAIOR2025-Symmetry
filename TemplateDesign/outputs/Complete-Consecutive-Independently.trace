@@ -1,0 +1,5 @@
+Adding the following unnamed symmetry breaking constraints:
+    such that
+        and([(design, printings) .<=
+             transform([permutation((q1, succ(q1)))], (design, printings))
+                 | q1 : templates, q1 < n_templates])

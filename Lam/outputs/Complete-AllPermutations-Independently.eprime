@@ -1,0 +1,123 @@
+language ESSENCE' 1.0
+
+given indexSize: int
+find m: matrix indexed by [int(1..indexSize), int(1..indexSize)] of bool
+branching on [m]
+such that
+    and([sum([toInt(!m[r, c]) | c : int(1..indexSize)]) = 11 | r : int(1..indexSize)]),
+    and([sum([toInt(!m[r, c]) | r : int(1..indexSize)]) = 11 | c : int(1..indexSize)]),
+    and([sum([toInt(!(m[r1, c] \/ m[r2, c])) | c : int(1..indexSize)]) = 1
+             | r1 : int(1..indexSize), r2 : int(1..indexSize), r1 != r2]),
+    and([flatten([[-toInt(m[q2, q3]); int(1)] | q2 : int(1..indexSize), q3 : int(1..indexSize)]) <=lex
+         flatten([[-toInt(m   [[q2,
+                                catchUndef(q1_PermutationAsFunction_PermutationFunction_backwards_Function1D[q2], 0);
+                                    int(1..2)]
+                                   [toInt(or([q14 = q2 | q14 : int(1..indexSize)])) + 1],
+                               [q3,
+                                catchUndef(q1_PermutationAsFunction_PermutationFunction_backwards_Function1D[q3], 0);
+                                    int(1..2)]
+                                   [toInt(or([q16 = q3 | q16 : int(1..indexSize)])) + 1]]);
+                       int(1)]
+                      | q2 : int(1..indexSize), q3 : int(1..indexSize)])
+             | q1_PermutationAsFunction_PermutationFunction_forwards_Function1D : matrix indexed by [int(1..indexSize)] of
+                                                                                      int(1..indexSize),
+               q1_PermutationAsFunction_PermutationFunction_backwards_Function1D : matrix indexed by [int(1..indexSize)] of
+                                                                                       int(1..indexSize),
+               allDiff(q1_PermutationAsFunction_PermutationFunction_forwards_Function1D),
+               and([or([q1_PermutationAsFunction_PermutationFunction_forwards_Function1D[q8] = q7
+                            | q8 : int(1..indexSize)])
+                        | q7 : int(1..indexSize)]),
+               allDiff(q1_PermutationAsFunction_PermutationFunction_backwards_Function1D),
+               and([or([q1_PermutationAsFunction_PermutationFunction_backwards_Function1D[q11] = q10
+                            | q11 : int(1..indexSize)])
+                        | q10 : int(1..indexSize)]),
+               and([q1_PermutationAsFunction_PermutationFunction_backwards_Function1D
+                        [q1_PermutationAsFunction_PermutationFunction_forwards_Function1D[q6]]
+                    = q6
+                        | q6 : int(1..indexSize)]),
+               and([q1_PermutationAsFunction_PermutationFunction_forwards_Function1D
+                        [q1_PermutationAsFunction_PermutationFunction_backwards_Function1D[q6]]
+                    = q6
+                        | q6 : int(1..indexSize)])])
+
+$ Conjure's
+$ {"finds": [{"Name": "m"}], "givens": [{"Name": "indexSize"}], "enumGivens": [], "enumLettings": [],
+$  "lettings":
+$      [[{"Name": "Index"},
+$        {"Domain":
+$             {"DomainInt":
+$                  [{"TagUnnamed": "Index"},
+$                   [{"RangeBounded":
+$                         [{"Constant": {"ConstantInt": [{"TagInt": []}, 1]}},
+$                          {"Reference":
+$                               [{"Name": "indexSize"},
+$                                {"DeclNoRepr":
+$                                     ["Given", {"Name": "indexSize"}, {"DomainInt": [{"TagInt": []}, []]},
+$                                      {"NoRegion": []}]}]}]}]]}}]],
+$  "unnameds": [[{"Name": "Index"}, {"Reference": [{"Name": "indexSize"}, null]}]], "strategyQ": {"PickFirst": []},
+$  "strategyA": {"Compact": []},
+$  "trailCompact":
+$      [[1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
+$       [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
+$       [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
+$       [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
+$       [1, 1, 1], [1, 1, 1], [1, 1, 1]],
+$  "nameGenState": [["q", 17]], "nbExtraGivens": 0,
+$  "representations":
+$      [[{"Name": "m"},
+$        {"DomainMatrix":
+$             [{"DomainInt":
+$                   [{"TagUnnamed": "Index"},
+$                    [{"RangeBounded":
+$                          [{"Constant": {"ConstantInt": [{"TagUnnamed": "Index"}, 1]}},
+$                           {"Reference":
+$                                [{"Name": "indexSize"},
+$                                 {"DeclNoRepr":
+$                                      ["Given", {"Name": "indexSize"}, {"DomainInt": [{"TagUnnamed": "Index"}, []]},
+$                                       {"NoRegion": []}]}]}]}]]},
+$              {"DomainMatrix":
+$                   [{"DomainInt":
+$                         [{"TagUnnamed": "Index"},
+$                          [{"RangeBounded":
+$                                [{"Constant": {"ConstantInt": [{"TagUnnamed": "Index"}, 1]}},
+$                                 {"Reference":
+$                                      [{"Name": "indexSize"},
+$                                       {"DeclNoRepr":
+$                                            ["Given", {"Name": "indexSize"},
+$                                             {"DomainInt": [{"TagUnnamed": "Index"}, []]}, {"NoRegion": []}]}]}]}]]},
+$                    {"DomainBool": []}]}]}],
+$       [{"Name": "indexSize"}, {"DomainInt": [{"TagInt": []}, []]}]],
+$  "representationsTree":
+$      [[{"Name": "indexSize"}, [{"rootLabel": null, "subForest": []}]],
+$       [{"Name": "m"},
+$        [{"rootLabel": null, "subForest": [{"rootLabel": null, "subForest": [{"rootLabel": null, "subForest": []}]}]}]]],
+$  "originalDomains":
+$      [[{"Name": "indexSize"}, {"DomainInt": [{"TagInt": []}, []]}],
+$       [{"Name": "m"},
+$        {"DomainMatrix":
+$             [{"DomainReference": [{"Name": "Index"}, null]},
+$              {"DomainMatrix": [{"DomainReference": [{"Name": "Index"}, null]}, {"DomainBool": []}]}]}]],
+$  "trailGeneralised":
+$      [[7687545093986443848, 7976165983420105653], [7428789137023703343, -9133578572564052133],
+$       [1214114950911733646, 6201589828052655215], [5327101608203797570, -857247578888769242],
+$       [9034878576963922018, -2946608468127610344], [8064533459524059444, 3474766894939510848],
+$       [-6548311028208419298, -389016174336713868], [-7056706906478149532, 7875604601606749548],
+$       [-4876620159600078464, 4262472766743589519], [-6820447810544455619, 8371413584547937796],
+$       [-5232624344619564468, -786084142666336115], [2456896942193804071, -333294367987320247],
+$       [-1704562869910437998, 4720385408671005172], [-6938357858638465132, -6216625255857913057],
+$       [-8037385016376407054, -4783043543300061630], [5903133020793641904, 3508140001999436637],
+$       [7420022713315521005, 4849122843827671957], [-6450192214930535689, 340852688212133662],
+$       [-8142249610876450225, -5842516037994019666], [-7371452771904589589, -7906398853377470050],
+$       [7373749354717477459, 8921452076228961208], [2791622902933511186, -248275815676813363],
+$       [5727664400221228742, 1164638084940036455], [4350213964055342418, 3074767381922791507],
+$       [-6736581865860790242, -2370898551629565513], [1195311918789107380, -9113910021197833971],
+$       [-4844624373991398368, 5564481782091081587], [209273267491039303, -7396936239239456911],
+$       [-5602561448841893547, -7396936239239456911], [-1597243711340728620, -3686548648843208991],
+$       [1694992896754805450, 9007046824468218516], [-1277001045490278510, 8224576827653383222],
+$       [-7340679533641169260, 4810458757840146834], [-5450325863927009759, -1103567205196824254],
+$       [3357866187494400908, -486890986176825992], [-3393343913531649552, -1119877632466194418],
+$       [2896799121004358492, -7965941641714754880], [6357570315553291460, 4057156259864189460],
+$       [8186133151629716868, 7133872296449335304], [3843564962410193537, 3714173717390147208],
+$       [-7927695952545656868, -2550613414422767168], [6862018419201905804, 6243704437843059268],
+$       [3838712312828550122, 5636942319167693195]],
+$  "trailVerbose": [], "trailRewrites": []}

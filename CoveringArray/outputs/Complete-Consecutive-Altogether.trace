@@ -1,0 +1,9 @@
+Adding the following unnamed symmetry breaking constraints:
+    such that
+        and([and([and([CA .<=
+                       transform([permutation((q3, succ(q3))),
+                                  permutation((q2, succ(q2))), permutation((q1, succ(q1)))],
+                                 CA)
+                           | q3 : G, q3 < g])
+                      | q2 : B, q2 < b])
+                 | q1 : K, q1 < k])

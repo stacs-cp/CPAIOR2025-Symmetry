@@ -1,0 +1,4 @@
+Adding the following unnamed symmetry breaking constraints:
+    such that
+        and([f .<= transform([permutation((q1, succ(q1)))], f)
+                 | q1 : T, q1 < n])

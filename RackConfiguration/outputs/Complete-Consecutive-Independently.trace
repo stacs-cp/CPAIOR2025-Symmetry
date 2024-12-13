@@ -1,0 +1,6 @@
+Adding the following unnamed symmetry breaking constraints:
+    such that
+        and([(configuration, totalCost) .<=
+             transform([permutation((q1, succ(q1)))],
+                       (configuration, totalCost))
+                 | q1 : Rack, q1 < nbRacks])

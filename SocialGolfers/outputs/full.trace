@@ -1,0 +1,6 @@
+Adding the following unnamed symmetry breaking constraints:
+    such that
+        and([and([and([sched .<= transform([q3, q2, q1], sched)
+                           | q3 : permutation of Groups])
+                      | q2 : permutation of Weeks])
+                 | q1 : permutation of Golfers])

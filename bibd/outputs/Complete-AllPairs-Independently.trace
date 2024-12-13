@@ -1,0 +1,6 @@
+Adding the following unnamed symmetry breaking constraints:
+    such that
+        and([bibd .<= transform([permutation((q1, q2))], bibd)
+                 | q1 : Obj, q2 : Obj, q1 < q2]),
+        and([bibd .<= transform([permutation((q3, q4))], bibd)
+                 | q3 : Block, q4 : Block, q3 < q4])

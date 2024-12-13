@@ -1,0 +1,5 @@
+Adding the following unnamed symmetry breaking constraints:
+    such that
+        and([(colour, contents) .<=
+             transform([permutation((q2, succ(q2)))], (colour, contents))
+                 | q2 : Bin, q2 < let1])

@@ -1,0 +1,4 @@
+Adding the following unnamed symmetry breaking constraints:
+    such that
+        and([(design, printings) .<= transform([q1], (design, printings))
+                 | q1 : permutation of templates])
