@@ -4,9 +4,10 @@ Supplementary material about the "Breaking the symmetries of indistinguishable o
 
 # Problem classes
 
-This is the list of problem classes we use for evaluating our work. They are all of the Essence problem specifications which make use of the "unnamed types" feature of Essence from the [CSPLib](http://www.csplib.org).
+This is the list of problem classes we use for evaluating our work. 
 
-In addition we wrote a problem specification for the Semigroups problem since it is a canonical example of the unnamed types feature.
+They are most of the Essence problem specifications which make use of the "unnamed types" feature of Essence from the [CSPLib](http://www.csplib.org).
+In addition we wrote a problem specifications for the Semigroups and the Yang-Baxter problem since they are canonical examples of the unnamed types feature.
 
 - BIBD
 - Template Design
@@ -17,6 +18,7 @@ In addition we wrote a problem specification for the Semigroups problem since it
 - Vellino’s problem
 - Covering Array
 - Semigroups
+- Yang-Baxter
 
 
 # Kinds of symmetry breaking
