@@ -1,0 +1,12 @@
+
+given n : int(1..)
+
+letting X be new type of size n
+
+find m : matrix indexed by [X, X] of X
+
+such that forAll i : X . allDiff(m[i,..])
+
+such that forAll i,j,k : X . m[m[i,j],m[i,k]] = m[m[j,i],m[j,k]]
+
+such that allDiff([m[i,i] | i : X])
