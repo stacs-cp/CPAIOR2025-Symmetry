@@ -13,7 +13,6 @@ In addition we wrote a problem specifications for the Semigroups and the Yang-Ba
 - Template Design
 - Social Golfers
 - Lam’s problem
-- Production Line Sequencing
 - Rack Configuration
 - Vellino’s problem
 - Covering Array
