@@ -7,7 +7,7 @@ Supplementary material about the "Breaking the symmetries of indistinguishable o
 This is the list of problem classes we use for evaluating our work. 
 
 They are most of the Essence problem specifications which make use of the "unnamed types" feature of Essence from the [CSPLib](http://www.csplib.org).
-In addition we wrote a problem specifications for the Semigroups and the Yang-Baxter problem since they are canonical examples of the unnamed types feature.
+In addition we wrote problem specifications for the Semigroups and the Yang-Baxter problem since they are canonical examples of the unnamed types feature.
 
 - BIBD
 - Template Design
