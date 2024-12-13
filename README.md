@@ -15,7 +15,6 @@ In addition we wrote a problem specification for the Semigroups problem since it
 - Production Line Sequencing
 - Rack Configuration
 - Vellino’s problem
-- Sports Tournament Scheduling
 - Covering Array
 - Semigroups
 
@@ -33,7 +32,6 @@ In addition we wrote a problem specification for the Semigroups problem since it
 
 in addition, we have shorthands for the following.
 - **none**: no unnamed type symmetry breaking
-- **fast**: Quick-Consecutive-Independently
 - **full**: Complete-AllPermutations-Altogether
 
 # Command line flags
@@ -45,7 +43,6 @@ Command line flag is:
 where MODE is one of the following.
 
     none
-    fast (alias to Quick-Consecutive-Independently)
     full (alias to Complete-AllPermutations-Altogether)
     Complete-Consecutive-Independently
     Complete-Consecutive-Altogether
