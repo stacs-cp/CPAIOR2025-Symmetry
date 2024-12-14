@@ -1,0 +1,1291 @@
+language ESSENCE' 1.0
+
+given n_teams: int(1..)
+where n_teams % 2 = 0
+letting let1 be n_teams - 1
+letting let2 be n_teams / 2
+letting let3 be (n_teams - 1) * n_teams / 2
+find sched_RelationAsSetR3_ExplicitR3_1: matrix indexed by [int(1..let3)] of int(1..let1)
+find sched_RelationAsSetR3_ExplicitR3_2: matrix indexed by [int(1..let3)] of int(1..let2)
+find sched_RelationAsSetR3_ExplicitR3_3_Explicit: matrix indexed by [int(1..let3), int(1..2)] of int(1..n_teams)
+branching on
+    [sched_RelationAsSetR3_ExplicitR3_1, sched_RelationAsSetR3_ExplicitR3_2,
+     sched_RelationAsSetR3_ExplicitR3_3_Explicit]
+find conjure_aux1_RelationAsSetR3_ExplicitR3_1:
+        matrix indexed by [matrix indexed by [int(1..n_teams)] of int(1..n_teams),
+                           matrix indexed by [int(1..n_teams)] of int(1..n_teams),
+                           matrix indexed by [int(1..let1)] of int(1..let1),
+                           matrix indexed by [int(1..let1)] of int(1..let1),
+                           matrix indexed by [int(1..let2)] of int(1..let2),
+                           matrix indexed by [int(1..let2)] of int(1..let2), int(1..let3)] of
+            int(1..let1)
+find conjure_aux1_RelationAsSetR3_ExplicitR3_2:
+        matrix indexed by [matrix indexed by [int(1..n_teams)] of int(1..n_teams),
+                           matrix indexed by [int(1..n_teams)] of int(1..n_teams),
+                           matrix indexed by [int(1..let1)] of int(1..let1),
+                           matrix indexed by [int(1..let1)] of int(1..let1),
+                           matrix indexed by [int(1..let2)] of int(1..let2),
+                           matrix indexed by [int(1..let2)] of int(1..let2), int(1..let3)] of
+            int(1..let2)
+find conjure_aux1_RelationAsSetR3_ExplicitR3_3_Explicit:
+        matrix indexed by [matrix indexed by [int(1..n_teams)] of int(1..n_teams),
+                           matrix indexed by [int(1..n_teams)] of int(1..n_teams),
+                           matrix indexed by [int(1..let1)] of int(1..let1),
+                           matrix indexed by [int(1..let1)] of int(1..let1),
+                           matrix indexed by [int(1..let2)] of int(1..let2),
+                           matrix indexed by [int(1..let2)] of int(1..let2), int(1..let3), int(1..2)] of
+            int(1..n_teams)
+such that
+    and([and([or([sched_RelationAsSetR3_ExplicitR3_1[q41] = w /\
+                  or([sched_RelationAsSetR3_ExplicitR3_3_Explicit[q41, q43] = t | q43 : int(1..2)])
+                      | q41 : int(1..let3)])
+                  | w : int(1..let1)])
+             | t : int(1..n_teams)]),
+    and([and([sum([toInt(sched_RelationAsSetR3_ExplicitR3_2[q46] = p) *
+                   catchUndef(toInt(or([sched_RelationAsSetR3_ExplicitR3_3_Explicit[q46, q48] = t | q48 : int(1..2)])),
+                              0)
+                       | q46 : int(1..let3)])
+              <= 2
+                  | p : int(1..let2)])
+             | t : int(1..n_teams)]),
+    and([sum([toInt(and([t1 = sched_RelationAsSetR3_ExplicitR3_3_Explicit[q51, q53] \/
+                         t2 = sched_RelationAsSetR3_ExplicitR3_3_Explicit[q51, q53]
+                             | q53 : int(1..2)])
+                    /\
+                    (or([sched_RelationAsSetR3_ExplicitR3_3_Explicit[q51, q57] = t1 | q57 : int(1..2)]) /\
+                     or([sched_RelationAsSetR3_ExplicitR3_3_Explicit[q51, q59] = t2 | q59 : int(1..2)])))
+                  | q51 : int(1..let3)])
+         = 1
+         /\ allDiff([t1, t2; int(1..2)])
+             | t1 : int(1..n_teams), t2 : int(1..n_teams), t1 != t2]),
+    and([and([and([and([flatten([[conjure_aux1_RelationAsSetR3_ExplicitR3_1
+                                      [q1_PermutationAsFunction_PermutationFunction_forwards_Function1D,
+                                       q1_PermutationAsFunction_PermutationFunction_backwards_Function1D,
+                                       q2_PermutationAsFunction_PermutationFunction_forwards_Function1D,
+                                       q2_PermutationAsFunction_PermutationFunction_backwards_Function1D,
+                                       q3_PermutationAsFunction_PermutationFunction_forwards_Function1D,
+                                       q3_PermutationAsFunction_PermutationFunction_backwards_Function1D, q19];
+                                      int(1)],
+                                 [conjure_aux1_RelationAsSetR3_ExplicitR3_2
+                                      [q1_PermutationAsFunction_PermutationFunction_forwards_Function1D,
+                                       q1_PermutationAsFunction_PermutationFunction_backwards_Function1D,
+                                       q2_PermutationAsFunction_PermutationFunction_forwards_Function1D,
+                                       q2_PermutationAsFunction_PermutationFunction_backwards_Function1D,
+                                       q3_PermutationAsFunction_PermutationFunction_forwards_Function1D,
+                                       q3_PermutationAsFunction_PermutationFunction_backwards_Function1D, q19];
+                                      int(1)],
+                                 [conjure_aux1_RelationAsSetR3_ExplicitR3_3_Explicit
+                                      [q1_PermutationAsFunction_PermutationFunction_forwards_Function1D,
+                                       q1_PermutationAsFunction_PermutationFunction_backwards_Function1D,
+                                       q2_PermutationAsFunction_PermutationFunction_forwards_Function1D,
+                                       q2_PermutationAsFunction_PermutationFunction_backwards_Function1D,
+                                       q3_PermutationAsFunction_PermutationFunction_forwards_Function1D,
+                                       q3_PermutationAsFunction_PermutationFunction_backwards_Function1D, q19, q81]
+                                      | q81 : int(1..2)];
+                                     int(1..3)])
+                        <lex
+                        flatten([[conjure_aux1_RelationAsSetR3_ExplicitR3_1
+                                      [q1_PermutationAsFunction_PermutationFunction_forwards_Function1D,
+                                       q1_PermutationAsFunction_PermutationFunction_backwards_Function1D,
+                                       q2_PermutationAsFunction_PermutationFunction_forwards_Function1D,
+                                       q2_PermutationAsFunction_PermutationFunction_backwards_Function1D,
+                                       q3_PermutationAsFunction_PermutationFunction_forwards_Function1D,
+                                       q3_PermutationAsFunction_PermutationFunction_backwards_Function1D, q19 + 1];
+                                      int(1)],
+                                 [conjure_aux1_RelationAsSetR3_ExplicitR3_2
+                                      [q1_PermutationAsFunction_PermutationFunction_forwards_Function1D,
+                                       q1_PermutationAsFunction_PermutationFunction_backwards_Function1D,
+                                       q2_PermutationAsFunction_PermutationFunction_forwards_Function1D,
+                                       q2_PermutationAsFunction_PermutationFunction_backwards_Function1D,
+                                       q3_PermutationAsFunction_PermutationFunction_forwards_Function1D,
+                                       q3_PermutationAsFunction_PermutationFunction_backwards_Function1D, q19 + 1];
+                                      int(1)],
+                                 [conjure_aux1_RelationAsSetR3_ExplicitR3_3_Explicit
+                                      [q1_PermutationAsFunction_PermutationFunction_forwards_Function1D,
+                                       q1_PermutationAsFunction_PermutationFunction_backwards_Function1D,
+                                       q2_PermutationAsFunction_PermutationFunction_forwards_Function1D,
+                                       q2_PermutationAsFunction_PermutationFunction_backwards_Function1D,
+                                       q3_PermutationAsFunction_PermutationFunction_forwards_Function1D,
+                                       q3_PermutationAsFunction_PermutationFunction_backwards_Function1D, q19 + 1, q82]
+                                      | q82 : int(1..2)];
+                                     int(1..3)])
+                            | q19 : int(1..let3 - 1)])
+                       | q3_PermutationAsFunction_PermutationFunction_forwards_Function1D : matrix indexed by [int(1..let2)] of
+                                                                                                int(1..let2),
+                         q3_PermutationAsFunction_PermutationFunction_backwards_Function1D : matrix indexed by [int(1..let2)] of
+                                                                                                 int(1..let2),
+                         allDiff(q3_PermutationAsFunction_PermutationFunction_forwards_Function1D),
+                         and([or([q3_PermutationAsFunction_PermutationFunction_forwards_Function1D[q76] = q75
+                                      | q76 : int(1..let2)])
+                                  | q75 : int(1..let2)]),
+                         allDiff(q3_PermutationAsFunction_PermutationFunction_backwards_Function1D),
+                         and([or([q3_PermutationAsFunction_PermutationFunction_backwards_Function1D[q79] = q78
+                                      | q79 : int(1..let2)])
+                                  | q78 : int(1..let2)]),
+                         and([q3_PermutationAsFunction_PermutationFunction_backwards_Function1D
+                                  [q3_PermutationAsFunction_PermutationFunction_forwards_Function1D[q74]]
+                              = q74
+                                  | q74 : int(1..let2)]),
+                         and([q3_PermutationAsFunction_PermutationFunction_forwards_Function1D
+                                  [q3_PermutationAsFunction_PermutationFunction_backwards_Function1D[q74]]
+                              = q74
+                                  | q74 : int(1..let2)])])
+                  | q2_PermutationAsFunction_PermutationFunction_forwards_Function1D : matrix indexed by [int(1..let1)] of
+                                                                                           int(1..let1),
+                    q2_PermutationAsFunction_PermutationFunction_backwards_Function1D : matrix indexed by [int(1..let1)] of
+                                                                                            int(1..let1),
+                    allDiff(q2_PermutationAsFunction_PermutationFunction_forwards_Function1D),
+                    and([or([q2_PermutationAsFunction_PermutationFunction_forwards_Function1D[q69] = q68
+                                 | q69 : int(1..let1)])
+                             | q68 : int(1..let1)]),
+                    allDiff(q2_PermutationAsFunction_PermutationFunction_backwards_Function1D),
+                    and([or([q2_PermutationAsFunction_PermutationFunction_backwards_Function1D[q72] = q71
+                                 | q72 : int(1..let1)])
+                             | q71 : int(1..let1)]),
+                    and([q2_PermutationAsFunction_PermutationFunction_backwards_Function1D
+                             [q2_PermutationAsFunction_PermutationFunction_forwards_Function1D[q67]]
+                         = q67
+                             | q67 : int(1..let1)]),
+                    and([q2_PermutationAsFunction_PermutationFunction_forwards_Function1D
+                             [q2_PermutationAsFunction_PermutationFunction_backwards_Function1D[q67]]
+                         = q67
+                             | q67 : int(1..let1)])])
+             | q1_PermutationAsFunction_PermutationFunction_forwards_Function1D : matrix indexed by [int(1..n_teams)] of
+                                                                                      int(1..n_teams),
+               q1_PermutationAsFunction_PermutationFunction_backwards_Function1D : matrix indexed by [int(1..n_teams)] of
+                                                                                       int(1..n_teams),
+               allDiff(q1_PermutationAsFunction_PermutationFunction_forwards_Function1D),
+               and([or([q1_PermutationAsFunction_PermutationFunction_forwards_Function1D[q62] = q61
+                            | q62 : int(1..n_teams)])
+                        | q61 : int(1..n_teams)]),
+               allDiff(q1_PermutationAsFunction_PermutationFunction_backwards_Function1D),
+               and([or([q1_PermutationAsFunction_PermutationFunction_backwards_Function1D[q65] = q64
+                            | q65 : int(1..n_teams)])
+                        | q64 : int(1..n_teams)]),
+               and([q1_PermutationAsFunction_PermutationFunction_backwards_Function1D
+                        [q1_PermutationAsFunction_PermutationFunction_forwards_Function1D[q60]]
+                    = q60
+                        | q60 : int(1..n_teams)]),
+               and([q1_PermutationAsFunction_PermutationFunction_forwards_Function1D
+                        [q1_PermutationAsFunction_PermutationFunction_backwards_Function1D[q60]]
+                    = q60
+                        | q60 : int(1..n_teams)])]),
+    and([and([and([and([conjure_aux1_RelationAsSetR3_ExplicitR3_3_Explicit
+                            [q1_PermutationAsFunction_PermutationFunction_forwards_Function1D,
+                             q1_PermutationAsFunction_PermutationFunction_backwards_Function1D,
+                             q2_PermutationAsFunction_PermutationFunction_forwards_Function1D,
+                             q2_PermutationAsFunction_PermutationFunction_backwards_Function1D,
+                             q3_PermutationAsFunction_PermutationFunction_forwards_Function1D,
+                             q3_PermutationAsFunction_PermutationFunction_backwards_Function1D, q20, 1]
+                        <
+                        conjure_aux1_RelationAsSetR3_ExplicitR3_3_Explicit
+                            [q1_PermutationAsFunction_PermutationFunction_forwards_Function1D,
+                             q1_PermutationAsFunction_PermutationFunction_backwards_Function1D,
+                             q2_PermutationAsFunction_PermutationFunction_forwards_Function1D,
+                             q2_PermutationAsFunction_PermutationFunction_backwards_Function1D,
+                             q3_PermutationAsFunction_PermutationFunction_forwards_Function1D,
+                             q3_PermutationAsFunction_PermutationFunction_backwards_Function1D, q20, 2]
+                            | q20 : int(1..let3)])
+                       | q3_PermutationAsFunction_PermutationFunction_forwards_Function1D : matrix indexed by [int(1..let2)] of
+                                                                                                int(1..let2),
+                         q3_PermutationAsFunction_PermutationFunction_backwards_Function1D : matrix indexed by [int(1..let2)] of
+                                                                                                 int(1..let2),
+                         allDiff(q3_PermutationAsFunction_PermutationFunction_forwards_Function1D),
+                         and([or([q3_PermutationAsFunction_PermutationFunction_forwards_Function1D[q76] = q75
+                                      | q76 : int(1..let2)])
+                                  | q75 : int(1..let2)]),
+                         allDiff(q3_PermutationAsFunction_PermutationFunction_backwards_Function1D),
+                         and([or([q3_PermutationAsFunction_PermutationFunction_backwards_Function1D[q79] = q78
+                                      | q79 : int(1..let2)])
+                                  | q78 : int(1..let2)]),
+                         and([q3_PermutationAsFunction_PermutationFunction_backwards_Function1D
+                                  [q3_PermutationAsFunction_PermutationFunction_forwards_Function1D[q74]]
+                              = q74
+                                  | q74 : int(1..let2)]),
+                         and([q3_PermutationAsFunction_PermutationFunction_forwards_Function1D
+                                  [q3_PermutationAsFunction_PermutationFunction_backwards_Function1D[q74]]
+                              = q74
+                                  | q74 : int(1..let2)])])
+                  | q2_PermutationAsFunction_PermutationFunction_forwards_Function1D : matrix indexed by [int(1..let1)] of
+                                                                                           int(1..let1),
+                    q2_PermutationAsFunction_PermutationFunction_backwards_Function1D : matrix indexed by [int(1..let1)] of
+                                                                                            int(1..let1),
+                    allDiff(q2_PermutationAsFunction_PermutationFunction_forwards_Function1D),
+                    and([or([q2_PermutationAsFunction_PermutationFunction_forwards_Function1D[q69] = q68
+                                 | q69 : int(1..let1)])
+                             | q68 : int(1..let1)]),
+                    allDiff(q2_PermutationAsFunction_PermutationFunction_backwards_Function1D),
+                    and([or([q2_PermutationAsFunction_PermutationFunction_backwards_Function1D[q72] = q71
+                                 | q72 : int(1..let1)])
+                             | q71 : int(1..let1)]),
+                    and([q2_PermutationAsFunction_PermutationFunction_backwards_Function1D
+                             [q2_PermutationAsFunction_PermutationFunction_forwards_Function1D[q67]]
+                         = q67
+                             | q67 : int(1..let1)]),
+                    and([q2_PermutationAsFunction_PermutationFunction_forwards_Function1D
+                             [q2_PermutationAsFunction_PermutationFunction_backwards_Function1D[q67]]
+                         = q67
+                             | q67 : int(1..let1)])])
+             | q1_PermutationAsFunction_PermutationFunction_forwards_Function1D : matrix indexed by [int(1..n_teams)] of
+                                                                                      int(1..n_teams),
+               q1_PermutationAsFunction_PermutationFunction_backwards_Function1D : matrix indexed by [int(1..n_teams)] of
+                                                                                       int(1..n_teams),
+               allDiff(q1_PermutationAsFunction_PermutationFunction_forwards_Function1D),
+               and([or([q1_PermutationAsFunction_PermutationFunction_forwards_Function1D[q62] = q61
+                            | q62 : int(1..n_teams)])
+                        | q61 : int(1..n_teams)]),
+               allDiff(q1_PermutationAsFunction_PermutationFunction_backwards_Function1D),
+               and([or([q1_PermutationAsFunction_PermutationFunction_backwards_Function1D[q65] = q64
+                            | q65 : int(1..n_teams)])
+                        | q64 : int(1..n_teams)]),
+               and([q1_PermutationAsFunction_PermutationFunction_backwards_Function1D
+                        [q1_PermutationAsFunction_PermutationFunction_forwards_Function1D[q60]]
+                    = q60
+                        | q60 : int(1..n_teams)]),
+               and([q1_PermutationAsFunction_PermutationFunction_forwards_Function1D
+                        [q1_PermutationAsFunction_PermutationFunction_backwards_Function1D[q60]]
+                    = q60
+                        | q60 : int(1..n_teams)])]),
+    and([and([and([and([or([and([conjure_aux1_RelationAsSetR3_ExplicitR3_1
+                                     [q1_PermutationAsFunction_PermutationFunction_forwards_Function1D,
+                                      q1_PermutationAsFunction_PermutationFunction_backwards_Function1D,
+                                      q2_PermutationAsFunction_PermutationFunction_forwards_Function1D,
+                                      q2_PermutationAsFunction_PermutationFunction_backwards_Function1D,
+                                      q3_PermutationAsFunction_PermutationFunction_forwards_Function1D,
+                                      q3_PermutationAsFunction_PermutationFunction_backwards_Function1D, q25]
+                                 =
+                                 [sched_RelationAsSetR3_ExplicitR3_1[q23],
+                                  catchUndef(q2_PermutationAsFunction_PermutationFunction_forwards_Function1D
+                                                 [sched_RelationAsSetR3_ExplicitR3_1[q23]],
+                                             0);
+                                      int(1..2)]
+                                     [toInt(or([q84 = sched_RelationAsSetR3_ExplicitR3_1[q23] | q84 : int(1..let1)])) +
+                                      1],
+                                 conjure_aux1_RelationAsSetR3_ExplicitR3_2
+                                     [q1_PermutationAsFunction_PermutationFunction_forwards_Function1D,
+                                      q1_PermutationAsFunction_PermutationFunction_backwards_Function1D,
+                                      q2_PermutationAsFunction_PermutationFunction_forwards_Function1D,
+                                      q2_PermutationAsFunction_PermutationFunction_backwards_Function1D,
+                                      q3_PermutationAsFunction_PermutationFunction_forwards_Function1D,
+                                      q3_PermutationAsFunction_PermutationFunction_backwards_Function1D, q25]
+                                 =
+                                 [sched_RelationAsSetR3_ExplicitR3_2[q23],
+                                  catchUndef(q3_PermutationAsFunction_PermutationFunction_forwards_Function1D
+                                                 [sched_RelationAsSetR3_ExplicitR3_2[q23]],
+                                             0);
+                                      int(1..2)]
+                                     [toInt(or([q86 = sched_RelationAsSetR3_ExplicitR3_2[q23] | q86 : int(1..let2)])) +
+                                      1],
+                                 and([or([[sched_RelationAsSetR3_ExplicitR3_3_Explicit[q23, q30],
+                                           catchUndef(q1_PermutationAsFunction_PermutationFunction_forwards_Function1D
+                                                          [sched_RelationAsSetR3_ExplicitR3_3_Explicit[q23, q30]],
+                                                      0);
+                                               int(1..2)]
+                                              [toInt(or([q88 = sched_RelationAsSetR3_ExplicitR3_3_Explicit[q23, q30]
+                                                             | q88 : int(1..n_teams)]))
+                                               + 1]
+                                          =
+                                          conjure_aux1_RelationAsSetR3_ExplicitR3_3_Explicit
+                                              [q1_PermutationAsFunction_PermutationFunction_forwards_Function1D,
+                                               q1_PermutationAsFunction_PermutationFunction_backwards_Function1D,
+                                               q2_PermutationAsFunction_PermutationFunction_forwards_Function1D,
+                                               q2_PermutationAsFunction_PermutationFunction_backwards_Function1D,
+                                               q3_PermutationAsFunction_PermutationFunction_forwards_Function1D,
+                                               q3_PermutationAsFunction_PermutationFunction_backwards_Function1D, q25,
+                                               q27]
+                                              | q30 : int(1..2)])
+                                          | q27 : int(1..2)])
+                                 /\
+                                 and([or([conjure_aux1_RelationAsSetR3_ExplicitR3_3_Explicit
+                                              [q1_PermutationAsFunction_PermutationFunction_forwards_Function1D,
+                                               q1_PermutationAsFunction_PermutationFunction_backwards_Function1D,
+                                               q2_PermutationAsFunction_PermutationFunction_forwards_Function1D,
+                                               q2_PermutationAsFunction_PermutationFunction_backwards_Function1D,
+                                               q3_PermutationAsFunction_PermutationFunction_forwards_Function1D,
+                                               q3_PermutationAsFunction_PermutationFunction_backwards_Function1D, q25,
+                                               q35]
+                                          =
+                                          [sched_RelationAsSetR3_ExplicitR3_3_Explicit[q23, q33],
+                                           catchUndef(q1_PermutationAsFunction_PermutationFunction_forwards_Function1D
+                                                          [sched_RelationAsSetR3_ExplicitR3_3_Explicit[q23, q33]],
+                                                      0);
+                                               int(1..2)]
+                                              [toInt(or([q90 = sched_RelationAsSetR3_ExplicitR3_3_Explicit[q23, q33]
+                                                             | q90 : int(1..n_teams)]))
+                                               + 1]
+                                              | q35 : int(1..2)])
+                                          | q33 : int(1..2)]);
+                                     int(1..3)])
+                                | q25 : int(1..let3)])
+                            | q23 : int(1..let3)])
+                       | q3_PermutationAsFunction_PermutationFunction_forwards_Function1D : matrix indexed by [int(1..let2)] of
+                                                                                                int(1..let2),
+                         q3_PermutationAsFunction_PermutationFunction_backwards_Function1D : matrix indexed by [int(1..let2)] of
+                                                                                                 int(1..let2),
+                         allDiff(q3_PermutationAsFunction_PermutationFunction_forwards_Function1D),
+                         and([or([q3_PermutationAsFunction_PermutationFunction_forwards_Function1D[q76] = q75
+                                      | q76 : int(1..let2)])
+                                  | q75 : int(1..let2)]),
+                         allDiff(q3_PermutationAsFunction_PermutationFunction_backwards_Function1D),
+                         and([or([q3_PermutationAsFunction_PermutationFunction_backwards_Function1D[q79] = q78
+                                      | q79 : int(1..let2)])
+                                  | q78 : int(1..let2)]),
+                         and([q3_PermutationAsFunction_PermutationFunction_backwards_Function1D
+                                  [q3_PermutationAsFunction_PermutationFunction_forwards_Function1D[q74]]
+                              = q74
+                                  | q74 : int(1..let2)]),
+                         and([q3_PermutationAsFunction_PermutationFunction_forwards_Function1D
+                                  [q3_PermutationAsFunction_PermutationFunction_backwards_Function1D[q74]]
+                              = q74
+                                  | q74 : int(1..let2)])])
+                  | q2_PermutationAsFunction_PermutationFunction_forwards_Function1D : matrix indexed by [int(1..let1)] of
+                                                                                           int(1..let1),
+                    q2_PermutationAsFunction_PermutationFunction_backwards_Function1D : matrix indexed by [int(1..let1)] of
+                                                                                            int(1..let1),
+                    allDiff(q2_PermutationAsFunction_PermutationFunction_forwards_Function1D),
+                    and([or([q2_PermutationAsFunction_PermutationFunction_forwards_Function1D[q69] = q68
+                                 | q69 : int(1..let1)])
+                             | q68 : int(1..let1)]),
+                    allDiff(q2_PermutationAsFunction_PermutationFunction_backwards_Function1D),
+                    and([or([q2_PermutationAsFunction_PermutationFunction_backwards_Function1D[q72] = q71
+                                 | q72 : int(1..let1)])
+                             | q71 : int(1..let1)]),
+                    and([q2_PermutationAsFunction_PermutationFunction_backwards_Function1D
+                             [q2_PermutationAsFunction_PermutationFunction_forwards_Function1D[q67]]
+                         = q67
+                             | q67 : int(1..let1)]),
+                    and([q2_PermutationAsFunction_PermutationFunction_forwards_Function1D
+                             [q2_PermutationAsFunction_PermutationFunction_backwards_Function1D[q67]]
+                         = q67
+                             | q67 : int(1..let1)])])
+             | q1_PermutationAsFunction_PermutationFunction_forwards_Function1D : matrix indexed by [int(1..n_teams)] of
+                                                                                      int(1..n_teams),
+               q1_PermutationAsFunction_PermutationFunction_backwards_Function1D : matrix indexed by [int(1..n_teams)] of
+                                                                                       int(1..n_teams),
+               allDiff(q1_PermutationAsFunction_PermutationFunction_forwards_Function1D),
+               and([or([q1_PermutationAsFunction_PermutationFunction_forwards_Function1D[q62] = q61
+                            | q62 : int(1..n_teams)])
+                        | q61 : int(1..n_teams)]),
+               allDiff(q1_PermutationAsFunction_PermutationFunction_backwards_Function1D),
+               and([or([q1_PermutationAsFunction_PermutationFunction_backwards_Function1D[q65] = q64
+                            | q65 : int(1..n_teams)])
+                        | q64 : int(1..n_teams)]),
+               and([q1_PermutationAsFunction_PermutationFunction_backwards_Function1D
+                        [q1_PermutationAsFunction_PermutationFunction_forwards_Function1D[q60]]
+                    = q60
+                        | q60 : int(1..n_teams)]),
+               and([q1_PermutationAsFunction_PermutationFunction_forwards_Function1D
+                        [q1_PermutationAsFunction_PermutationFunction_backwards_Function1D[q60]]
+                    = q60
+                        | q60 : int(1..n_teams)])]),
+    and([and([and([and([or([and([sched_RelationAsSetR3_ExplicitR3_1[q10] =
+                                 [conjure_aux1_RelationAsSetR3_ExplicitR3_1
+                                      [q1_PermutationAsFunction_PermutationFunction_forwards_Function1D,
+                                       q1_PermutationAsFunction_PermutationFunction_backwards_Function1D,
+                                       q2_PermutationAsFunction_PermutationFunction_forwards_Function1D,
+                                       q2_PermutationAsFunction_PermutationFunction_backwards_Function1D,
+                                       q3_PermutationAsFunction_PermutationFunction_forwards_Function1D,
+                                       q3_PermutationAsFunction_PermutationFunction_backwards_Function1D, q36],
+                                  catchUndef(q2_PermutationAsFunction_PermutationFunction_backwards_Function1D
+                                                 [conjure_aux1_RelationAsSetR3_ExplicitR3_1
+                                                      [q1_PermutationAsFunction_PermutationFunction_forwards_Function1D,
+                                                       q1_PermutationAsFunction_PermutationFunction_backwards_Function1D,
+                                                       q2_PermutationAsFunction_PermutationFunction_forwards_Function1D,
+                                                       q2_PermutationAsFunction_PermutationFunction_backwards_Function1D,
+                                                       q3_PermutationAsFunction_PermutationFunction_forwards_Function1D,
+                                                       q3_PermutationAsFunction_PermutationFunction_backwards_Function1D,
+                                                       q36]],
+                                             0);
+                                      int(1..2)]
+                                     [toInt(or([q92 =
+                                                conjure_aux1_RelationAsSetR3_ExplicitR3_1
+                                                    [q1_PermutationAsFunction_PermutationFunction_forwards_Function1D,
+                                                     q1_PermutationAsFunction_PermutationFunction_backwards_Function1D,
+                                                     q2_PermutationAsFunction_PermutationFunction_forwards_Function1D,
+                                                     q2_PermutationAsFunction_PermutationFunction_backwards_Function1D,
+                                                     q3_PermutationAsFunction_PermutationFunction_forwards_Function1D,
+                                                     q3_PermutationAsFunction_PermutationFunction_backwards_Function1D,
+                                                     q36]
+                                                    | q92 : int(1..let1)]))
+                                      + 1],
+                                 sched_RelationAsSetR3_ExplicitR3_2[q10] =
+                                 [conjure_aux1_RelationAsSetR3_ExplicitR3_2
+                                      [q1_PermutationAsFunction_PermutationFunction_forwards_Function1D,
+                                       q1_PermutationAsFunction_PermutationFunction_backwards_Function1D,
+                                       q2_PermutationAsFunction_PermutationFunction_forwards_Function1D,
+                                       q2_PermutationAsFunction_PermutationFunction_backwards_Function1D,
+                                       q3_PermutationAsFunction_PermutationFunction_forwards_Function1D,
+                                       q3_PermutationAsFunction_PermutationFunction_backwards_Function1D, q36],
+                                  catchUndef(q3_PermutationAsFunction_PermutationFunction_backwards_Function1D
+                                                 [conjure_aux1_RelationAsSetR3_ExplicitR3_2
+                                                      [q1_PermutationAsFunction_PermutationFunction_forwards_Function1D,
+                                                       q1_PermutationAsFunction_PermutationFunction_backwards_Function1D,
+                                                       q2_PermutationAsFunction_PermutationFunction_forwards_Function1D,
+                                                       q2_PermutationAsFunction_PermutationFunction_backwards_Function1D,
+                                                       q3_PermutationAsFunction_PermutationFunction_forwards_Function1D,
+                                                       q3_PermutationAsFunction_PermutationFunction_backwards_Function1D,
+                                                       q36]],
+                                             0);
+                                      int(1..2)]
+                                     [toInt(or([q94 =
+                                                conjure_aux1_RelationAsSetR3_ExplicitR3_2
+                                                    [q1_PermutationAsFunction_PermutationFunction_forwards_Function1D,
+                                                     q1_PermutationAsFunction_PermutationFunction_backwards_Function1D,
+                                                     q2_PermutationAsFunction_PermutationFunction_forwards_Function1D,
+                                                     q2_PermutationAsFunction_PermutationFunction_backwards_Function1D,
+                                                     q3_PermutationAsFunction_PermutationFunction_forwards_Function1D,
+                                                     q3_PermutationAsFunction_PermutationFunction_backwards_Function1D,
+                                                     q36]
+                                                    | q94 : int(1..let2)]))
+                                      + 1],
+                                 and([or([[conjure_aux1_RelationAsSetR3_ExplicitR3_3_Explicit
+                                               [q1_PermutationAsFunction_PermutationFunction_forwards_Function1D,
+                                                q1_PermutationAsFunction_PermutationFunction_backwards_Function1D,
+                                                q2_PermutationAsFunction_PermutationFunction_forwards_Function1D,
+                                                q2_PermutationAsFunction_PermutationFunction_backwards_Function1D,
+                                                q3_PermutationAsFunction_PermutationFunction_forwards_Function1D,
+                                                q3_PermutationAsFunction_PermutationFunction_backwards_Function1D, q36,
+                                                q37],
+                                           catchUndef(q1_PermutationAsFunction_PermutationFunction_backwards_Function1D
+                                                          [conjure_aux1_RelationAsSetR3_ExplicitR3_3_Explicit
+                                                               [q1_PermutationAsFunction_PermutationFunction_forwards_Function1D,
+                                                                q1_PermutationAsFunction_PermutationFunction_backwards_Function1D,
+                                                                q2_PermutationAsFunction_PermutationFunction_forwards_Function1D,
+                                                                q2_PermutationAsFunction_PermutationFunction_backwards_Function1D,
+                                                                q3_PermutationAsFunction_PermutationFunction_forwards_Function1D,
+                                                                q3_PermutationAsFunction_PermutationFunction_backwards_Function1D,
+                                                                q36, q37]],
+                                                      0);
+                                               int(1..2)]
+                                              [toInt(or([q96 =
+                                                         conjure_aux1_RelationAsSetR3_ExplicitR3_3_Explicit
+                                                             [q1_PermutationAsFunction_PermutationFunction_forwards_Function1D,
+                                                              q1_PermutationAsFunction_PermutationFunction_backwards_Function1D,
+                                                              q2_PermutationAsFunction_PermutationFunction_forwards_Function1D,
+                                                              q2_PermutationAsFunction_PermutationFunction_backwards_Function1D,
+                                                              q3_PermutationAsFunction_PermutationFunction_forwards_Function1D,
+                                                              q3_PermutationAsFunction_PermutationFunction_backwards_Function1D,
+                                                              q36, q37]
+                                                             | q96 : int(1..n_teams)]))
+                                               + 1]
+                                          = sched_RelationAsSetR3_ExplicitR3_3_Explicit[q10, q12]
+                                              | q37 : int(1..2)])
+                                          | q12 : int(1..2)])
+                                 /\
+                                 and([or([sched_RelationAsSetR3_ExplicitR3_3_Explicit[q10, q18] =
+                                          [conjure_aux1_RelationAsSetR3_ExplicitR3_3_Explicit
+                                               [q1_PermutationAsFunction_PermutationFunction_forwards_Function1D,
+                                                q1_PermutationAsFunction_PermutationFunction_backwards_Function1D,
+                                                q2_PermutationAsFunction_PermutationFunction_forwards_Function1D,
+                                                q2_PermutationAsFunction_PermutationFunction_backwards_Function1D,
+                                                q3_PermutationAsFunction_PermutationFunction_forwards_Function1D,
+                                                q3_PermutationAsFunction_PermutationFunction_backwards_Function1D, q36,
+                                                q38],
+                                           catchUndef(q1_PermutationAsFunction_PermutationFunction_backwards_Function1D
+                                                          [conjure_aux1_RelationAsSetR3_ExplicitR3_3_Explicit
+                                                               [q1_PermutationAsFunction_PermutationFunction_forwards_Function1D,
+                                                                q1_PermutationAsFunction_PermutationFunction_backwards_Function1D,
+                                                                q2_PermutationAsFunction_PermutationFunction_forwards_Function1D,
+                                                                q2_PermutationAsFunction_PermutationFunction_backwards_Function1D,
+                                                                q3_PermutationAsFunction_PermutationFunction_forwards_Function1D,
+                                                                q3_PermutationAsFunction_PermutationFunction_backwards_Function1D,
+                                                                q36, q38]],
+                                                      0);
+                                               int(1..2)]
+                                              [toInt(or([q98 =
+                                                         conjure_aux1_RelationAsSetR3_ExplicitR3_3_Explicit
+                                                             [q1_PermutationAsFunction_PermutationFunction_forwards_Function1D,
+                                                              q1_PermutationAsFunction_PermutationFunction_backwards_Function1D,
+                                                              q2_PermutationAsFunction_PermutationFunction_forwards_Function1D,
+                                                              q2_PermutationAsFunction_PermutationFunction_backwards_Function1D,
+                                                              q3_PermutationAsFunction_PermutationFunction_forwards_Function1D,
+                                                              q3_PermutationAsFunction_PermutationFunction_backwards_Function1D,
+                                                              q36, q38]
+                                                             | q98 : int(1..n_teams)]))
+                                               + 1]
+                                              | q18 : int(1..2)])
+                                          | q38 : int(1..2)]);
+                                     int(1..3)])
+                                | q10 : int(1..let3)])
+                            | q36 : int(1..let3)])
+                       | q3_PermutationAsFunction_PermutationFunction_forwards_Function1D : matrix indexed by [int(1..let2)] of
+                                                                                                int(1..let2),
+                         q3_PermutationAsFunction_PermutationFunction_backwards_Function1D : matrix indexed by [int(1..let2)] of
+                                                                                                 int(1..let2),
+                         allDiff(q3_PermutationAsFunction_PermutationFunction_forwards_Function1D),
+                         and([or([q3_PermutationAsFunction_PermutationFunction_forwards_Function1D[q76] = q75
+                                      | q76 : int(1..let2)])
+                                  | q75 : int(1..let2)]),
+                         allDiff(q3_PermutationAsFunction_PermutationFunction_backwards_Function1D),
+                         and([or([q3_PermutationAsFunction_PermutationFunction_backwards_Function1D[q79] = q78
+                                      | q79 : int(1..let2)])
+                                  | q78 : int(1..let2)]),
+                         and([q3_PermutationAsFunction_PermutationFunction_backwards_Function1D
+                                  [q3_PermutationAsFunction_PermutationFunction_forwards_Function1D[q74]]
+                              = q74
+                                  | q74 : int(1..let2)]),
+                         and([q3_PermutationAsFunction_PermutationFunction_forwards_Function1D
+                                  [q3_PermutationAsFunction_PermutationFunction_backwards_Function1D[q74]]
+                              = q74
+                                  | q74 : int(1..let2)])])
+                  | q2_PermutationAsFunction_PermutationFunction_forwards_Function1D : matrix indexed by [int(1..let1)] of
+                                                                                           int(1..let1),
+                    q2_PermutationAsFunction_PermutationFunction_backwards_Function1D : matrix indexed by [int(1..let1)] of
+                                                                                            int(1..let1),
+                    allDiff(q2_PermutationAsFunction_PermutationFunction_forwards_Function1D),
+                    and([or([q2_PermutationAsFunction_PermutationFunction_forwards_Function1D[q69] = q68
+                                 | q69 : int(1..let1)])
+                             | q68 : int(1..let1)]),
+                    allDiff(q2_PermutationAsFunction_PermutationFunction_backwards_Function1D),
+                    and([or([q2_PermutationAsFunction_PermutationFunction_backwards_Function1D[q72] = q71
+                                 | q72 : int(1..let1)])
+                             | q71 : int(1..let1)]),
+                    and([q2_PermutationAsFunction_PermutationFunction_backwards_Function1D
+                             [q2_PermutationAsFunction_PermutationFunction_forwards_Function1D[q67]]
+                         = q67
+                             | q67 : int(1..let1)]),
+                    and([q2_PermutationAsFunction_PermutationFunction_forwards_Function1D
+                             [q2_PermutationAsFunction_PermutationFunction_backwards_Function1D[q67]]
+                         = q67
+                             | q67 : int(1..let1)])])
+             | q1_PermutationAsFunction_PermutationFunction_forwards_Function1D : matrix indexed by [int(1..n_teams)] of
+                                                                                      int(1..n_teams),
+               q1_PermutationAsFunction_PermutationFunction_backwards_Function1D : matrix indexed by [int(1..n_teams)] of
+                                                                                       int(1..n_teams),
+               allDiff(q1_PermutationAsFunction_PermutationFunction_forwards_Function1D),
+               and([or([q1_PermutationAsFunction_PermutationFunction_forwards_Function1D[q62] = q61
+                            | q62 : int(1..n_teams)])
+                        | q61 : int(1..n_teams)]),
+               allDiff(q1_PermutationAsFunction_PermutationFunction_backwards_Function1D),
+               and([or([q1_PermutationAsFunction_PermutationFunction_backwards_Function1D[q65] = q64
+                            | q65 : int(1..n_teams)])
+                        | q64 : int(1..n_teams)]),
+               and([q1_PermutationAsFunction_PermutationFunction_backwards_Function1D
+                        [q1_PermutationAsFunction_PermutationFunction_forwards_Function1D[q60]]
+                    = q60
+                        | q60 : int(1..n_teams)]),
+               and([q1_PermutationAsFunction_PermutationFunction_forwards_Function1D
+                        [q1_PermutationAsFunction_PermutationFunction_backwards_Function1D[q60]]
+                    = q60
+                        | q60 : int(1..n_teams)])]),
+    and([and([and([flatten([flatten([[sched_RelationAsSetR3_ExplicitR3_1[q99]; int(1)],
+                                     [sched_RelationAsSetR3_ExplicitR3_2[q99]; int(1)],
+                                     [sched_RelationAsSetR3_ExplicitR3_3_Explicit[q99, q100] | q100 : int(1..2)];
+                                         int(1..3)])
+                                | q99 : int(1..let3)])
+                   <=lex
+                   flatten([flatten([[conjure_aux1_RelationAsSetR3_ExplicitR3_1
+                                          [q1_PermutationAsFunction_PermutationFunction_forwards_Function1D,
+                                           q1_PermutationAsFunction_PermutationFunction_backwards_Function1D,
+                                           q2_PermutationAsFunction_PermutationFunction_forwards_Function1D,
+                                           q2_PermutationAsFunction_PermutationFunction_backwards_Function1D,
+                                           q3_PermutationAsFunction_PermutationFunction_forwards_Function1D,
+                                           q3_PermutationAsFunction_PermutationFunction_backwards_Function1D, q101];
+                                          int(1)],
+                                     [conjure_aux1_RelationAsSetR3_ExplicitR3_2
+                                          [q1_PermutationAsFunction_PermutationFunction_forwards_Function1D,
+                                           q1_PermutationAsFunction_PermutationFunction_backwards_Function1D,
+                                           q2_PermutationAsFunction_PermutationFunction_forwards_Function1D,
+                                           q2_PermutationAsFunction_PermutationFunction_backwards_Function1D,
+                                           q3_PermutationAsFunction_PermutationFunction_forwards_Function1D,
+                                           q3_PermutationAsFunction_PermutationFunction_backwards_Function1D, q101];
+                                          int(1)],
+                                     [conjure_aux1_RelationAsSetR3_ExplicitR3_3_Explicit
+                                          [q1_PermutationAsFunction_PermutationFunction_forwards_Function1D,
+                                           q1_PermutationAsFunction_PermutationFunction_backwards_Function1D,
+                                           q2_PermutationAsFunction_PermutationFunction_forwards_Function1D,
+                                           q2_PermutationAsFunction_PermutationFunction_backwards_Function1D,
+                                           q3_PermutationAsFunction_PermutationFunction_forwards_Function1D,
+                                           q3_PermutationAsFunction_PermutationFunction_backwards_Function1D, q101,
+                                           q102]
+                                          | q102 : int(1..2)];
+                                         int(1..3)])
+                                | q101 : int(1..let3)])
+                       | q3_PermutationAsFunction_PermutationFunction_forwards_Function1D : matrix indexed by [int(1..let2)] of
+                                                                                                int(1..let2),
+                         q3_PermutationAsFunction_PermutationFunction_backwards_Function1D : matrix indexed by [int(1..let2)] of
+                                                                                                 int(1..let2),
+                         allDiff(q3_PermutationAsFunction_PermutationFunction_forwards_Function1D),
+                         and([or([q3_PermutationAsFunction_PermutationFunction_forwards_Function1D[q76] = q75
+                                      | q76 : int(1..let2)])
+                                  | q75 : int(1..let2)]),
+                         allDiff(q3_PermutationAsFunction_PermutationFunction_backwards_Function1D),
+                         and([or([q3_PermutationAsFunction_PermutationFunction_backwards_Function1D[q79] = q78
+                                      | q79 : int(1..let2)])
+                                  | q78 : int(1..let2)]),
+                         and([q3_PermutationAsFunction_PermutationFunction_backwards_Function1D
+                                  [q3_PermutationAsFunction_PermutationFunction_forwards_Function1D[q74]]
+                              = q74
+                                  | q74 : int(1..let2)]),
+                         and([q3_PermutationAsFunction_PermutationFunction_forwards_Function1D
+                                  [q3_PermutationAsFunction_PermutationFunction_backwards_Function1D[q74]]
+                              = q74
+                                  | q74 : int(1..let2)])])
+              /\
+              and([and([and([conjure_aux1_RelationAsSetR3_ExplicitR3_1
+                                 [q1_PermutationAsFunction_PermutationFunction_forwards_Function1D,
+                                  q1_PermutationAsFunction_PermutationFunction_backwards_Function1D,
+                                  q2_PermutationAsFunction_PermutationFunction_forwards_Function1D,
+                                  q2_PermutationAsFunction_PermutationFunction_backwards_Function1D, q106, q107, q108]
+                             = 1 | q106 : matrix indexed by [int(1..let2)] of int(1..let2),
+                                   q107 : matrix indexed by [int(1..let2)] of int(1..let2), q108 : int(1..let3)]),
+                        and([conjure_aux1_RelationAsSetR3_ExplicitR3_2
+                                 [q1_PermutationAsFunction_PermutationFunction_forwards_Function1D,
+                                  q1_PermutationAsFunction_PermutationFunction_backwards_Function1D,
+                                  q2_PermutationAsFunction_PermutationFunction_forwards_Function1D,
+                                  q2_PermutationAsFunction_PermutationFunction_backwards_Function1D, q111, q112, q113]
+                             = 1 | q111 : matrix indexed by [int(1..let2)] of int(1..let2),
+                                   q112 : matrix indexed by [int(1..let2)] of int(1..let2), q113 : int(1..let3)]),
+                        and([conjure_aux1_RelationAsSetR3_ExplicitR3_3_Explicit
+                                 [q1_PermutationAsFunction_PermutationFunction_forwards_Function1D,
+                                  q1_PermutationAsFunction_PermutationFunction_backwards_Function1D,
+                                  q2_PermutationAsFunction_PermutationFunction_forwards_Function1D,
+                                  q2_PermutationAsFunction_PermutationFunction_backwards_Function1D, q116, q117, q118,
+                                  q119]
+                             = 1 | q116 : matrix indexed by [int(1..let2)] of int(1..let2),
+                                   q117 : matrix indexed by [int(1..let2)] of int(1..let2), q118 : int(1..let3),
+                                   q119 : int(1..2)]);
+                            int(1..3)])
+                       | q3_PermutationAsFunction_PermutationFunction_forwards_Function1D : matrix indexed by [int(1..let2)] of
+                                                                                                int(1..let2),
+                         q3_PermutationAsFunction_PermutationFunction_backwards_Function1D : matrix indexed by [int(1..let2)] of
+                                                                                                 int(1..let2),
+                         !allDiff(q3_PermutationAsFunction_PermutationFunction_forwards_Function1D),
+                         !and([or([q3_PermutationAsFunction_PermutationFunction_forwards_Function1D[q76] = q75
+                                       | q76 : int(1..let2)])
+                                   | q75 : int(1..let2)]),
+                         !allDiff(q3_PermutationAsFunction_PermutationFunction_backwards_Function1D),
+                         !and([or([q3_PermutationAsFunction_PermutationFunction_backwards_Function1D[q79] = q78
+                                       | q79 : int(1..let2)])
+                                   | q78 : int(1..let2)]),
+                         !and([q3_PermutationAsFunction_PermutationFunction_backwards_Function1D
+                                   [q3_PermutationAsFunction_PermutationFunction_forwards_Function1D[q74]]
+                               = q74
+                                   | q74 : int(1..let2)]),
+                         !and([q3_PermutationAsFunction_PermutationFunction_forwards_Function1D
+                                   [q3_PermutationAsFunction_PermutationFunction_backwards_Function1D[q74]]
+                               = q74
+                                   | q74 : int(1..let2)])])
+                  | q2_PermutationAsFunction_PermutationFunction_forwards_Function1D : matrix indexed by [int(1..let1)] of
+                                                                                           int(1..let1),
+                    q2_PermutationAsFunction_PermutationFunction_backwards_Function1D : matrix indexed by [int(1..let1)] of
+                                                                                            int(1..let1),
+                    allDiff(q2_PermutationAsFunction_PermutationFunction_forwards_Function1D),
+                    and([or([q2_PermutationAsFunction_PermutationFunction_forwards_Function1D[q69] = q68
+                                 | q69 : int(1..let1)])
+                             | q68 : int(1..let1)]),
+                    allDiff(q2_PermutationAsFunction_PermutationFunction_backwards_Function1D),
+                    and([or([q2_PermutationAsFunction_PermutationFunction_backwards_Function1D[q72] = q71
+                                 | q72 : int(1..let1)])
+                             | q71 : int(1..let1)]),
+                    and([q2_PermutationAsFunction_PermutationFunction_backwards_Function1D
+                             [q2_PermutationAsFunction_PermutationFunction_forwards_Function1D[q67]]
+                         = q67
+                             | q67 : int(1..let1)]),
+                    and([q2_PermutationAsFunction_PermutationFunction_forwards_Function1D
+                             [q2_PermutationAsFunction_PermutationFunction_backwards_Function1D[q67]]
+                         = q67
+                             | q67 : int(1..let1)])])
+         /\
+         and([and([and([conjure_aux1_RelationAsSetR3_ExplicitR3_1
+                            [q1_PermutationAsFunction_PermutationFunction_forwards_Function1D,
+                             q1_PermutationAsFunction_PermutationFunction_backwards_Function1D, q122, q123, q124, q125,
+                             q126]
+                        = 1 | q122 : matrix indexed by [int(1..let1)] of int(1..let1),
+                              q123 : matrix indexed by [int(1..let1)] of int(1..let1),
+                              q124 : matrix indexed by [int(1..let2)] of int(1..let2),
+                              q125 : matrix indexed by [int(1..let2)] of int(1..let2), q126 : int(1..let3)]),
+                   and([conjure_aux1_RelationAsSetR3_ExplicitR3_2
+                            [q1_PermutationAsFunction_PermutationFunction_forwards_Function1D,
+                             q1_PermutationAsFunction_PermutationFunction_backwards_Function1D, q131, q132, q133, q134,
+                             q135]
+                        = 1 | q131 : matrix indexed by [int(1..let1)] of int(1..let1),
+                              q132 : matrix indexed by [int(1..let1)] of int(1..let1),
+                              q133 : matrix indexed by [int(1..let2)] of int(1..let2),
+                              q134 : matrix indexed by [int(1..let2)] of int(1..let2), q135 : int(1..let3)]),
+                   and([conjure_aux1_RelationAsSetR3_ExplicitR3_3_Explicit
+                            [q1_PermutationAsFunction_PermutationFunction_forwards_Function1D,
+                             q1_PermutationAsFunction_PermutationFunction_backwards_Function1D, q140, q141, q142, q143,
+                             q144, q145]
+                        = 1 | q140 : matrix indexed by [int(1..let1)] of int(1..let1),
+                              q141 : matrix indexed by [int(1..let1)] of int(1..let1),
+                              q142 : matrix indexed by [int(1..let2)] of int(1..let2),
+                              q143 : matrix indexed by [int(1..let2)] of int(1..let2), q144 : int(1..let3),
+                              q145 : int(1..2)]);
+                       int(1..3)])
+                  | q2_PermutationAsFunction_PermutationFunction_forwards_Function1D : matrix indexed by [int(1..let1)] of
+                                                                                           int(1..let1),
+                    q2_PermutationAsFunction_PermutationFunction_backwards_Function1D : matrix indexed by [int(1..let1)] of
+                                                                                            int(1..let1),
+                    !allDiff(q2_PermutationAsFunction_PermutationFunction_forwards_Function1D),
+                    !and([or([q2_PermutationAsFunction_PermutationFunction_forwards_Function1D[q69] = q68
+                                  | q69 : int(1..let1)])
+                              | q68 : int(1..let1)]),
+                    false, !allDiff(q2_PermutationAsFunction_PermutationFunction_backwards_Function1D),
+                    !and([or([q2_PermutationAsFunction_PermutationFunction_backwards_Function1D[q72] = q71
+                                  | q72 : int(1..let1)])
+                              | q71 : int(1..let1)]),
+                    false,
+                    !and([q2_PermutationAsFunction_PermutationFunction_backwards_Function1D
+                              [q2_PermutationAsFunction_PermutationFunction_forwards_Function1D[q67]]
+                          = q67
+                              | q67 : int(1..let1)]),
+                    !and([q2_PermutationAsFunction_PermutationFunction_forwards_Function1D
+                              [q2_PermutationAsFunction_PermutationFunction_backwards_Function1D[q67]]
+                          = q67
+                              | q67 : int(1..let1)])])
+             | q1_PermutationAsFunction_PermutationFunction_forwards_Function1D : matrix indexed by [int(1..n_teams)] of
+                                                                                      int(1..n_teams),
+               q1_PermutationAsFunction_PermutationFunction_backwards_Function1D : matrix indexed by [int(1..n_teams)] of
+                                                                                       int(1..n_teams),
+               allDiff(q1_PermutationAsFunction_PermutationFunction_forwards_Function1D),
+               and([or([q1_PermutationAsFunction_PermutationFunction_forwards_Function1D[q62] = q61
+                            | q62 : int(1..n_teams)])
+                        | q61 : int(1..n_teams)]),
+               allDiff(q1_PermutationAsFunction_PermutationFunction_backwards_Function1D),
+               and([or([q1_PermutationAsFunction_PermutationFunction_backwards_Function1D[q65] = q64
+                            | q65 : int(1..n_teams)])
+                        | q64 : int(1..n_teams)]),
+               and([q1_PermutationAsFunction_PermutationFunction_backwards_Function1D
+                        [q1_PermutationAsFunction_PermutationFunction_forwards_Function1D[q60]]
+                    = q60
+                        | q60 : int(1..n_teams)]),
+               and([q1_PermutationAsFunction_PermutationFunction_forwards_Function1D
+                        [q1_PermutationAsFunction_PermutationFunction_backwards_Function1D[q60]]
+                    = q60
+                        | q60 : int(1..n_teams)])]),
+    and([and([and([conjure_aux1_RelationAsSetR3_ExplicitR3_1[q155, q156, q157, q158, q159, q160, q161] = 1
+                       | q155 : matrix indexed by [int(1..n_teams)] of int(1..n_teams),
+                         q156 : matrix indexed by [int(1..n_teams)] of int(1..n_teams),
+                         q157 : matrix indexed by [int(1..let1)] of int(1..let1),
+                         q158 : matrix indexed by [int(1..let1)] of int(1..let1),
+                         q159 : matrix indexed by [int(1..let2)] of int(1..let2),
+                         q160 : matrix indexed by [int(1..let2)] of int(1..let2), q161 : int(1..let3)]),
+              and([conjure_aux1_RelationAsSetR3_ExplicitR3_2[q168, q169, q170, q171, q172, q173, q174] = 1
+                       | q168 : matrix indexed by [int(1..n_teams)] of int(1..n_teams),
+                         q169 : matrix indexed by [int(1..n_teams)] of int(1..n_teams),
+                         q170 : matrix indexed by [int(1..let1)] of int(1..let1),
+                         q171 : matrix indexed by [int(1..let1)] of int(1..let1),
+                         q172 : matrix indexed by [int(1..let2)] of int(1..let2),
+                         q173 : matrix indexed by [int(1..let2)] of int(1..let2), q174 : int(1..let3)]),
+              and([conjure_aux1_RelationAsSetR3_ExplicitR3_3_Explicit[q181, q182, q183, q184, q185, q186, q187, q188] =
+                   1   | q181 : matrix indexed by [int(1..n_teams)] of int(1..n_teams),
+                         q182 : matrix indexed by [int(1..n_teams)] of int(1..n_teams),
+                         q183 : matrix indexed by [int(1..let1)] of int(1..let1),
+                         q184 : matrix indexed by [int(1..let1)] of int(1..let1),
+                         q185 : matrix indexed by [int(1..let2)] of int(1..let2),
+                         q186 : matrix indexed by [int(1..let2)] of int(1..let2), q187 : int(1..let3),
+                         q188 : int(1..2)]);
+                  int(1..3)])
+             | q1_PermutationAsFunction_PermutationFunction_forwards_Function1D : matrix indexed by [int(1..n_teams)] of
+                                                                                      int(1..n_teams),
+               q1_PermutationAsFunction_PermutationFunction_backwards_Function1D : matrix indexed by [int(1..n_teams)] of
+                                                                                       int(1..n_teams),
+               !allDiff(q1_PermutationAsFunction_PermutationFunction_forwards_Function1D),
+               !and([or([q1_PermutationAsFunction_PermutationFunction_forwards_Function1D[q62] = q61
+                             | q62 : int(1..n_teams)])
+                         | q61 : int(1..n_teams)]),
+               false, !allDiff(q1_PermutationAsFunction_PermutationFunction_backwards_Function1D),
+               !and([or([q1_PermutationAsFunction_PermutationFunction_backwards_Function1D[q65] = q64
+                             | q65 : int(1..n_teams)])
+                         | q64 : int(1..n_teams)]),
+               false,
+               !and([q1_PermutationAsFunction_PermutationFunction_backwards_Function1D
+                         [q1_PermutationAsFunction_PermutationFunction_forwards_Function1D[q60]]
+                     = q60
+                         | q60 : int(1..n_teams)]),
+               !and([q1_PermutationAsFunction_PermutationFunction_forwards_Function1D
+                         [q1_PermutationAsFunction_PermutationFunction_backwards_Function1D[q60]]
+                     = q60
+                         | q60 : int(1..n_teams)])]),
+    and([flatten([[sched_RelationAsSetR3_ExplicitR3_1[q5]; int(1)], [sched_RelationAsSetR3_ExplicitR3_2[q5]; int(1)],
+                  [sched_RelationAsSetR3_ExplicitR3_3_Explicit[q5, q202] | q202 : int(1..2)];
+                      int(1..3)])
+         <lex
+         flatten([[sched_RelationAsSetR3_ExplicitR3_1[q5 + 1]; int(1)],
+                  [sched_RelationAsSetR3_ExplicitR3_2[q5 + 1]; int(1)],
+                  [sched_RelationAsSetR3_ExplicitR3_3_Explicit[q5 + 1, q203] | q203 : int(1..2)];
+                      int(1..3)])
+             | q5 : int(1..let3 - 1)]),
+    and([sched_RelationAsSetR3_ExplicitR3_3_Explicit[q6, 1] < sched_RelationAsSetR3_ExplicitR3_3_Explicit[q6, 2]
+             | q6 : int(1..let3)])
+
+$ Conjure's
+$ {"finds": [{"Name": "sched"}], "givens": [{"Name": "n_teams"}], "enumGivens": [], "enumLettings": [],
+$  "lettings":
+$      [[{"Name": "Team"},
+$        {"Domain":
+$             {"DomainInt":
+$                  [{"TagUnnamed": "Team"},
+$                   [{"RangeBounded":
+$                         [{"Constant": {"ConstantInt": [{"TagInt": []}, 1]}},
+$                          {"Reference":
+$                               [{"Name": "n_teams"},
+$                                {"DeclNoRepr":
+$                                     ["Given", {"Name": "n_teams"},
+$                                      {"DomainInt":
+$                                           [{"TagInt": []},
+$                                            [{"RangeLowerBounded":
+$                                                  {"Constant": {"ConstantInt": [{"TagInt": []}, 1]}}}]]},
+$                                      {"NoRegion": []}]}]}]}]]}}],
+$       [{"MachineName": ["let", 1, []]},
+$        {"Op":
+$             {"MkOpMinus":
+$                  [{"Reference":
+$                        [{"Name": "n_teams"},
+$                         {"DeclNoRepr":
+$                              ["Given", {"Name": "n_teams"},
+$                               {"DomainInt":
+$                                    [{"TagInt": []},
+$                                     [{"RangeLowerBounded": {"Constant": {"ConstantInt": [{"TagInt": []}, 1]}}}]]},
+$                               {"NoRegion": []}]}]},
+$                   {"Constant": {"ConstantInt": [{"TagInt": []}, 1]}}]}}],
+$       [{"Name": "Week"},
+$        {"Domain":
+$             {"DomainInt":
+$                  [{"TagUnnamed": "Week"},
+$                   [{"RangeBounded":
+$                         [{"Constant": {"ConstantInt": [{"TagInt": []}, 1]}},
+$                          {"Reference":
+$                               [{"MachineName": ["let", 1, []]},
+$                                {"Alias":
+$                                     {"Op":
+$                                          {"MkOpMinus":
+$                                               [{"Reference":
+$                                                     [{"Name": "n_teams"},
+$                                                      {"DeclNoRepr":
+$                                                           ["Given", {"Name": "n_teams"},
+$                                                            {"DomainInt":
+$                                                                 [{"TagInt": []},
+$                                                                  [{"RangeLowerBounded":
+$                                                                        {"Constant":
+$                                                                             {"ConstantInt": [{"TagInt": []}, 1]}}}]]},
+$                                                            {"NoRegion": []}]}]},
+$                                                {"Constant": {"ConstantInt": [{"TagInt": []}, 1]}}]}}}]}]}]]}}],
+$       [{"MachineName": ["let", 2, []]},
+$        {"Op":
+$             {"MkOpDiv":
+$                  [{"Reference":
+$                        [{"Name": "n_teams"},
+$                         {"DeclNoRepr":
+$                              ["Given", {"Name": "n_teams"},
+$                               {"DomainInt":
+$                                    [{"TagInt": []},
+$                                     [{"RangeLowerBounded": {"Constant": {"ConstantInt": [{"TagInt": []}, 1]}}}]]},
+$                               {"NoRegion": []}]}]},
+$                   {"Constant": {"ConstantInt": [{"TagInt": []}, 2]}}]}}],
+$       [{"Name": "Period"},
+$        {"Domain":
+$             {"DomainInt":
+$                  [{"TagUnnamed": "Period"},
+$                   [{"RangeBounded":
+$                         [{"Constant": {"ConstantInt": [{"TagInt": []}, 1]}},
+$                          {"Reference":
+$                               [{"MachineName": ["let", 2, []]},
+$                                {"Alias":
+$                                     {"Op":
+$                                          {"MkOpDiv":
+$                                               [{"Reference":
+$                                                     [{"Name": "n_teams"},
+$                                                      {"DeclNoRepr":
+$                                                           ["Given", {"Name": "n_teams"},
+$                                                            {"DomainInt":
+$                                                                 [{"TagInt": []},
+$                                                                  [{"RangeLowerBounded":
+$                                                                        {"Constant":
+$                                                                             {"ConstantInt": [{"TagInt": []}, 1]}}}]]},
+$                                                            {"NoRegion": []}]}]},
+$                                                {"Constant": {"ConstantInt": [{"TagInt": []}, 2]}}]}}}]}]}]]}}],
+$       [{"MachineName": ["let", 3, []]},
+$        {"Op":
+$             {"MkOpDiv":
+$                  [{"Op":
+$                        {"MkOpProduct":
+$                             {"AbstractLiteral":
+$                                  {"AbsLitMatrix":
+$                                       [{"DomainInt":
+$                                             [{"TagInt": []},
+$                                              [{"RangeBounded":
+$                                                    [{"Constant": {"ConstantInt": [{"TagInt": []}, 1]}},
+$                                                     {"Constant": {"ConstantInt": [{"TagInt": []}, 2]}}]}]]},
+$                                        [{"Op":
+$                                              {"MkOpMinus":
+$                                                   [{"Reference":
+$                                                         [{"Name": "n_teams"},
+$                                                          {"DeclNoRepr":
+$                                                               ["Given", {"Name": "n_teams"},
+$                                                                {"DomainInt":
+$                                                                     [{"TagInt": []},
+$                                                                      [{"RangeLowerBounded":
+$                                                                            {"Constant":
+$                                                                                 {"ConstantInt":
+$                                                                                      [{"TagInt": []}, 1]}}}]]},
+$                                                                {"NoRegion": []}]}]},
+$                                                    {"Constant": {"ConstantInt": [{"TagInt": []}, 1]}}]}},
+$                                         {"Reference":
+$                                              [{"Name": "n_teams"},
+$                                               {"DeclNoRepr":
+$                                                    ["Given", {"Name": "n_teams"},
+$                                                     {"DomainInt":
+$                                                          [{"TagInt": []},
+$                                                           [{"RangeLowerBounded":
+$                                                                 {"Constant": {"ConstantInt": [{"TagInt": []}, 1]}}}]]},
+$                                                     {"NoRegion": []}]}]}]]}}}},
+$                   {"Constant": {"ConstantInt": [{"TagInt": []}, 2]}}]}}]],
+$  "unnameds":
+$      [[{"Name": "Team"}, {"Reference": [{"Name": "n_teams"}, null]}],
+$       [{"Name": "Week"}, {"Reference": [{"MachineName": ["let", 1, []]}, null]}],
+$       [{"Name": "Period"}, {"Reference": [{"MachineName": ["let", 2, []]}, null]}]],
+$  "strategyQ": {"PickFirst": []}, "strategyA": {"Compact": []},
+$  "trailCompact":
+$      [[1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 2], [1, 1, 1], [1, 1, 1],
+$       [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
+$       [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
+$       [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 2], [1, 1, 1], [1, 1, 1], [1, 1, 1],
+$       [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
+$       [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
+$       [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 2], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 2],
+$       [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
+$       [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
+$       [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
+$       [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
+$       [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
+$       [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
+$       [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
+$       [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
+$       [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
+$       [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
+$       [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
+$       [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
+$       [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
+$       [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
+$       [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
+$       [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
+$       [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
+$       [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
+$       [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
+$       [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
+$       [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
+$       [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
+$       [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
+$       [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
+$       [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
+$       [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
+$       [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
+$       [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
+$       [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
+$       [1, 1, 1], [1, 1, 1]],
+$  "nameGenState": [["conjure_aux", 2], ["let", 4], ["q", 204]], "nbExtraGivens": 0,
+$  "representations":
+$      [[{"Name": "sched"},
+$        {"DomainRelation":
+$             [{"Relation_AsSet": {"Set_Explicit": []}},
+$              [{"SizeAttr_Size":
+$                    {"Reference":
+$                         [{"MachineName": ["let", 3, []]},
+$                          {"Alias":
+$                               {"Op":
+$                                    {"MkOpDiv":
+$                                         [{"Op":
+$                                               {"MkOpProduct":
+$                                                    {"AbstractLiteral":
+$                                                         {"AbsLitMatrix":
+$                                                              [{"DomainInt":
+$                                                                    [{"TagInt": []},
+$                                                                     [{"RangeBounded":
+$                                                                           [{"Constant":
+$                                                                                 {"ConstantInt": [{"TagInt": []}, 1]}},
+$                                                                            {"Constant":
+$                                                                                 {"ConstantInt":
+$                                                                                      [{"TagInt": []}, 2]}}]}]]},
+$                                                               [{"Op":
+$                                                                     {"MkOpMinus":
+$                                                                          [{"Reference":
+$                                                                                [{"Name": "n_teams"},
+$                                                                                 {"DeclNoRepr":
+$                                                                                      ["Given", {"Name": "n_teams"},
+$                                                                                       {"DomainInt":
+$                                                                                            [{"TagInt": []},
+$                                                                                             [{"RangeLowerBounded":
+$                                                                                                   {"Constant":
+$                                                                                                        {"ConstantInt":
+$                                                                                                             [{"TagInt":
+$                                                                                                                   []},
+$                                                                                                              1]}}}]]},
+$                                                                                       {"NoRegion": []}]}]},
+$                                                                           {"Constant":
+$                                                                                {"ConstantInt": [{"TagInt": []}, 1]}}]}},
+$                                                                {"Reference":
+$                                                                     [{"Name": "n_teams"},
+$                                                                      {"DeclNoRepr":
+$                                                                           ["Given", {"Name": "n_teams"},
+$                                                                            {"DomainInt":
+$                                                                                 [{"TagInt": []},
+$                                                                                  [{"RangeLowerBounded":
+$                                                                                        {"Constant":
+$                                                                                             {"ConstantInt":
+$                                                                                                  [{"TagInt": []},
+$                                                                                                   1]}}}]]},
+$                                                                            {"NoRegion": []}]}]}]]}}}},
+$                                          {"Constant": {"ConstantInt": [{"TagInt": []}, 2]}}]}}}]}},
+$               []],
+$              [{"DomainInt":
+$                    [{"TagUnnamed": "Week"},
+$                     [{"RangeBounded":
+$                           [{"Constant": {"ConstantInt": [{"TagUnnamed": "Week"}, 1]}},
+$                            {"Reference":
+$                                 [{"MachineName": ["let", 1, []]},
+$                                  {"Alias":
+$                                       {"Op":
+$                                            {"MkOpMinus":
+$                                                 [{"Reference":
+$                                                       [{"Name": "n_teams"},
+$                                                        {"DeclNoRepr":
+$                                                             ["Given", {"Name": "n_teams"},
+$                                                              {"DomainInt":
+$                                                                   [{"TagUnnamed": "Week"},
+$                                                                    [{"RangeLowerBounded":
+$                                                                          {"Constant":
+$                                                                               {"ConstantInt":
+$                                                                                    [{"TagUnnamed": "Week"}, 1]}}}]]},
+$                                                              {"NoRegion": []}]}]},
+$                                                  {"Constant": {"ConstantInt": [{"TagUnnamed": "Week"}, 1]}}]}}}]}]}]]},
+$               {"DomainInt":
+$                    [{"TagUnnamed": "Period"},
+$                     [{"RangeBounded":
+$                           [{"Constant": {"ConstantInt": [{"TagUnnamed": "Period"}, 1]}},
+$                            {"Reference":
+$                                 [{"MachineName": ["let", 2, []]},
+$                                  {"Alias":
+$                                       {"Op":
+$                                            {"MkOpDiv":
+$                                                 [{"Reference":
+$                                                       [{"Name": "n_teams"},
+$                                                        {"DeclNoRepr":
+$                                                             ["Given", {"Name": "n_teams"},
+$                                                              {"DomainInt":
+$                                                                   [{"TagUnnamed": "Period"},
+$                                                                    [{"RangeLowerBounded":
+$                                                                          {"Constant":
+$                                                                               {"ConstantInt":
+$                                                                                    [{"TagUnnamed": "Period"}, 1]}}}]]},
+$                                                              {"NoRegion": []}]}]},
+$                                                  {"Constant":
+$                                                       {"ConstantInt": [{"TagUnnamed": "Period"}, 2]}}]}}}]}]}]]},
+$               {"DomainSet":
+$                    [{"Set_Explicit": []}, {"SizeAttr_Size": {"Constant": {"ConstantInt": [{"TagInt": []}, 2]}}},
+$                     {"DomainInt":
+$                          [{"TagUnnamed": "Team"},
+$                           [{"RangeBounded":
+$                                 [{"Constant": {"ConstantInt": [{"TagUnnamed": "Team"}, 1]}},
+$                                  {"Reference":
+$                                       [{"Name": "n_teams"},
+$                                        {"DeclNoRepr":
+$                                             ["Given", {"Name": "n_teams"},
+$                                              {"DomainInt":
+$                                                   [{"TagUnnamed": "Team"},
+$                                                    [{"RangeLowerBounded":
+$                                                          {"Constant": {"ConstantInt": [{"TagUnnamed": "Team"}, 1]}}}]]},
+$                                              {"NoRegion": []}]}]}]}]]}]}]]}],
+$       [{"Name": "n_teams"},
+$        {"DomainInt": [{"TagInt": []}, [{"RangeLowerBounded": {"Constant": {"ConstantInt": [{"TagInt": []}, 1]}}}]]}]],
+$  "representationsTree":
+$      [[{"Name": "n_teams"}, [{"rootLabel": null, "subForest": []}]],
+$       [{"Name": "sched"},
+$        [{"rootLabel": {"Relation_AsSet": {"Set_Explicit": []}},
+$          "subForest":
+$              [{"rootLabel": null, "subForest": []}, {"rootLabel": null, "subForest": []},
+$               {"rootLabel": {"Set_Explicit": []}, "subForest": [{"rootLabel": null, "subForest": []}]}]}]]],
+$  "originalDomains":
+$      [[{"Name": "n_teams"},
+$        {"DomainInt": [{"TagInt": []}, [{"RangeLowerBounded": {"Constant": {"ConstantInt": [{"TagInt": []}, 1]}}}]]}],
+$       [{"Name": "sched"},
+$        {"DomainRelation":
+$             [[], [{"SizeAttr_Size": {"Reference": [{"MachineName": ["let", 3, []]}, null]}}, []],
+$              [{"DomainReference": [{"Name": "Week"}, null]}, {"DomainReference": [{"Name": "Period"}, null]},
+$               {"DomainSet":
+$                    [[], {"SizeAttr_Size": {"Constant": {"ConstantInt": [{"TagInt": []}, 2]}}},
+$                     {"DomainReference": [{"Name": "Team"}, null]}]}]]}]],
+$  "trailGeneralised":
+$      [[-4384227242653450458, -7775078270635826113], [5987633441202970902, 1256735689389196159],
+$       [-600130904144638683, 6818137272256673177], [5421144401418697749, 537273273867952284],
+$       [8472556044098456533, 5855932057862046546], [3456799583299253341, 276376316771352450],
+$       [9174086528555889315, -3388926352044823648], [-1171349496346227448, 8261831531371664517],
+$       [3364610616534211139, 8749695244619894423], [-8842477578570794168, -5882358881048574209],
+$       [-1709518817635684100, -4875744519991025025], [5458319860491227072, 3454973994034110607],
+$       [6044715787508520090, 7261427269384365189], [7144652915935423660, -5894991418890383361],
+$       [-6659730668565499245, 2245605644558725423], [2481411881774805681, -7136892813747686828],
+$       [-1411826109309286091, 6543312270946816510], [-7434512192882894293, -4457708026945208248],
+$       [7482243710896515479, 705367143635408554], [-3261513966252746547, -3582608832044304404],
+$       [490806870793861661, -1138592115204233166], [-3728856625913339009, 4158876933280271364],
+$       [7586964813060307815, 1239243013885759270], [-5339314490403827800, -7321032645275441749],
+$       [-2576395144884579518, -7904335721006908041], [3494976642873657483, 200110385646199030],
+$       [8646223514284805417, -7099399252536255344], [5512923637595392665, -3647736427395861558],
+$       [-5246939259247906645, 301727799864724184], [6608773431897753287, -9149070463773926758],
+$       [-1972061323120435695, 3762059745621054828], [279659825562960485, -3688957037598834954],
+$       [992010139668759546, -3027402012570717648], [1777828467776205530, 3027144419815625761],
+$       [6625724811414997012, -4398390740477348298], [4441971226512982306, 7796855850252478240],
+$       [3724794434866139102, 4731159962526147142], [-5092309016139723032, -6252748142563945264],
+$       [3410602009709251308, 5190437653166361298], [-7901145033727492618, -3568324982264574220],
+$       [-8031042874280667682, 8397330021754795178], [417252435384125655, -7352856775517277413],
+$       [-2500757071321114964, -122193187958321743], [-6787743646454866112, -122193187958321743],
+$       [9178525681632792468, -4246039547017461593], [-4712852424341755410, 4115135649441794583],
+$       [-8291832253085162563, -2942479922339370371], [6234160667572753340, -1331319356357764108],
+$       [-5372429386092406274, -4187232368990585648], [8598463174020563618, 5123884568985648202],
+$       [-7365501645040839310, -6532101856655059320], [-5255292178127971541, -2638656893913276698],
+$       [-5644101834775506588, -3342627916964412361], [3645891063660356516, 7499620784285002915],
+$       [-9078774807538414372, -8812216487571505169], [-7534526598034836024, 145652932964281039],
+$       [-1432805912672538710, -868594669486114145], [7810790197704915134, -1569335809499023693],
+$       [3620535207357025374, -2417982602649318710], [-2718143499563242682, 5773432938578173412],
+$       [-7970235764633777432, -472107689889816970], [-901617739411739092, -4380255898754496228],
+$       [9170404136814055342, 2327162683743176818], [-3275985999415487182, -6545372776060499624],
+$       [600839804730711150, 3147697834342079298], [8462188286988575522, 1982456222410834567],
+$       [3430469479306632671, -3933456405020926286], [-1471369543236370199, 3810559376798732448],
+$       [1213502711801445593, -5149829826883498622], [369369749963307475, -1290250702100169120],
+$       [431385331414696431, -4353364229496849402], [4775056653226970458, 2257171570483881096],
+$       [-9058635044980429478, -1494588020596856823], [-16427164915291288, 288652653782456366],
+$       [-8302927705896868250, -8016025567058159592], [3550776471567177754, -5612793765035086202],
+$       [-8275431419384247252, 9184076624658956724], [-6682927292646954244, 1956783924208948618],
+$       [-7260638152833515099, 4567712999137241601], [1174363737894820930, -122193187958321743],
+$       [-7467328263406121050, -122193187958321743], [6706516079342847736, -2503902832437312098],
+$       [-6176258426739449358, 5551797649301689033], [-1788339225718210520, 3755872097238590979],
+$       [-7253508667794329656, 7768391836493925246], [-7226735062347172546, -8141042335132680664],
+$       [-4851317164113762244, -368128923372365726], [7355346500120374090, -6383467963770204660],
+$       [334287233927544228, 5515595582181781255], [1596720406188695126, 7727867715156397124],
+$       [-8511483064562914098, 1762223557520075510], [-1819949947798985660, 3671756804863158348],
+$       [-3812908084138757964, -5273079494413829966], [1945502984158241783, 5994321754744872233],
+$       [-6800375617215099729, 6510602848400404891], [-8228628031780284184, -1239240662602297564],
+$       [-1610296582427531258, -2998995086668809942], [-6588419665570914938, -7933326465379030720],
+$       [-2267249926863440328, 6712956384036185323], [-2528253144388733731, -3175255127959917073],
+$       [508603930024341636, -2731973987564190082], [-3541384530634341314, 6488477017534482968],
+$       [18896629830034830, -4742765882907741054], [-1972457634073269025, -7867027340578690818],
+$       [5430568125256622055, 9171036366670843437], [5382632140281531506, 4590473050120114597],
+$       [-1125894471571899418, 4854750273676248568], [6589672132009776067, 2616459747044699480],
+$       [4797468543393816488, 8091896300296635076], [-8036102551611828031, -7389448236726232104],
+$       [6200849819054208815, 9121463707436016450], [473140685708969694, 5555046186408077073],
+$       [9048092682446558226, -6584414198797179667], [1517119255783395468, 153705274971015062],
+$       [2116251229976468750, 4367778729029351712], [6337480678219654700, -7162814103609427322],
+$       [-1676883558357749194, -8618404799790244640], [-1011683002741488629, 7729037414992388490],
+$       [1462700266724474477, 8659260380044457557], [-1792718897848448879, -7348600095088366323],
+$       [-803315405375507073, 524251547850093290], [1451192597435959682, 7023676987613395976],
+$       [-6609058647277328756, -7701270624273590778], [-3937702029571967674, -7670992573663630491],
+$       [2027606095830720940, -851224377058957269], [4176381343665656356, 7065950292855604110],
+$       [-6142074612193093515, -5550563304985920532], [5078442456192201769, 941306459315558598],
+$       [-7855431019552222605, 3812170600525031627], [2738642176479600265, -5718836558616593704],
+$       [6202461908429964401, 4187623463641448805], [-4703664657877852418, -370867158370658215],
+$       [7312547693429349318, 466626140334643226], [5739796483310978744, 2471830602655140007],
+$       [2739147977293351822, -156439301748493521], [-7680906127751456282, 8174706824066771972],
+$       [7570453463038381233, 6877457301647820956], [6240314402666919404, -840847115277984926],
+$       [1634467823236187774, 7065064071306690473], [-3717193025921800618, -3611239521353301297],
+$       [-3962802947948651168, -6804637673601786896], [-2011074505480044321, -7397298446006551661],
+$       [7327498123423336439, -8149769284775310858], [5680642279053966645, 6264600750625058765],
+$       [-1514351673950951589, -7486274629080254955], [6902213810932519559, -3848530682747054340],
+$       [8314961262234599888, 1318764697676868507], [5922810271871987766, -6781755924827218778],
+$       [-6659003414834151992, 6865789025718713515], [-1924831423234721668, 5220151203046945730],
+$       [-8663353149260172792, 3524327537449835767], [7247062496306048009, -3002047209796938604],
+$       [1819721735402938541, -7007962496480048310], [-5288349882219403577, -4837533394100035053],
+$       [8037447674007986430, -7483365189771701359], [-4800522116102245522, 4700120127667938360],
+$       [-7869903738971492585, 3947461922995301177], [-8376419581624166105, -3541471476108350140],
+$       [4151842023954984172, 5877430083785136624], [-8237550248778139098, 1438213355993353552],
+$       [-6174055159743161717, -8483031491620030774], [-5816240650871676213, -973851603654992467],
+$       [2918845290500522512, -338189397748498891], [8381268633637343882, 6997419141215436465],
+$       [5277009456562536246, -5647987362733215573], [6787661491841712976, -1945146347311275469],
+$       [6121736939288954942, -571846186678343209], [-301874016786572374, -1520501831487418789],
+$       [5917847160873615881, -4302747464769661167], [8007152399982843825, -4302747464769661167],
+$       [5609812688342680138, 3907988353129194577], [8660245861874868747, -3053669811300241280],
+$       [-8081056721837419829, -1825571733430655922], [7212473784265541052, 251494746314264551],
+$       [-1955927292188728839, 2159047826361699550], [6068043067939577821, -7602029538251191824],
+$       [-350475601689806326, 8701679104474045847], [6052581310611945265, -6867794257490861757],
+$       [1163060145962623887, -6867794257490861757], [-1286230182631265080, 6519409369633150828],
+$       [3800775762848096737, -7501211480847909950], [4017660903767070003, 3110891762384073436],
+$       [6622455925078116946, -791412492984773899], [2103987929599145253, 3224660978137439160],
+$       [3080142232957275857, 2521068611240114794], [5811476609590214980, -7883374875159110611],
+$       [7130287499318806405, -9138309519927001603], [-6801834738788466125, -9138309519927001603],
+$       [-5835518044107481902, 4982389236956427684], [7839138878739659011, 7869752179621493387],
+$       [-4727004454743569101, 5642804842433170961], [-9173369677650027622, 6185172449355495030],
+$       [-5695679455625810946, -8438055240862190397], [-2848082457936820876, 7571996028235158038],
+$       [-8649415448689917370, 733958222793414162], [1844974643767906320, -4028660794716913710],
+$       [7099650820799732313, -624587577769675777], [-858055188596880260, -4629825565303655456],
+$       [-5496401224209486118, 8414086831527018871], [5974944082502875945, 8852932311508581716],
+$       [3413141530879698473, 1975759044882383075], [-7053942573842433795, -1013763002859926188],
+$       [-4805852023240022065, -7484189075230650543], [6013670953498676937, -9135403879912889565],
+$       [-7206128579395686687, 5092067950093750856], [-2436060202421066705, -5623699447523720335],
+$       [-5166822164067760969, 3680202415937064721], [6749039137328381704, -8954452290763325344],
+$       [-473824743737134588, -6779586396658678143], [-6921054499317320576, 3898182675822092398],
+$       [-6018451943218547716, -5398907287895366852], [-5376703574420259930, -1194683026733940772],
+$       [-9019440802403059893, 5039684155854546767], [344110500595292452, -4122394153661722410],
+$       [-4624445630959018258, -1429704605820783691], [-6276251727687570179, 5608121845914744782],
+$       [-4856127324154718701, 4028494035189850557], [-8945303094614093516, 1234496438614733451],
+$       [-8966312437430108868, 5450234560982305927], [-7359255925690876883, 5182242885953376413],
+$       [-8522465781259461632, -5919248523940993268], [-6545609251644107262, -3960224364542179221],
+$       [-1368886295380327888, 3972964796600918903], [4044257977281303657, 2444870779129975157],
+$       [-9064424995469615749, -1143105583621388429], [-4095393898777382304, 1184015364238513236],
+$       [7812109891702157048, -3221141358580759446], [-6870308646066530836, 8917325458463340473],
+$       [8909616177242650230, 4715247093777809838], [2738400934077031434, -5422593717355562285],
+$       [5608146626502214128, 4223001172261130513], [-7275033231423424652, 5631002796956366955],
+$       [-5352445787626791265, -8266137510593627023], [-2993121417868327744, -8371629113789348886],
+$       [6479291897418012408, 3958862270997821978], [-7516386437595825440, 7636075141726339424],
+$       [5890367682238700614, -2246968389544294185], [2794672876857763328, -8899069648144525202],
+$       [3237411040310722882, -1055410199825397547], [6543292455414618095, -7876422599429497324],
+$       [-8990243156588766623, 7084539094185344647], [-1277376046701789383, 3265554502367406383],
+$       [6338044283212642441, 4843449244036422672], [2657818847481858984, -2709714774771214146],
+$       [8547172610263173592, -2570311489290764547], [7710291799442167100, 5510962773334263715],
+$       [-4472938606080952936, -8361925756473053915], [-7605391147398765946, 1875018452374017896],
+$       [7406372691833526652, -5966718578328583438], [-7384543778721793974, 2859163569749252223],
+$       [2070158811358116786, 4029308756614830516], [8065862610960588016, -5081102177456715185],
+$       [-2609167827414133881, 1327512646083472433], [1747343603748667351, -6581441677295529798],
+$       [7157825856247320513, -2315285028411442193], [-5549926691278054127, 2511675119951939162],
+$       [-8556887961210164116, -5763554701203394936], [4967920030468043868, -5683528335620134398],
+$       [6258312388426247612, 7962389653922969641], [198667630512095214, -7463866832080038930],
+$       [-5579658366350504180, -4978962294445639462], [7419050506969880386, 7081106586864096969],
+$       [-7139880074597905308, 5588513213497039806], [-1040108890760805116, -8430128558033581311],
+$       [5555555178403483721, -2061072771215598624], [3843446323551421872, 4602430585981233375],
+$       [-6006874770550339511, -9025470974317967967], [8896345586282669693, 3569851182527624294],
+$       [8778216939372136148, -903230444680195160], [2957699374099858013, 621728172233294862],
+$       [-3281227794459412816, 621728172233294862], [5432871064839782402, -3305097725540195059],
+$       [2745086461388392057, -6184318870266489793], [-8253806593430979151, 1151559598049359392],
+$       [3778799864590658928, 8240016378401251304], [-6566632766514062959, 2187414093854681302],
+$       [-5778736166690813034, -1065048886562194476], [1229298780873863278, -5096167292199582834],
+$       [-1219459448644399386, -3936269145169950869], [8362677268126601689, -1065048886562194476],
+$       [2033523906584800682, -9167359280302963274], [-2837719826081379536, -7481488632819569160],
+$       [-2241920717279987410, -3513087628100810637], [8881871122878583675, -3809875589788778778],
+$       [-824099829108569286, -1339135648551017426], [-3331121986369630879, 4463392472967398823],
+$       [-264360156958487495, 925026556817700152], [466591384265454062, -3651467838349751764],
+$       [-3821871409746447062, -5840448743204768882], [-5759071350614300598, -1458645051645941943],
+$       [-995472057895618359, -7456658939243703052], [5553519259367536813, 3620181010214638320],
+$       [4538810957861427187, -3349539412173477041], [-120655892652933928, -215418873447951971],
+$       [-7649356321172188581, -4262205667905308537], [5591575050243595986, -8490271677960431177],
+$       [-2896229046887772373, 3265104270699601892], [-1331422598750898031, -5520205609434848388],
+$       [4953202301085622067, -6740160800343561289], [7908094665998273305, 2374923936302309064],
+$       [8364181486979178958, 603549789342119228], [6514644602607138039, 8138724399708511676],
+$       [7017446241992103041, -5547886196757145980], [2439895043009755509, 3869824117154032563],
+$       [6890491173289767979, -9159020973097118470], [2933368190360262804, 32813919009189740],
+$       [-2692423073127848255, 2467553492348884702], [5888254609274961237, 280595533586913971],
+$       [-753123499742778059, 5479630501273996748], [-4988103355064820812, -1782402268428318607],
+$       [-4944492214378325608, 7303324185958659599], [6901736035106216681, 2353177208907609486],
+$       [4295547378445962634, 6958243144675875210], [-4174526228572218652, -3171819272500317973],
+$       [7380789182456401426, -8016980914121543241], [-1412943579670279581, 4071815921186811433],
+$       [-3523514768905764761, -6315042612316965992], [-2374199397711192098, 8331989423120853869],
+$       [-9166552357570668072, -5127710106900598307], [-5465770571989406018, 3569851182527624294],
+$       [-7568822702869058978, -903230444680195160], [-480313990937414969, -8966007552768298746],
+$       [4312738518481476826, -8966007552768298746], [168397372853387864, -407225855253163747],
+$       [-3725824048935352509, -6184318870266489793], [-3250180642235303932, -72394274618924068],
+$       [7975981960206060756, 3891596446953918198], [2251882623343947545, 9200512293135601589],
+$       [-2555434429449939285, 5231363361603075924], [589954655052550508, -4997470784102723472],
+$       [-7172646981437496046, 3957816041645686055], [7878892458244147762, 3891596446953918198],
+$       [2417780064034743886, -765866755796821237], [-8137456150076482627, 2180618386459323497],
+$       [7764424835894536634, -7814314918666932342], [-77664756458811947, 8267723126556484199],
+$       [-7013840949099195945, -7814314918666932342], [-2416302290951087395, -2474252560205309129],
+$       [-8125632577628993408, -8295929931046180367], [-4622015176033631365, -2735372505500938428],
+$       [-3062023412527817836, 3298399075894209752], [-567815767313216863, 6363978663063431665],
+$       [-178049368089289213, -751960324059982867], [-1553387156400042757, 4663531220042497894],
+$       [7544368078395992750, -6283879498770799734], [-5989335185678161222, 8638678022519368613],
+$       [-4753983777034874126, -6371787357647609347], [7641236753254923226, 2408306026835956144],
+$       [-2006672806772705547, -5034623988605188113], [-7395038459860743598, 8396329655802720426],
+$       [2322357373687349590, -6705908715004023088], [-5868142951664867265, -1566532053210149698],
+$       [-7231644807869753297, 2959791159151572064], [5291541971690972144, 121514264102708711],
+$       [3037680968087551133, -9218743679853832369], [7251275166090427253, -8444694066306593304],
+$       [4010809983328572645, 7914058787218526262], [3710519437527228971, 559802540271501757],
+$       [1924149647780418740, 5747815730650263302], [720774330315775132, 2728030781926153802],
+$       [6819896887819730135, 3429855836087329195], [-2618378174947691586, -193034821040273538]],
+$  "trailVerbose": [], "trailRewrites": []}

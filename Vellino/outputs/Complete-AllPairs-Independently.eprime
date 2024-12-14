@@ -10,7 +10,7 @@ given capacity_Function1D: matrix indexed by [int(1..3)] of int(0..fin4)
 letting let1 be sum([quantity_Function1D[m] | m : int(1..5)])
 find colour_Function1DPartial_Flags: matrix indexed by [int(1..let1)] of bool
 find colour_Function1DPartial_Values: matrix indexed by [int(1..let1)] of int(1..3)
-letting let2 be max([capacity_Function1D[q322] | q322 : int(1..3)])
+letting let2 be max([capacity_Function1D[q358] | q358 : int(1..3)])
 find contents_Function1DPartialR8_Flags: matrix indexed by [int(1..let1)] of bool
 find contents_Function1DPartialR8_Values_ExplicitWithFlags_Flags:
         matrix indexed by [int(1..let1), int(1..let2)] of int(0..maxMaterial)
@@ -27,7 +27,7 @@ find conjure_aux2_Function1DPartialR8_Values_ExplicitWithFlags_Flags:
         matrix indexed by [int(1..let1), int(1..let1), int(1..let1), int(1..let2)] of int(0..maxMaterial)
 find conjure_aux2_Function1DPartialR8_Values_ExplicitWithFlags_Values:
         matrix indexed by [int(1..let1), int(1..let1), int(1..let1), int(1..let2)] of int(1..5)
-minimising sum([toInt(colour_Function1DPartial_Flags[q409]) | q409 : int(1..let1)])
+minimising sum([toInt(colour_Function1DPartial_Flags[q464]) | q464 : int(1..let1)])
 such that
     and([colour_Function1DPartial_Flags[b] <-> contents_Function1DPartialR8_Flags[b] | b : int(1..let1)]),
     and([sum([toInt(contents_Function1DPartialR8_Flags[q20]) *
@@ -40,103 +40,103 @@ such that
          /\
          and([contents_Function1DPartialR8_Flags[q20] -> contents_Function1DPartialR8_Flags[q20] | q20 : int(1..let1)])
              | q1 : int(1..5)]),
-    and([colour_Function1DPartial_Flags[q326] ->
-         and([sum([toInt(contents_Function1DPartialR8_Values_ExplicitWithFlags_Flags[q326, q324] > 0) *
-                   catchUndef(contents_Function1DPartialR8_Values_ExplicitWithFlags_Flags[q326, q324], 0)
-                       | q324 : int(1..let2)])
-              <= capacity_Function1D[colour_Function1DPartial_Values[q326]],
-              contents_Function1DPartialR8_Flags[q326], colour_Function1DPartial_Flags[q326];
-                  int(1..3)])
-             | q326 : int(1..let1)]),
-    and([colour_Function1DPartial_Flags[q332] ->
-         (colour_Function1DPartial_Values[q332] = 1 /\ colour_Function1DPartial_Flags[q332] ->
-          !(or([contents_Function1DPartialR8_Values_ExplicitWithFlags_Flags[q332, q328] > 0 /\
-                contents_Function1DPartialR8_Values_ExplicitWithFlags_Values[q332, q328] = 2
-                    | q328 : int(1..let2)])
-            /\ contents_Function1DPartialR8_Flags[q332])
-          /\
-          !(or([contents_Function1DPartialR8_Values_ExplicitWithFlags_Flags[q332, q330] > 0 /\
-                contents_Function1DPartialR8_Values_ExplicitWithFlags_Values[q332, q330] = 3
-                    | q330 : int(1..let2)])
-            /\ contents_Function1DPartialR8_Flags[q332]))
-             | q332 : int(1..let1)]),
-    and([colour_Function1DPartial_Flags[q338] ->
-         (colour_Function1DPartial_Values[q338] = 3 /\ colour_Function1DPartial_Flags[q338] ->
-          !(or([contents_Function1DPartialR8_Values_ExplicitWithFlags_Flags[q338, q334] > 0 /\
-                contents_Function1DPartialR8_Values_ExplicitWithFlags_Values[q338, q334] = 4
-                    | q334 : int(1..let2)])
-            /\ contents_Function1DPartialR8_Flags[q338])
-          /\
-          !(or([contents_Function1DPartialR8_Values_ExplicitWithFlags_Flags[q338, q336] > 0 /\
-                contents_Function1DPartialR8_Values_ExplicitWithFlags_Values[q338, q336] = 2
-                    | q336 : int(1..let2)])
-            /\ contents_Function1DPartialR8_Flags[q338]))
-             | q338 : int(1..let1)]),
-    and([colour_Function1DPartial_Flags[q344] ->
-         (colour_Function1DPartial_Values[q344] = 2 /\ colour_Function1DPartial_Flags[q344] ->
-          !(or([contents_Function1DPartialR8_Values_ExplicitWithFlags_Flags[q344, q340] > 0 /\
-                contents_Function1DPartialR8_Values_ExplicitWithFlags_Values[q344, q340] = 3
-                    | q340 : int(1..let2)])
-            /\ contents_Function1DPartialR8_Flags[q344])
-          /\
-          !(or([contents_Function1DPartialR8_Values_ExplicitWithFlags_Flags[q344, q342] > 0 /\
-                contents_Function1DPartialR8_Values_ExplicitWithFlags_Values[q344, q342] = 1
-                    | q342 : int(1..let2)])
-            /\ contents_Function1DPartialR8_Flags[q344]))
-             | q344 : int(1..let1)]),
-    and([colour_Function1DPartial_Flags[q347] ->
-         (colour_Function1DPartial_Values[q347] = 1 /\ colour_Function1DPartial_Flags[q347] ->
-          sum([toInt(contents_Function1DPartialR8_Values_ExplicitWithFlags_Values[q347, q345] = 4) *
-               catchUndef(contents_Function1DPartialR8_Values_ExplicitWithFlags_Flags[q347, q345], 0)
-                   | q345 : int(1..let2)])
-          <= 1
-          /\ contents_Function1DPartialR8_Flags[q347])
-             | q347 : int(1..let1)]),
-    and([colour_Function1DPartial_Flags[q350] ->
-         (colour_Function1DPartial_Values[q350] = 2 /\ colour_Function1DPartial_Flags[q350] ->
-          sum([toInt(contents_Function1DPartialR8_Values_ExplicitWithFlags_Values[q350, q348] = 4) *
-               catchUndef(contents_Function1DPartialR8_Values_ExplicitWithFlags_Flags[q350, q348], 0)
-                   | q348 : int(1..let2)])
-          <= 2
-          /\ contents_Function1DPartialR8_Flags[q350])
-             | q350 : int(1..let1)]),
-    and([colour_Function1DPartial_Flags[q356] ->
-         (or([contents_Function1DPartialR8_Values_ExplicitWithFlags_Flags[q356, q354] > 0 /\
-              contents_Function1DPartialR8_Values_ExplicitWithFlags_Values[q356, q354] = 4
-                  | q354 : int(1..let2)])
-          /\ contents_Function1DPartialR8_Flags[q356]
-          ->
-          or([contents_Function1DPartialR8_Values_ExplicitWithFlags_Flags[q356, q352] > 0 /\
-              contents_Function1DPartialR8_Values_ExplicitWithFlags_Values[q356, q352] = 2
-                  | q352 : int(1..let2)])
-          /\ contents_Function1DPartialR8_Flags[q356])
-             | q356 : int(1..let1)]),
     and([colour_Function1DPartial_Flags[q362] ->
-         (or([contents_Function1DPartialR8_Values_ExplicitWithFlags_Flags[q362, q360] > 0 /\
-              contents_Function1DPartialR8_Values_ExplicitWithFlags_Values[q362, q360] = 1
-                  | q360 : int(1..let2)])
-          /\ contents_Function1DPartialR8_Flags[q362]
-          ->
-          !(or([contents_Function1DPartialR8_Values_ExplicitWithFlags_Flags[q362, q358] > 0 /\
-                contents_Function1DPartialR8_Values_ExplicitWithFlags_Values[q362, q358] = 5
-                    | q358 : int(1..let2)])
-            /\ contents_Function1DPartialR8_Flags[q362]))
+         and([sum([toInt(contents_Function1DPartialR8_Values_ExplicitWithFlags_Flags[q362, q360] > 0) *
+                   catchUndef(contents_Function1DPartialR8_Values_ExplicitWithFlags_Flags[q362, q360], 0)
+                       | q360 : int(1..let2)])
+              <= capacity_Function1D[colour_Function1DPartial_Values[q362]],
+              contents_Function1DPartialR8_Flags[q362], colour_Function1DPartial_Flags[q362];
+                  int(1..3)])
              | q362 : int(1..let1)]),
     and([colour_Function1DPartial_Flags[q368] ->
-         (or([contents_Function1DPartialR8_Values_ExplicitWithFlags_Flags[q368, q366] > 0 /\
-              contents_Function1DPartialR8_Values_ExplicitWithFlags_Values[q368, q366] = 5
-                  | q366 : int(1..let2)])
-          /\ contents_Function1DPartialR8_Flags[q368]
-          ->
+         (colour_Function1DPartial_Values[q368] = 1 /\ colour_Function1DPartial_Flags[q368] ->
           !(or([contents_Function1DPartialR8_Values_ExplicitWithFlags_Flags[q368, q364] > 0 /\
                 contents_Function1DPartialR8_Values_ExplicitWithFlags_Values[q368, q364] = 2
                     | q364 : int(1..let2)])
+            /\ contents_Function1DPartialR8_Flags[q368])
+          /\
+          !(or([contents_Function1DPartialR8_Values_ExplicitWithFlags_Flags[q368, q366] > 0 /\
+                contents_Function1DPartialR8_Values_ExplicitWithFlags_Values[q368, q366] = 3
+                    | q366 : int(1..let2)])
             /\ contents_Function1DPartialR8_Flags[q368]))
              | q368 : int(1..let1)]),
+    and([colour_Function1DPartial_Flags[q374] ->
+         (colour_Function1DPartial_Values[q374] = 3 /\ colour_Function1DPartial_Flags[q374] ->
+          !(or([contents_Function1DPartialR8_Values_ExplicitWithFlags_Flags[q374, q370] > 0 /\
+                contents_Function1DPartialR8_Values_ExplicitWithFlags_Values[q374, q370] = 4
+                    | q370 : int(1..let2)])
+            /\ contents_Function1DPartialR8_Flags[q374])
+          /\
+          !(or([contents_Function1DPartialR8_Values_ExplicitWithFlags_Flags[q374, q372] > 0 /\
+                contents_Function1DPartialR8_Values_ExplicitWithFlags_Values[q374, q372] = 2
+                    | q372 : int(1..let2)])
+            /\ contents_Function1DPartialR8_Flags[q374]))
+             | q374 : int(1..let1)]),
+    and([colour_Function1DPartial_Flags[q380] ->
+         (colour_Function1DPartial_Values[q380] = 2 /\ colour_Function1DPartial_Flags[q380] ->
+          !(or([contents_Function1DPartialR8_Values_ExplicitWithFlags_Flags[q380, q376] > 0 /\
+                contents_Function1DPartialR8_Values_ExplicitWithFlags_Values[q380, q376] = 3
+                    | q376 : int(1..let2)])
+            /\ contents_Function1DPartialR8_Flags[q380])
+          /\
+          !(or([contents_Function1DPartialR8_Values_ExplicitWithFlags_Flags[q380, q378] > 0 /\
+                contents_Function1DPartialR8_Values_ExplicitWithFlags_Values[q380, q378] = 1
+                    | q378 : int(1..let2)])
+            /\ contents_Function1DPartialR8_Flags[q380]))
+             | q380 : int(1..let1)]),
+    and([colour_Function1DPartial_Flags[q383] ->
+         (colour_Function1DPartial_Values[q383] = 1 /\ colour_Function1DPartial_Flags[q383] ->
+          sum([toInt(contents_Function1DPartialR8_Values_ExplicitWithFlags_Values[q383, q381] = 4) *
+               catchUndef(contents_Function1DPartialR8_Values_ExplicitWithFlags_Flags[q383, q381], 0)
+                   | q381 : int(1..let2)])
+          <= 1
+          /\ contents_Function1DPartialR8_Flags[q383])
+             | q383 : int(1..let1)]),
+    and([colour_Function1DPartial_Flags[q386] ->
+         (colour_Function1DPartial_Values[q386] = 2 /\ colour_Function1DPartial_Flags[q386] ->
+          sum([toInt(contents_Function1DPartialR8_Values_ExplicitWithFlags_Values[q386, q384] = 4) *
+               catchUndef(contents_Function1DPartialR8_Values_ExplicitWithFlags_Flags[q386, q384], 0)
+                   | q384 : int(1..let2)])
+          <= 2
+          /\ contents_Function1DPartialR8_Flags[q386])
+             | q386 : int(1..let1)]),
+    and([colour_Function1DPartial_Flags[q392] ->
+         (or([contents_Function1DPartialR8_Values_ExplicitWithFlags_Flags[q392, q390] > 0 /\
+              contents_Function1DPartialR8_Values_ExplicitWithFlags_Values[q392, q390] = 4
+                  | q390 : int(1..let2)])
+          /\ contents_Function1DPartialR8_Flags[q392]
+          ->
+          or([contents_Function1DPartialR8_Values_ExplicitWithFlags_Flags[q392, q388] > 0 /\
+              contents_Function1DPartialR8_Values_ExplicitWithFlags_Values[q392, q388] = 2
+                  | q388 : int(1..let2)])
+          /\ contents_Function1DPartialR8_Flags[q392])
+             | q392 : int(1..let1)]),
+    and([colour_Function1DPartial_Flags[q398] ->
+         (or([contents_Function1DPartialR8_Values_ExplicitWithFlags_Flags[q398, q396] > 0 /\
+              contents_Function1DPartialR8_Values_ExplicitWithFlags_Values[q398, q396] = 1
+                  | q396 : int(1..let2)])
+          /\ contents_Function1DPartialR8_Flags[q398]
+          ->
+          !(or([contents_Function1DPartialR8_Values_ExplicitWithFlags_Flags[q398, q394] > 0 /\
+                contents_Function1DPartialR8_Values_ExplicitWithFlags_Values[q398, q394] = 5
+                    | q394 : int(1..let2)])
+            /\ contents_Function1DPartialR8_Flags[q398]))
+             | q398 : int(1..let1)]),
+    and([colour_Function1DPartial_Flags[q404] ->
+         (or([contents_Function1DPartialR8_Values_ExplicitWithFlags_Flags[q404, q402] > 0 /\
+              contents_Function1DPartialR8_Values_ExplicitWithFlags_Values[q404, q402] = 5
+                  | q402 : int(1..let2)])
+          /\ contents_Function1DPartialR8_Flags[q404]
+          ->
+          !(or([contents_Function1DPartialR8_Values_ExplicitWithFlags_Flags[q404, q400] > 0 /\
+                contents_Function1DPartialR8_Values_ExplicitWithFlags_Values[q404, q400] = 2
+                    | q400 : int(1..let2)])
+            /\ contents_Function1DPartialR8_Flags[q404]))
+             | q404 : int(1..let1)]),
     and([and([conjure_aux1_Function1DPartial_Flags[q2, q3, q36] = false ->
               conjure_aux1_Function1DPartial_Values[q2, q3, q36] = 1
                   | q36 : int(1..let1)])
-             | q2 : int(1..let1), q3 : int(1..let1)]),
+             | q2 : int(1..let1), q3 : int(1..let1), q2 < q3]),
     and([and([colour_Function1DPartial_Flags[q29] ->
               sum([toInt(conjure_aux1_Function1DPartial_Flags[q2, q3, q39]) *
                    catchUndef(conjure_aux1_Function1DPartial_Values[q2, q3, q39], 0)
@@ -148,7 +148,7 @@ such that
                   q42 = catchUndef([q29, q3, q2; int(0..2)][toInt(q2 = q29) + toInt(q3 = q29) * 2], 1)
                       | q42 : int(1..let1)])
                   | q29 : int(1..let1)])
-             | q2 : int(1..let1), q3 : int(1..let1)]),
+             | q2 : int(1..let1), q3 : int(1..let1), q2 < q3]),
     and([and([conjure_aux1_Function1DPartial_Flags[q2, q3, q46] ->
               colour_Function1DPartial_Values
                   [catchUndef([q46, q3, q2; int(0..2)][toInt(q2 = q46) + toInt(q3 = q46) * 2], 1)]
@@ -157,7 +157,7 @@ such that
               colour_Function1DPartial_Flags
                   [catchUndef([q46, q3, q2; int(0..2)][toInt(q2 = q46) + toInt(q3 = q46) * 2], 1)]
                   | q46 : int(1..let1)])
-             | q2 : int(1..let1), q3 : int(1..let1)]),
+             | q2 : int(1..let1), q3 : int(1..let1), q2 < q3]),
     and([and([conjure_aux2_Function1DPartialR8_Flags[q2, q3, q132] = false ->
               and([conjure_aux2_Function1DPartialR8_Values_ExplicitWithFlags_Flags[q2, q3, q132, q142] = 0
                        | q142 : int(1..let2)])
@@ -165,32 +165,32 @@ such that
               and([conjure_aux2_Function1DPartialR8_Values_ExplicitWithFlags_Values[q2, q3, q132, q143] = 1
                        | q143 : int(1..let2)])
                   | q132 : int(1..let1)])
-             | q2 : int(1..let1), q3 : int(1..let1)]),
+             | q2 : int(1..let1), q3 : int(1..let1), q2 < q3]),
     and([and([conjure_aux2_Function1DPartialR8_Flags[q2, q3, q134] ->
               and([conjure_aux2_Function1DPartialR8_Values_ExplicitWithFlags_Flags[q2, q3, q134, q135 + 1] > 0 ->
                    conjure_aux2_Function1DPartialR8_Values_ExplicitWithFlags_Values[q2, q3, q134, q135] <
                    conjure_aux2_Function1DPartialR8_Values_ExplicitWithFlags_Values[q2, q3, q134, q135 + 1]
                        | q135 : int(1..let2 - 1)])
                   | q134 : int(1..let1)])
-             | q2 : int(1..let1), q3 : int(1..let1)]),
+             | q2 : int(1..let1), q3 : int(1..let1), q2 < q3]),
     and([and([conjure_aux2_Function1DPartialR8_Flags[q2, q3, q134] ->
               and([conjure_aux2_Function1DPartialR8_Values_ExplicitWithFlags_Flags[q2, q3, q134, q136] = 0 ->
                    conjure_aux2_Function1DPartialR8_Values_ExplicitWithFlags_Values[q2, q3, q134, q136] = 1
                        | q136 : int(1..let2)])
                   | q134 : int(1..let1)])
-             | q2 : int(1..let1), q3 : int(1..let1)]),
+             | q2 : int(1..let1), q3 : int(1..let1), q2 < q3]),
     and([and([conjure_aux2_Function1DPartialR8_Flags[q2, q3, q134] ->
               and([conjure_aux2_Function1DPartialR8_Values_ExplicitWithFlags_Flags[q2, q3, q134, q137 + 1] > 0 ->
                    conjure_aux2_Function1DPartialR8_Values_ExplicitWithFlags_Flags[q2, q3, q134, q137] > 0
                        | q137 : int(1..let2 - 1)])
                   | q134 : int(1..let1)])
-             | q2 : int(1..let1), q3 : int(1..let1)]),
+             | q2 : int(1..let1), q3 : int(1..let1), q2 < q3]),
     and([and([conjure_aux2_Function1DPartialR8_Flags[q2, q3, q134] ->
               sum([conjure_aux2_Function1DPartialR8_Values_ExplicitWithFlags_Flags[q2, q3, q134, q140]
                        | q140 : int(1..let2)])
               <= let2
                   | q134 : int(1..let1)])
-             | q2 : int(1..let1), q3 : int(1..let1)]),
+             | q2 : int(1..let1), q3 : int(1..let1), q2 < q3]),
     and([and([contents_Function1DPartialR8_Flags[q86] ->
               and([conjure_aux2_Function1DPartialR8_Flags[q2, q3, q144] /\
                    conjure_aux2_Function1DPartialR8_Values_ExplicitWithFlags_Flags[q2, q3, q144, q150] > 0
@@ -240,7 +240,7 @@ such that
                             | q96 : int(1..let2)])
                        | q98 : int(1..let2)])
                   | q86 : int(1..let1)])
-             | q2 : int(1..let1), q3 : int(1..let1)]),
+             | q2 : int(1..let1), q3 : int(1..let1), q2 < q3]),
     and([and([conjure_aux2_Function1DPartialR8_Flags[q2, q3, q164] ->
               and([contents_Function1DPartialR8_Values_ExplicitWithFlags_Flags
                        [catchUndef([q164, q3, q2; int(0..2)][toInt(q2 = q164) + toInt(q3 = q164) * 2], 1), q106]
@@ -304,7 +304,7 @@ such that
               contents_Function1DPartialR8_Flags
                   [catchUndef([q164, q3, q2; int(0..2)][toInt(q2 = q164) + toInt(q3 = q164) * 2], 1)]
                   | q164 : int(1..let1)])
-             | q2 : int(1..let1), q3 : int(1..let1)]),
+             | q2 : int(1..let1), q3 : int(1..let1), q2 < q3]),
     and([flatten([flatten([[-toInt(colour_Function1DPartial_Flags[q292]); int(1)],
                            [colour_Function1DPartial_Values[q292]; int(1)];
                                int(1..2)])
@@ -355,10 +355,22 @@ such that
                                int(1..2)])
                       | q225 : int(1..let1)])
              | q2 : int(1..let1), q3 : int(1..let1), q2 < q3]),
+    and([and([and([conjure_aux1_Function1DPartial_Flags[q320, q321, q322] = false
+                       | q320 : int(1..let1), q321 : int(1..let1), q322 : int(1..let1)]),
+              and([conjure_aux1_Function1DPartial_Values[q323, q324, q325] = 1
+                       | q323 : int(1..let1), q324 : int(1..let1), q325 : int(1..let1)]),
+              and([conjure_aux2_Function1DPartialR8_Flags[q326, q327, q328] = false
+                       | q326 : int(1..let1), q327 : int(1..let1), q328 : int(1..let1)]),
+              and([conjure_aux2_Function1DPartialR8_Values_ExplicitWithFlags_Flags[q329, q330, q331, q332] = 0
+                       | q329 : int(1..let1), q330 : int(1..let1), q331 : int(1..let1), q332 : int(1..let2)]),
+              and([conjure_aux2_Function1DPartialR8_Values_ExplicitWithFlags_Values[q333, q334, q335, q336] = 1
+                       | q333 : int(1..let1), q334 : int(1..let1), q335 : int(1..let1), q336 : int(1..let2)]);
+                  int(1..5)])
+             | q2 : int(1..let1), q3 : int(1..let1), !(q2 < q3)]),
     and([colour_Function1DPartial_Flags[q4] = false -> colour_Function1DPartial_Values[q4] = 1 | q4 : int(1..let1)]),
     and([contents_Function1DPartialR8_Flags[q8] = false ->
-         and([contents_Function1DPartialR8_Values_ExplicitWithFlags_Flags[q8, q301] = 0 | q301 : int(1..let2)]) /\
-         and([contents_Function1DPartialR8_Values_ExplicitWithFlags_Values[q8, q302] = 1 | q302 : int(1..let2)])
+         and([contents_Function1DPartialR8_Values_ExplicitWithFlags_Flags[q8, q337] = 0 | q337 : int(1..let2)]) /\
+         and([contents_Function1DPartialR8_Values_ExplicitWithFlags_Values[q8, q338] = 1 | q338 : int(1..let2)])
              | q8 : int(1..let1)]),
     and([contents_Function1DPartialR8_Flags[q10] ->
          and([contents_Function1DPartialR8_Values_ExplicitWithFlags_Flags[q10, q11 + 1] > 0 ->
@@ -660,8 +672,11 @@ $       [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1,
 $       [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
 $       [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
 $       [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
-$       [1, 1, 1], [1, 1, 1], [1, 1, 1]],
-$  "nameGenState": [["conjure_aux", 3], ["fin", 5], ["let", 3], ["q", 410]], "nbExtraGivens": 4,
+$       [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
+$       [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
+$       [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1],
+$       [1, 1, 1]],
+$  "nameGenState": [["conjure_aux", 3], ["fin", 5], ["let", 3], ["q", 465]], "nbExtraGivens": 4,
 $  "representations":
 $      [[{"Name": "colour"},
 $        {"DomainFunction":
@@ -1125,134 +1140,148 @@ $                    [{"SizeAttr_MaxSize": {"Reference": [{"MachineName": ["let"
 $                     {"OccurAttr_MaxOccur": {"Reference": [{"Name": "maxMaterial"}, null]}}],
 $                    {"DomainEnum": [{"Name": "Material"}, null, null]}]}]}]],
 $  "trailGeneralised":
-$      [[421200468985085096, 3054418422333315138], [-1119579431935419348, -8438055240862190397],
-$       [-6369351668665686300, -762552171232266182], [-908106412249366366, -6422875956902433092],
-$       [-970907425663871538, 8227158673632809644], [7145594247691385732, -4952339052718508268],
-$       [-4076294397184717216, -2287862082985692426], [-2413810991810365292, 8442817953278169607],
-$       [5894026733748006831, -3856105716654753719], [2082629128111682861, -3856105716654753719],
-$       [5013152023159803452, -3856105716654753719], [778843405718101490, -3856105716654753719],
-$       [8802869152647488373, -3856105716654753719], [-4314833455118533231, -3856105716654753719],
-$       [6230149531571595698, 5748498512490252336], [5547935529305358870, -5258702884108019670],
-$       [1196984788067963374, 6955611105402625341], [6580074601088207939, -6390832295154507981],
-$       [-4318689912511500764, -5384459374142955561], [806471612990449915, 2018129907923781166],
-$       [-5999735857717548863, 5413069081826884231], [-8078393440448094651, -4452335038689305619],
-$       [3300790914338059581, 1798846694839455633], [-6083749940999477995, 671587172392169800],
-$       [1692258374873853618, 3234109842869873277], [-4273069296221068354, -6268132696180016333],
-$       [6777006653441146214, -2878968294321966143], [-6474023499625459147, -2129062171033413505],
-$       [3312824182459082607, -4154952846805147889], [7083539846373629559, 2985881720354030813],
-$       [4768868589066625873, -2129062171033413505], [1761265167629806638, -5857417219859628771],
-$       [-1524865511048084443, 5754240362845013177], [-8482755349527299404, 5754240362845013177],
-$       [7355312346840757244, 5754240362845013177], [-3407700887902453587, 5754240362845013177],
-$       [3164123275166941650, 5754240362845013177], [-8828934328847447802, 5754240362845013177],
-$       [5497733649102099404, 9074552314828887594], [8916567782252715972, -267091548338388548],
-$       [6393604134444552184, -2352017889704348507], [-3263966916757287740, 9140054973397016159],
-$       [-5016088494084413945, 2534759452375782379], [3217878540256749032, 3087631621875717686],
-$       [-9149109870249891174, 4437183226846256749], [-6614715102298879581, 1764901584992554531],
-$       [-2583688321190943617, 3614121272492208935], [-7500405806405236709, -8773929150973015586],
-$       [-5568963515877154229, 743770760466568399], [3990805841919535415, -4154952846805147889],
-$       [5949140177107680367, 2985881720354030813], [-6737606618262559192, -2129062171033413505],
-$       [703304475654187874, 1614964529215908703], [-2836132520951553918, -82521063851292259],
-$       [-3452994768045581036, -2129062171033413505], [-3687591389763743528, 9213662838591600503],
-$       [2464769094465876582, 5569156264599454457], [2268337468232211116, 5569156264599454457],
-$       [1937332638391646531, 5569156264599454457], [1631450913160805806, 5569156264599454457],
-$       [-5016721312272968130, 5569156264599454457], [4567470584948667095, 5569156264599454457],
-$       [-5186500304301918514, -5860723989159235472], [6548349087339921374, 6664968644504757730],
-$       [6763901796894929014, -3052996440270974095], [-2925609985508497663, -8425635297579948091],
-$       [782770935452189586, 315318512183938801], [7554588935832895405, 3858688084938536540],
-$       [8352381831588542802, 2341274710078788039], [-8797080367373027136, -1057432661863558315],
-$       [7779171650390411323, -2685717383251039735], [-1586159675079862432, 6067768365576211168],
-$       [-4503538108790954069, -4494226217905354455], [1771204838249428694, -6268132696180016333],
-$       [-7387226529514165394, -2878968294321966143], [8504569255604363124, -2129062171033413505],
-$       [-1346522438730613274, -7700020487342985933], [-8617966940163046186, -1632672540102359951],
-$       [2872820615273622632, -2129062171033413505], [-5120467512558380178, -1842782288041212033],
-$       [-2073690718674162269, -922939813154473143], [7993728926537052719, -922939813154473143],
-$       [8871343275759569857, -922939813154473143], [2477400243842865847, -922939813154473143],
-$       [-5003438057301059364, -922939813154473143], [-6837017055760207468, -1683519790573866952],
-$       [-5069704071926314434, -7707563377368752537], [-8784366649268345114, -312602827234573085],
-$       [4754102796017048850, 8535056433370939483], [1119241759688199298, 4905253000926210297],
-$       [2524521883035757820, 7175227889945662596], [-6484667641157339501, 4310535652969459091],
-$       [1339457236881863642, 7690818097292754835], [5832608113077184190, -7122642341108078363],
-$       [-7128037373451356507, -2129062171033413505], [-1101382917565624798, 55181819940349391],
-$       [-6510596294122961414, 2426434722973945989], [8567380379758938053, -5370676388064940169],
-$       [-7528310474446970074, -3290206615932405453], [-4366954850869258524, -2131982288141538261],
-$       [4355867012774444960, -2131982288141538261], [4198969606416600632, -2131982288141538261],
-$       [-3024125424208081426, -2131982288141538261], [-6793978348318503502, -2131982288141538261],
-$       [3096125050349532256, -2405308088923353332], [-5033180813692979138, -2283363953660094743],
-$       [1393407456597597030, -8113631707695316618], [4157132956386327303, -5516657613324373341],
-$       [-3668967761335683769, -8404128765681979919], [6272403441167527838, 7858032302924545306],
-$       [7562671195923166677, 4827788665024852177], [4023696322218469005, -7946645534878077866],
-$       [-2941317669134364599, -7122642341108078363], [-4725168024507500514, -2129062171033413505],
-$       [-5918283174246335459, 1080651130803109327], [-2676782761616960779, -8989257877305071823],
-$       [-8325058131577389670, -5370676388064940169], [2526160027162622712, 7764627404079453455],
-$       [-2726939282277997212, 572406169740654537], [4807747255611909213, 572406169740654537],
-$       [5861909362717897921, 572406169740654537], [4078680625873729508, 572406169740654537],
-$       [897421828160856423, 572406169740654537], [-5571850449552023787, 572406169740654537],
-$       [5202131882169579006, 572406169740654537], [9147328773580846273, 572406169740654537],
-$       [3627331635761555622, -3041344966528852056], [2404340365687296446, -3241886266927241438],
-$       [3121013943166847450, -5650936684317770983], [5139566187674367509, 585802317741429099],
-$       [-4567924829949339623, -414899785040962337], [8387816851320981909, 5853055762437947302],
-$       [8027405663750413515, 3958636277168281559], [-1052154421655619551, 1614964529215908703],
-$       [5613617583424199649, -82521063851292259], [2203406811749593260, -2129062171033413505],
-$       [-472237838060552318, 1679804728676051139], [4873863616484575944, 4953621275445198259],
-$       [4560974047098965658, -465219226957540486], [-7358013293328383504, 890343009965773077],
-$       [4707000203223892736, -653181584932804369], [883060951865055104, 3888652083342278989],
-$       [-5856271695171896393, -2129062171033413505], [-4026124741105224, 55181819940349391],
-$       [1754590922093106616, 2426434722973945989], [-7617753394708271677, -5370676388064940169],
-$       [8511129380231693942, 5046019465578716457], [-1757863056701687852, -2712173090822624599],
-$       [-4402886430275926606, -2712173090822624599], [-9026772893599413605, -2712173090822624599],
-$       [-6516595402686946464, -2712173090822624599], [-6031505544362135104, -2712173090822624599],
-$       [6278990893315199315, -2712173090822624599], [-4487682502031994929, -2712173090822624599],
-$       [-2975250143587948691, -2712173090822624599], [-6053596091565515516, -7347677933070393386],
-$       [-6378390319049170096, 1353292451995911200], [4896230792575770640, -3136713231552704403],
-$       [820979849928833715, -8424874328967904011], [-823830673729894753, -2444474738516376759],
-$       [-485754140353761261, 4133096974062706432], [1958737672628979188, 4737135574718244697],
-$       [-7613937619003983878, -6268132696180016333], [7483092572228447498, -2878968294321966143],
-$       [5548837520718250347, -2129062171033413505], [6680625571730963120, -7233393238451425523],
-$       [-514761521453257454, -4528968826487581807], [-8344911858993688900, 8325497541623764660],
-$       [4787475163901411027, 4834930994876095195], [-5199546666372299253, -7700020487342985933],
-$       [6991314777572628115, -1632672540102359951], [8244092687832857928, -2129062171033413505],
-$       [-2718566927967886426, -3107020035610434721], [-3356563944097376218, -7383514788535708775],
-$       [8704343544515337613, -5370676388064940169], [-833639986598339700, 4193085052223774847],
-$       [283680559962674266, 3021821037655308793], [4652312150405846449, 3021821037655308793],
-$       [1584039500190742867, 3021821037655308793], [-7094325879450644439, 3021821037655308793],
-$       [1563064685570988891, 3021821037655308793], [7169645643098503302, 3021821037655308793],
-$       [7820621537935804254, 3021821037655308793], [-1144867635628267878, 3021821037655308793],
-$       [-4940453466026515110, -1044346924886744128], [-483127653886409914, 1478130525190543422],
-$       [-7603644767623625782, 8384217536231194921], [1885902041512396091, 5340562380422239079],
-$       [8116331395968949311, -7671880535316993121], [-3439877217745732257, -8055967524193394822],
-$       [-3933121071363033799, 5706362033060370679], [-6380844704300202993, -653181584932804369],
-$       [-1415854514784846937, 3888652083342278989], [8312408778748158114, -2129062171033413505],
-$       [1714784861571118349, 2629754103009384405], [-8211652212211309865, 2712443572412607369],
-$       [-719350512565279083, -3506499155126349696], [-1057545399376989704, 3152020526663378593],
-$       [16394668618462748, -6268132696180016333], [3437745874842637908, -2878968294321966143],
-$       [6180239200181891147, -2129062171033413505], [4872061984097141255, 1080651130803109327],
-$       [-7863240025273538833, -8989257877305071823], [8748018309190044876, -5370676388064940169],
-$       [7354948055224510986, -3021149094853940361], [-7820916779902879400, -1746012786431619079],
-$       [1686608355893909556, -1746012786431619079], [-8131122609187862605, -1746012786431619079],
-$       [1913892581872612176, -1746012786431619079], [4363438803650278706, -1746012786431619079],
-$       [-5811025685829156880, 7310800879613069292], [5847281474393361914, -7857082540444536329],
-$       [7832079981322293634, -6854776808550026009], [-6345169568961999014, -7692329394956424280],
-$       [-6897771776593748967, -5048803314169327015], [-8991205396150048341, -418965956589742698],
-$       [7888804602390570958, -3375690755212781246], [5823998211731904493, -7396922371020216087],
-$       [-3261833914704467030, 9124913791852681692], [1970937549495539847, -1388682885326175594],
-$       [-2767403324087280915, 7664603622192990137], [129654159924708546, -5370676388064940169],
-$       [7040079759700194111, 5021530680135488934], [2196305488789389768, -7303314119625617103],
-$       [6848674141332928386, -2129062171033413505], [4384672498989469969, -5718322364748688844],
-$       [3735707079997597072, -7378894129286733987], [-892110959298117053, 298720331945059180],
-$       [-8011239968713609915, -3100018851384540055], [-915510409892674785, 6255330850529584111],
-$       [-228630510060888373, 3180540458082898552], [8312092747021632843, 7812214294045480474],
-$       [6636224813359721930, 672077000496122235], [-6700370387395891139, -96653378343163659],
-$       [-5815285031661855534, -6982313788665792180], [6575198483532663780, -4572815529372746897],
-$       [9152663207496429631, -2195807474712661155], [3095438445340580920, 4707267201219008088],
-$       [-943266064803112792, 4781426727595779333], [2504259709199533066, -4418435206108837345],
-$       [-705508560922848740, 3030407653638289124], [3394643287931494074, -939964835367695559],
-$       [-1166936198673973397, 2172382044440436992], [4028536934079840772, 4836900365856063043],
-$       [-6563079678994634488, 4067319867839161821], [4565286775452117457, 2391689254747338794],
-$       [8944384176524568345, 4885603007581843509], [4417694571837775335, 3902303396382812169],
-$       [-2723558896081229046, -1865685658896701656], [-8254001144657022111, 228790066282964064],
-$       [8725813349087146706, 5195035550021402732], [1916277685554676388, 1657045525025821173],
-$       [1166512135995502600, 8131577206871143284], [3349788835232363438, 7181441541325327503],
-$       [-1234234350398606671, -1956569461778423482], [-405619072646559602, -465631653386485706],
+$      [[8400580432005961324, 822653659826671798], [3291810497111787090, -8438055240862190397],
+$       [5819908738466068658, -5258637947471754080], [-7224786965742895328, -2224772467768562570],
+$       [4964719097364871916, 2232969871268900770], [7630331716906487082, 5936159400827252842],
+$       [-4076294397184717216, 2403822560586314813], [-1145686599756893762, 1820159123499727051],
+$       [-6173127005841291788, -715117995527408921], [5285141938510874611, -5079476827811779079],
+$       [5895112151194350537, -5079476827811779079], [-5746733901106158280, -5079476827811779079],
+$       [7703672612842026994, -5079476827811779079], [-7658729945021866731, -5079476827811779079],
+$       [-5283622457619804575, -5079476827811779079], [5567204178298661250, 8759705383334789080],
+$       [8610068587915561014, 2252506683703676450], [2438086229698990070, -8586305915991097111],
+$       [6464612764154506995, 2315552804901796291], [5746000840938900956, 7088508873426291327],
+$       [-1979552035508729973, -2720009156910185178], [-6929126697862049051, -7265228448853562869],
+$       [-9009058361945673507, -7911560147741355915], [7898302065955034357, -5129322431468289463],
+$       [-3777865222061307683, 3834091464284032128], [1692258374873853618, 6474474999823808409],
+$       [-4273069296221068354, -6268132696180016333], [6777006653441146214, -2878968294321966143],
+$       [-6474023499625459147, -2129062171033413505], [3312824182459082607, -4154952846805147889],
+$       [7083539846373629559, 2985881720354030813], [4768868589066625873, -2129062171033413505],
+$       [3988080182628440758, 7970340353034886741], [-266558722026757943, 762044183660096617],
+$       [-7468127696695259368, 762044183660096617], [-6477473906696750448, 762044183660096617],
+$       [1029655696847540933, 762044183660096617], [-6587010610376645270, 762044183660096617],
+$       [2263271248664853238, 762044183660096617], [4208442415641840228, 1609331235494864138],
+$       [3972224695474792804, 2974910227218672708], [-6795001157737531520, -1752401572693484215],
+$       [-918684327517496452, 2934409759198368583], [-3149600128737960705, 2618895403419615531],
+$       [-3570401471800708680, 3947255797833067454], [1567662373546429294, 572825255318844641],
+$       [5235826075503614443, 4401209732301757267], [-2306695066391117841, 5372215223834837023],
+$       [-356165115887338165, 6983791913949256550], [-5568963515877154229, 595183142821814099],
+$       [3990805841919535415, -4154952846805147889], [5949140177107680367, 2985881720354030813],
+$       [-6737606618262559192, -2129062171033413505], [703304475654187874, 1614964529215908703],
+$       [-2836132520951553918, -82521063851292259], [-3452994768045581036, -2129062171033413505],
+$       [1542889204808859688, -1912370596890651129], [-2253799759994301746, 2733027798601881129],
+$       [2034910509532199764, 2733027798601881129], [6409503961332130915, 2733027798601881129],
+$       [-8461642288811597826, 2733027798601881129], [8547409991085267326, 2733027798601881129],
+$       [7592531475365651663, 2733027798601881129], [-1694806489055064602, -7229510623182752608],
+$       [5794567719058989406, -2232981133338634246], [-1243812834706625434, 1885482906260041789],
+$       [2789078947167807017, 809486741220231101], [4314173394541513802, 523076556404774913],
+$       [-6540826871311693779, 4191108361552583892], [3836009345922782958, 5402762588893991779],
+$       [-7626257786782912996, 7633096360568804765], [-8510908486229532033, 1397982839332481249],
+$       [-8960040027496337628, 8414440249870056632], [-4503538108790954069, -6732655108153460603],
+$       [1771204838249428694, -6268132696180016333], [-7387226529514165394, -2878968294321966143],
+$       [8504569255604363124, -2129062171033413505], [-1346522438730613274, -7700020487342985933],
+$       [-8617966940163046186, -1632672540102359951], [2872820615273622632, -2129062171033413505],
+$       [-2031475292105504114, 2112127178207440823], [6003479996427094071, -40419138101957687],
+$       [-2671326113932353729, -40419138101957687], [-4737415251835339615, -40419138101957687],
+$       [-7999746076580270357, -40419138101957687], [-3115859435900259328, -40419138101957687],
+$       [-2565532795188048940, 5878456541943769632], [53138535041457982, -7649740042752785081],
+$       [6527575149768496958, -350020036466623673], [-2251306484496217310, 7743579282588095731],
+$       [-4351002429039495758, -1802807902211236655], [6133627648631600968, -5865895065427550996],
+$       [-7068071561814912289, 429615010984785419], [1339457236881863642, 5622689929145202471],
+$       [5832608113077184190, -7122642341108078363], [-7128037373451356507, -2129062171033413505],
+$       [-1101382917565624798, 55181819940349391], [-6510596294122961414, 2426434722973945989],
+$       [8567380379758938053, -5370676388064940169], [2972981261829675686, 5734450660317861907],
+$       [8597936684281615888, -3584672221043553357], [6452889443846356568, -3584672221043553357],
+$       [-1573419972536995360, -3584672221043553357], [6866774019292780362, -3584672221043553357],
+$       [6285571742786221086, -3584672221043553357], [8036010372095611488, 8704378320645676548],
+$       [1213387172889496606, -5243435398615259103], [-6644244530609801770, -1522527582010491070],
+$       [-6124883898321101961, 8861234280853749115], [-6453771949106854153, -1217390056444103719],
+$       [-7139492798870930566, 8295792276417692306], [7240935392868683665, 2324613032804969177],
+$       [4023696322218469005, -7959921073906690198], [-2941317669134364599, -7122642341108078363],
+$       [-4725168024507500514, -2129062171033413505], [-5918283174246335459, 1080651130803109327],
+$       [-2676782761616960779, -8989257877305071823], [-8325058131577389670, -5370676388064940169],
+$       [1181374660964726696, -3008577982955690785], [-3773883740562418864, 554783463686724921],
+$       [3430546010847545857, 554783463686724921], [5442354395926584069, 554783463686724921],
+$       [-518972690773206040, 554783463686724921], [918570787475686235, 554783463686724921],
+$       [503761451325520553, 554783463686724921], [8277289989280197526, 554783463686724921],
+$       [-3922402606058146639, 554783463686724921], [-8940000619385541354, -1976090912215496264],
+$       [1884994448375237478, 1165007948805553418], [-6251530633681083694, -3012205526886493795],
+$       [6803658726246677865, 5783947914985785467], [-1720842028044803035, 6771018113214656631],
+$       [277633413258418385, 873711949618937870], [1777201692198626383, 8551482221107212363],
+$       [4231813263311544309, 1614964529215908703], [-8085311802537236843, -82521063851292259],
+$       [-3679372463202771168, -2129062171033413505], [-930298311267880206, 5857323932623839059],
+$       [767288126199435368, -2334646090387390269], [-2214420112798627118, -1434747106906832606],
+$       [-7358013293328383504, -2963750902892051839], [4707000203223892736, -653181584932804369],
+$       [883060951865055104, 3888652083342278989], [-5856271695171896393, -2129062171033413505],
+$       [-4026124741105224, 55181819940349391], [1754590922093106616, 2426434722973945989],
+$       [-7617753394708271677, -5370676388064940169], [3995496465033358574, 3345368460828930321],
+$       [7667147757768776376, 4108237194044375545], [-4521694475797220026, 4108237194044375545],
+$       [-6888538919108462025, 4108237194044375545], [-757430400209595316, 4108237194044375545],
+$       [2048697441736843980, 4108237194044375545], [-5581333528602824161, 4108237194044375545],
+$       [5288563127348876895, 4108237194044375545], [-8727438293677319539, 4108237194044375545],
+$       [6660892700637260628, 4056266687849878238], [6063266918646368272, 7345092941902180008],
+$       [3597421757533499080, 7879365275967218513], [-8692189176100327001, 1152598897826218397],
+$       [-7027933784598876229, 5206382921141554337], [7407465311860915703, 5132574318643576600],
+$       [-8923434254802277288, -5097428587209306571], [4185193945576832798, -6268132696180016333],
+$       [5068261513611035118, -2878968294321966143], [6329542440558533455, -2129062171033413505],
+$       [3915152110668029872, -2516535262878947035], [-6305858081242431110, -4401814991781860559],
+$       [4280616489093905508, -1291698233387771780], [4787475163901411027, 4474646848059793527],
+$       [-5199546666372299253, -7700020487342985933], [6991314777572628115, -1632672540102359951],
+$       [8244092687832857928, -2129062171033413505], [-2718566927967886426, -3107020035610434721],
+$       [-3356563944097376218, -7383514788535708775], [8704343544515337613, -5370676388064940169],
+$       [-275242294585813788, 7803720998810251407], [4161707824036827830, -3856105716654753719],
+$       [-5344192986061897059, -3856105716654753719], [2558145373365309007, -3856105716654753719],
+$       [-5203123935567299795, -3856105716654753719], [-7828561169949849945, -3856105716654753719],
+$       [8590664563933382706, -3856105716654753719], [2749825185295178574, -3856105716654753719],
+$       [3990087767004912826, -3856105716654753719], [-7944516059442711222, -6823550547522136048],
+$       [8532130416943061006, -7611093990371965938], [-5875767443504152446, 7243909465148540605],
+$       [1761173725981659151, 2806434442464454207], [1445510638853229723, 6790314755146485399],
+$       [-3987909600173955045, -757999943974062286], [2136245346749246477, -351778812876905853],
+$       [-836730150273024325, -653181584932804369], [1859495795455434259, 3888652083342278989],
+$       [3265880824709815454, -2129062171033413505], [2624766209947669853, -4452335038689305619],
+$       [-6518375034514022777, 1798846694839455633], [4159447895868524341, 671587172392169800],
+$       [-1057545399376989704, 3234109842869873277], [16394668618462748, -6268132696180016333],
+$       [3437745874842637908, -2878968294321966143], [6180239200181891147, -2129062171033413505],
+$       [4872061984097141255, 1080651130803109327], [-7863240025273538833, -8989257877305071823],
+$       [8748018309190044876, -5370676388064940169], [-3354841163328729526, -3752608787701941361],
+$       [-4681802784160643976, 5754240362845013177], [8840573712087740236, 5754240362845013177],
+$       [4932258181319926871, 5754240362845013177], [3024279747956752420, 5754240362845013177],
+$       [-8570147822299079482, 5754240362845013177], [-5779805671138574848, -5914157832940977388],
+$       [8250238579567508834, -1138656094645757977], [2111581060198736730, 1741910739326556107],
+$       [-2473066616006661946, -3043101547209776032], [5225636808188566829, -2321213019472232383],
+$       [-2909871239027866329, -84911626169308842], [186261401884800002, 4489650100732727058],
+$       [5823998211731904493, -7979121550778544659], [-3261833914704467030, 9124913791852681692],
+$       [1970937549495539847, -1388682885326175594], [-2767403324087280915, 7664603622192990137],
+$       [129654159924708546, -5370676388064940169], [7040079759700194111, 5021530680135488934],
+$       [2196305488789389768, -7303314119625617103], [6848674141332928386, -2129062171033413505],
+$       [4384672498989469969, -5718322364748688844], [3735707079997597072, -7378894129286733987],
+$       [-2062108415626296765, 1475426467886491772], [-7759581584198472859, -4867345022531067271],
+$       [-915510409892674785, -5461909891237688669], [-228630510060888373, 3180540458082898552],
+$       [8312092747021632843, 7812214294045480474], [6636224813359721930, 672077000496122235],
+$       [6951713566961239095, -7106406800254725075], [-5815285031661855534, -6982313788665792180],
+$       [6575198483532663780, -4572815529372746897], [9152663207496429631, -2195807474712661155],
+$       [3095438445340580920, 4707267201219008088], [-943266064803112792, 4781426727595779333],
+$       [2504259709199533066, -4418435206108837345], [-705508560922848740, 3030407653638289124],
+$       [3394643287931494074, -939964835367695559], [-1166936198673973397, 2172382044440436992],
+$       [4028536934079840772, 4836900365856063043], [5181973910689709608, -7142921387573594083],
+$       [-2179234091328716103, -4897613565934728190], [1563454035646742573, 968035326812906313],
+$       [-2667079297104792053, -7511803740366558959], [1692404501614759430, 1600529770927419928],
+$       [-8254001144657022111, 2949595030274911084], [8725813349087146706, 5195035550021402732],
+$       [1916277685554676388, 1657045525025821173], [1166512135995502600, 8131577206871143284],
+$       [3349788835232363438, 7181441541325327503], [-7543482827637536430, -3377702101588683939],
+$       [-8553933162008136054, -3598987752644810944], [7771919698902027720, -5006707814500371590],
+$       [5858557740089089136, 289706400458870352], [172548951637093338, 7341900173634180846],
+$       [-1127575202619262575, -2613486745468754131], [8476476380660961911, 1261867006168454577],
+$       [-1359545905783841979, 2143976624243196316], [1675937660113022823, -9180445780046714654],
+$       [-31520558516802993, 3796211584113808872], [-2120229279525536443, -4578973103771281302],
+$       [-2053911749288158372, 5599714764474856033], [9072442189583823677, -25265405950590540],
+$       [-5734031651739770083, 2532813900844846442], [8207912744467692117, 397798627707788776],
+$       [6652009157781882763, -3726847492764925410], [3963620094678371245, 6362060750925502148],
+$       [8968776761218869751, 5269614941846746164], [6682404585379395028, 3586879053321786070],
+$       [-487599425386380532, 4272195178102730864], [3075715143246265274, -1796552067899789618],
+$       [4783575430369441024, 4138559995122114015], [6458258013178121565, -3224066031808289964],
+$       [-1831280161924252270, -2407017343376370500], [3241377651129479902, -5401785628825417690],
+$       [8301171552976289888, 1362722313208898188], [8443492331948319225, 9107731715740637030],
+$       [1895421442085825071, 3323912635338319553], [-405619072646559602, -7156056303425046813],
 $       [8223903467892727886, 1860731385285870283], [8014513835036874402, 958112986403722438],
 $       [3775292602544485883, 582975130090672685], [-716763876486684520, 4685753265418628479],
 $       [-6987734763453144626, 5974734026961881282], [7375834400537428946, -7572674787668428961],

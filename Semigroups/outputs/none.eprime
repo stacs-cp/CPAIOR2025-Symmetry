@@ -3,7 +3,9 @@ language ESSENCE' 1.0
 given n: int
 find f_FunctionND: matrix indexed by [int(1..n), int(1..n)] of int(1..n)
 branching on [f_FunctionND]
-such that true
+such that
+    and([f_FunctionND[f_FunctionND[i, j], k] = f_FunctionND[i, f_FunctionND[j, k]]
+             | i : int(1..n), j : int(1..n), k : int(1..n)])
 
 $ Conjure's
 $ {"finds": [{"Name": "f"}], "givens": [{"Name": "n"}], "enumGivens": [], "enumLettings": [],
@@ -20,8 +22,10 @@ $                                {"DeclNoRepr":
 $                                     ["Given", {"Name": "n"}, {"DomainInt": [{"TagInt": []}, []]},
 $                                      {"NoRegion": []}]}]}]}]]}}]],
 $  "unnameds": [[{"Name": "T"}, {"Reference": [{"Name": "n"}, null]}]], "strategyQ": {"PickFirst": []},
-$  "strategyA": {"Compact": []}, "trailCompact": [[1, 1, 1], [1, 1, 1], [1, 1, 1]], "nameGenState": [["q", 3]],
-$  "nbExtraGivens": 0,
+$  "strategyA": {"Compact": []},
+$  "trailCompact":
+$      [[1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1], [1, 1, 1]],
+$  "nameGenState": [["q", 3]], "nbExtraGivens": 0,
 $  "representations":
 $      [[{"Name": "n"}, {"DomainInt": [{"TagUnnamed": "T"}, []]}],
 $       [{"Name": "f"},
@@ -68,6 +72,9 @@ $             [[], [{"SizeAttr_None": []}, "PartialityAttr_Total", "JectivityAtt
 $              {"DomainTuple": [{"DomainReference": [{"Name": "T"}, null]}, {"DomainReference": [{"Name": "T"}, null]}]},
 $              {"DomainReference": [{"Name": "T"}, null]}]}]],
 $  "trailGeneralised":
-$      [[8479253666498415867, 1095088697655131534], [3885693687959236388, -4609873970095313000],
-$       [-1494872803062006233, 3200439565164324512]],
+$      [[8479253666498415867, 1095088697655131534], [8244318192092480531, -1808586352760244421],
+$       [-5651015822877245352, 1982767039833308187], [-2935817116095375545, 7414323201628033467],
+$       [-4440121494611416520, -8114899272446542565], [513475871317316448, -4609873970095313000],
+$       [1966730106160111308, -4622688712868179536], [-4991188799472754536, -35511602423047700],
+$       [-2335998450266650680, 6584457305296129840], [-1494872803062006233, 3200439565164324512]],
 $  "trailVerbose": [], "trailRewrites": []}
